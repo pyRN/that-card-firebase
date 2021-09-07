@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 
+//Components
+import NavBar from "./components/Header/NavBar";
+
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <h2>Do I Have That Card?</h2>
-      </div>
       <Router>
+        <NavBar />
         {/* <Route path="/" exact render={(props) => <MainComponent />} /> */}
       </Router>
     </Provider>
