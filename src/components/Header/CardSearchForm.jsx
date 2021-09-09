@@ -1,4 +1,3 @@
-import "./NavBar.css";
 export default function CardSearchForm() {
   const fnHandleSubmit = (event) => {
     event.preventDefault();
@@ -7,14 +6,13 @@ export default function CardSearchForm() {
   return (
     <form className="search-form" onSubmit={fnHandleSubmit}>
       <input
-        className=""
+        className="search-input"
         type="search"
         id="searchInput"
         placeholder="Search"
         aria-label="Search"
-        style={{ backgroundColor: "#222", color: "green" }}
       />
-      <button className="" type="submit" onClick={fnHandleSubmit}>
+      <button className="search-btn" type="submit" onClick={fnHandleSubmit}>
         Search
       </button>
     </form>
