@@ -1,8 +1,11 @@
+body,
 html {
-  background-color: black;
-  color: #0275d8;
+  margin: 0;
+  background: black;
 }
+
 .App {
   text-align: center;
   background-color: black;
+  margin: 0px;
 }
