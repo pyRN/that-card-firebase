@@ -18,17 +18,19 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <NavBar />
-        <Route path="/" exact render={(props) => <MainContainer />} />
-        <Route path="/sets" exact render={(props) => <SetsContainer />} />
-        <Route path="/cards" exact render={(props) => <CardsContainer />} />
-        <Route path="/signIn" exact render={(props) => <SignInContainer />} />
-        <Route path="/decks" exact render={(props) => <DecksContainer />} />
-        <Route
-          path="/resources"
-          exact
-          render={(props) => <ResourcesContainer />}
-        />
+        <div className="mainContainer">
+          <NavBar />
+          <Route path="/" exact render={(props) => <MainContainer />} />
+          <Route path="/sets" exact render={(props) => <SetsContainer />} />
+          <Route path="/cards" exact render={(props) => <CardsContainer />} />
+          <Route path="/signIn" exact render={(props) => <SignInContainer />} />
+          <Route path="/decks" exact render={(props) => <DecksContainer />} />
+          <Route
+            path="/resources"
+            exact
+            render={(props) => <ResourcesContainer />}
+          />
+        </div>
       </Router>
     </Provider>
   );
