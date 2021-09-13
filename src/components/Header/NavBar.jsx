@@ -9,7 +9,7 @@ export default function NavBar() {
       <div className="container-fluid">
         <h3 className="navbar-brand text-primary">Do I Have That Card?</h3>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler bg-primary"
           data-bs-toggle="collapse"
           data-bs-target="#navBarContent"
           aria-controls="navBarContent"
