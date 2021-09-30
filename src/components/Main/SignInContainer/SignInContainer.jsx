@@ -31,6 +31,7 @@ export default function SignInContainer() {
     //Function rerenders component based on signIn/Sign Up/resetPassword
     event.preventDefault();
     fnSetLayoutType(event.target.id);
+    fnSetError("");
   };
 
   const fnSignIn = (event) => {
@@ -45,9 +46,8 @@ export default function SignInContainer() {
         fnHistory.push("/cards");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("error: ", errorCode, errorMessage);
+        fnSetError("Email or Password Incorrect");
+        console.log("error: ", error);
       });
 
     // onAuthStateChanged(auth, (user) => {
@@ -76,16 +76,20 @@ export default function SignInContainer() {
     if (sEmail && sPassword === sConfirmPassword) {
       createUserWithEmailAndPassword(auth, sEmail, sPassword)
         .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          console.log(user);
+          // Registration successful and signed in
+          fnDispatch(signIn(userCredential.user));
+          fnHistory.push("/cards");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+          if (error.code === "auth/email-already-in-use") {
+            fnSetError("Email already in use");
+          } else {
+            fnSetError("An error occurred signing up");
+          }
         });
-    } else {
+    } else if (!sEmail) {
+      fnSetError("Must input email");
+    } else if (sPassword !== sConfirmPassword) {
       fnSetError("Passwords do no match");
     }
   };
@@ -106,6 +110,11 @@ export default function SignInContainer() {
         )}
 
         <form className="form-signin mt-4" onSubmit={fnSignIn}>
+          {sError ? (
+            <div className="alert alert-danger" role="alert">
+              {sError}
+            </div>
+          ) : null}
           <input
             aria-describedby="emailHelp"
             autoFocus
