@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-
-//Components
-import CardSearchForm from "./CardSearchForm";
+import { useSelector } from "react-redux";
 
 export default function NavBar() {
+  const oUser = useSelector((state) => state.oUserReducer.oUser);
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div className="container-fluid">
@@ -35,20 +34,28 @@ export default function NavBar() {
                 Cards
               </Link>
             </li>
+            {oUser ? (
+              <>
+                <li className="btn">
+                  <Link className="nav-link text-primary" to="/decks">
+                    Decks
+                  </Link>
+                </li>
+                <li className="btn">
+                  <Link className="nav-link text-primary" to="/resources">
+                    Resources
+                  </Link>
+                </li>
+              </>
+            ) : null}
             <li className="btn">
-              <Link className="nav-link text-primary" to="/signIn">
-                Sign In
-              </Link>
-            </li>
-            <li className="btn">
-              <Link className="nav-link text-primary" to="/decks">
-                Decks
-              </Link>
-            </li>
-            <li className="btn">
-              <Link className="nav-link text-primary" to="/resources">
-                Resources
-              </Link>
+              {oUser ? (
+                <button className="btn btn-danger">Sign Out</button>
+              ) : (
+                <Link className="nav-link text-primary" to="/signIn">
+                  Sign In
+                </Link>
+              )}
             </li>
           </ul>
           <form className="d-flex">
