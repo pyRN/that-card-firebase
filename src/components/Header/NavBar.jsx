@@ -1,8 +1,30 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { signOutUser } from "../../actions";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
 
 export default function NavBar() {
   const oUser = useSelector((state) => state.oUserReducer.oUser);
+  const fnDispatch = useDispatch();
+  const fnHistory = useHistory();
+
+  //Functions
+  const fnSignOut = (event) => {
+    event.preventDefault();
+
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        fnDispatch(signOutUser());
+        fnHistory.push("/signIn");
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div className="container-fluid">
@@ -50,7 +72,9 @@ export default function NavBar() {
             ) : null}
             <li className="btn">
               {oUser ? (
-                <button className="btn btn-danger">Sign Out</button>
+                <button className="btn btn-danger" onClick={fnSignOut}>
+                  Sign Out
+                </button>
               ) : (
                 <Link className="nav-link text-primary" to="/signIn">
                   Sign In
