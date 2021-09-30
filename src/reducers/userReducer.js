@@ -1,16 +1,16 @@
-import {} from "../actions/types";
+import { SIGN_IN } from "../actions/types";
 
 const initialState = {
   oCardsShown: {},
-  sUID: null,
+  oUser: null,
 };
 
 export default function currentUser(state = initialState, action) {
   switch (action.type) {
-    case "type":
+    case SIGN_IN:
       return {
         ...state,
-        state: action.payload.state,
+        state: action.payload,
       };
     default:
       return state;
