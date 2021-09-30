@@ -5,12 +5,12 @@ const initialState = {
   oUser: null,
 };
 
-export default function currentUser(state = initialState, action) {
+export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case SIGN_IN:
       return {
         ...state,
-        state: action.payload,
+        oUser: action.payload,
       };
     default:
       return state;
