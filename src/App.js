@@ -11,7 +11,7 @@ import CardsContainer from "./components/Main/CardsContainer/CardsContainer";
 import DecksContainer from "./components/Main/DecksContainer/DecksContainer";
 import MainContainer from "./components/Main/MainContainer/MainContainer";
 import ResourcesContainer from "./components/Main/ResourcesContainer/ResourcesContainer";
-import SetsContainer from "./components/Main/SetsContainer/SetsContainer";
+import ExpansionsContainer from "./components/Main/ExpansionsContainer/ExpansionsContainer";
 import SignInContainer from "./components/Main/SignInContainer/SignInContainer";
 
 function App() {
@@ -21,7 +21,11 @@ function App() {
         <div className="mainContainer">
           <NavBar />
           <Route path="/" exact render={(props) => <MainContainer />} />
-          <Route path="/sets" exact render={(props) => <SetsContainer />} />
+          <Route
+            path="/expansions"
+            exact
+            render={(props) => <ExpansionsContainer />}
+          />
           <Route path="/cards" exact render={(props) => <CardsContainer />} />
           <Route path="/signIn" exact render={(props) => <SignInContainer />} />
           <Route path="/decks" exact render={(props) => <DecksContainer />} />
