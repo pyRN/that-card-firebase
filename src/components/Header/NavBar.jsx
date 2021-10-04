@@ -47,7 +47,7 @@ export default function NavBar() {
               </Link>
             </li>
             <li className="btn">
-              <Link className="nav-link text-primary" to="/sets">
+              <Link className="nav-link text-primary" to="/expansions">
                 Sets
               </Link>
             </li>
