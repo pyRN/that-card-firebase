@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import "./ExpansionsContainer.css";
 
 export default function ExpansionCard({ oExpansionInfo }) {
   const fDispatch = useDispatch();
@@ -47,25 +48,17 @@ export default function ExpansionCard({ oExpansionInfo }) {
 
   return (
     <div
-      className="card m-2 p-2 border border-success bg-dark rounded col-md-2"
+      className="expansion-card"
       onClick={handleOnClick}
       style={{ cursor: "pointer" }}
     >
-      <div align="center">
+      <div className="expansion-items" align="center">
         <img
           src={oExpansionInfo.icon_svg_uri}
-          align="center"
-          className="card-img-top"
+          className="expansion-img"
           alt={oExpansionInfo.name}
-          style={{
-            height: 100,
-            width: 100,
-            filter: "drop-shadow(0px 0px 5px #0275d8)",
-          }}
         />
-      </div>
-      <div className="card-body justify-content-center">
-        <h5 className="text-primary text-center">{oExpansionInfo.name}</h5>
+        <h5 className="expansion-text">{oExpansionInfo.name}</h5>
       </div>
     </div>
   );

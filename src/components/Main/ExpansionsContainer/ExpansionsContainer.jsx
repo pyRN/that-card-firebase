@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import "./ExpansionsContainer.css";
 
 //Components
 import ExpansionCard from "./ExpansionCard";
@@ -30,15 +31,7 @@ export default function ExpansionsContainer() {
   if (aExpansionsList !== undefined && aExpansionsList.length) {
     return (
       <>
-        <div
-          align="center"
-          className="justify-content-center mt-3 mb-3"
-          style={{
-            backgroundColor: "black",
-            display: "flex",
-            flexWrap: "wrap",
-          }}
-        >
+        <div align="center" className="main-container">
           {aExpansionsList.map(function (oExpansionInfo) {
             return !oExpansionInfo.digital ? (
               <ExpansionCard

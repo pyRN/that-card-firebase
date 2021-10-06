@@ -10,3 +10,7 @@ html,
   background-color: #222;
   margin: 0px;
 }
+
+.mtg-card {
+  width: 250px;
+}
