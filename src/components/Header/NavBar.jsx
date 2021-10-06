@@ -4,11 +4,16 @@ import { signOutUser } from "../../actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
+import React, { useRef } from "react";
+import "./NavBar.css";
 
 export default function NavBar() {
   const oUser = useSelector((state) => state.oUserReducer.oUser);
   const fnDispatch = useDispatch();
   const fnHistory = useHistory();
+  const oHamburgerMenu = useRef(null);
+  const oMobileSearchInput = useRef(null);
+  const oSearchInput = useRef(null);
 
   //Functions
   const fnSignOut = (event) => {
@@ -25,77 +30,137 @@ export default function NavBar() {
         console.log("Error: ", error);
       });
   };
+
+  const fnToggleMobileMenu = (event) => {
+    event.preventDefault();
+    oHamburgerMenu.current.classList.toggle("open");
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-      <div className="container-fluid">
-        <h3 className="navbar-brand text-primary">Do I Have That Card?</h3>
-        <button
-          className="navbar-toggler bg-primary"
-          data-bs-toggle="collapse"
-          data-bs-target="#navBarContent"
-          aria-controls="navBarContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
+    <header className="sticky">
+      <div className="brand">
+        <a href="/">Do I Have That Card?</a>
+      </div>
+      <form className="mobile-search">
+        <input
+          className="input-field"
+          type="search"
+          placeholder="Do I Have That Card?"
+          aria-label="Do I Have That Card?"
+        />
+        <button className="search-btn" type="submit">
+          Search
         </button>
-        <div className="collapse navbar-collapse" id="navBarContent">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li className="btn">
-              <Link className="nav-link text-primary" to="/">
-                Main
-              </Link>
-            </li>
-            <li className="btn">
-              <Link className="nav-link text-primary" to="/expansions">
-                Sets
-              </Link>
-            </li>
-            <li className="btn">
-              <Link className="nav-link text-primary" to="/cards">
-                Cards
-              </Link>
-            </li>
-            {oUser ? (
-              <>
-                <li className="btn">
-                  <Link className="nav-link text-primary" to="/decks">
-                    Decks
-                  </Link>
-                </li>
-                <li className="btn">
-                  <Link className="nav-link text-primary" to="/resources">
-                    Resources
-                  </Link>
-                </li>
-              </>
-            ) : null}
-            <li className="btn">
-              {oUser ? (
-                <button className="btn btn-danger" onClick={fnSignOut}>
-                  Sign Out
-                </button>
-              ) : (
-                <Link className="nav-link text-primary" to="/signIn">
-                  Sign In
+      </form>
+      <nav className="nav-links">
+        <ul>
+          <li>
+            <Link className="link-text" to="/">
+              Main
+            </Link>
+          </li>
+          <li>
+            <Link className="link-text" to="/expansions">
+              Expansions
+            </Link>
+          </li>
+          <li>
+            <Link className="link-text" to="/cards">
+              Cards
+            </Link>
+          </li>
+
+          {oUser ? (
+            <>
+              <li>
+                <Link className="link-text" to="/decks">
+                  Decks
                 </Link>
-              )}
+              </li>
+              <li>
+                <Link className="link-text" to="/resources">
+                  Resources
+                </Link>
+              </li>
+              <li>
+                <Link className="signOut-btn" onClick={fnSignOut}>
+                  Sign Out
+                </Link>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link className="link-text" to="/signIn">
+                Sign In
+              </Link>
             </li>
-          </ul>
-          <form className="d-flex">
+          )}
+          <form>
             <input
-              className="form-control me-1 border border-success"
+              className="input-field"
               type="search"
               placeholder="Search"
               aria-label="Search"
-              style={{ backgroundColor: "#222", color: "green" }}
             />
-            <button className="btn btn-success" type="submit">
+            <button className="search-btn" type="submit">
               Search
             </button>
           </form>
-        </div>
+        </ul>
+      </nav>
+      <div
+        className="hamburger-icon"
+        ref={oHamburgerMenu}
+        onClick={fnToggleMobileMenu}
+      >
+        <div className="hamburger-bar-1"></div>
+        <div className="hamburger-bar-2"></div>
+        <div className="hamburger-bar-3"></div>
+        <ul className="mobile-menu">
+          <Link className="link-text mobile-item" to="/" align="center">
+            <li>Main</li>
+          </Link>
+
+          <Link
+            className="link-text mobile-item"
+            to="/expansions"
+            align="center"
+          >
+            <li>Expansions</li>
+          </Link>
+          <Link className="link-text mobile-item" to="/cards" align="center">
+            <li>Cards</li>
+          </Link>
+
+          {oUser ? (
+            <>
+              <Link
+                className="link-text mobile-item"
+                to="/decks"
+                align="center"
+              >
+                <li>Decks</li>
+              </Link>
+              <Link
+                className="link-text mobile-item"
+                to="/resources"
+                align="center"
+              >
+                <li>Resources</li>
+              </Link>
+              <li>
+                <Link className="signOut-btn" onClick={fnSignOut}>
+                  Sign Out
+                </Link>
+              </li>
+            </>
+          ) : (
+            <Link className="link-text mobile-item" to="/signIn" align="center">
+              <li>Sign In</li>
+            </Link>
+          )}
+        </ul>
       </div>
-    </nav>
+    </header>
   );
 }
