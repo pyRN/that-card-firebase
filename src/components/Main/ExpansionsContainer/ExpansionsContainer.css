@@ -7,7 +7,41 @@
 #09c372 - mint green
 */
 
-.main-container {
+.expansions-container {
   color: #09c372;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-top: 20px;
+}
+
+.expansion-card {
+  background-color: #2a3166;
+  border: solid 1px #09c372;
+  border-radius: 4%;
+  height: 250px;
+  margin: 5px;
+  width: 250px;
+}
+
+.expansion-items {
+  padding: 5%;
+}
+
+.expansion-img {
+  filter: drop-shadow(0px 0px 5px #ee7879);
+  height: 100px;
+  width: 100px;
+}
+
+.expansion-text {
+  margin-top: 10%;
+}
+
+.expansion-card:hover {
+  background-color: #ee7879;
+  border: solid 1px #2a3166;
+  color: #2a3166;
+  transform: scale(1.05);
+  transition: 0.1s;
 }

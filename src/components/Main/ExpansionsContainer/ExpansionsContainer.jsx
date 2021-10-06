@@ -31,7 +31,7 @@ export default function ExpansionsContainer() {
   if (aExpansionsList !== undefined && aExpansionsList.length) {
     return (
       <>
-        <div align="center" className="main-container">
+        <div align="center" className="expansions-container">
           {aExpansionsList.map(function (oExpansionInfo) {
             return !oExpansionInfo.digital ? (
               <ExpansionCard
@@ -46,6 +46,7 @@ export default function ExpansionsContainer() {
   }
 
   //If no expansion list, show loading
+  //TODO: Add Loading component without bootstrap
   return (
     <div align="center" className="justify-content-center mt-3">
       <button className="btn btn-primary" type="button" disabled>
