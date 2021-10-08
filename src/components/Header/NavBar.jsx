@@ -12,8 +12,8 @@ export default function NavBar() {
   const fnDispatch = useDispatch();
   const fnHistory = useHistory();
   const oHamburgerMenu = useRef(null);
-  const oMobileSearchInput = useRef(null);
-  const oSearchInput = useRef(null);
+  // const oMobileSearchInput = useRef(null);
+  // const oSearchInput = useRef(null);
 
   //Functions
   const fnSignOut = (event) => {
