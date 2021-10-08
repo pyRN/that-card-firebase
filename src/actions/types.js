@@ -2,5 +2,8 @@
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
 
-//Types used for expansions
+//Type used to set expansions in expansions container
 export const SET_EXPANSION_LIST = "SET_EXPANSION_LIST";
+
+//Type used to set displayed cards in card container
+export const SET_CARDS_DISPLAYED = "SET_CARDS_DISPLAYED";
