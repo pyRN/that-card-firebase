@@ -12,5 +12,6 @@ html,
 }
 
 .mtg-card {
-  width: 250px;
+  padding: 10px;
+  width: 300px;
 }
