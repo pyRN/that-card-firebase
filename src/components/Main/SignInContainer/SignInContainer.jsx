@@ -6,9 +6,9 @@ import { useHistory } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import "./SignInContainer.css";
 
 export default function SignInContainer() {
   const firebaseApp = initializeApp({
@@ -95,30 +95,26 @@ export default function SignInContainer() {
   };
 
   return (
-    <div
-      align="center"
-      className="card bg-dark rounded-3 container mt-5"
-      style={{ width: "300px" }}
-    >
-      <div className="card-body">
+    <div className="signIn-container">
+      <div className="signIn-card" align="center">
         {sLayoutType === "signIn-btn" ? (
-          <h1 className="card-title text-primary">Sign In</h1>
+          <h1>Sign In</h1>
         ) : sLayoutType === "resetPass-btn" ? (
-          <h1 className="card-title text-primary">Reset Password</h1>
+          <h1>Reset Password</h1>
         ) : (
-          <h1 className="card-title text-primary">Sign Up</h1>
+          <h1>Sign Up</h1>
         )}
 
-        <form className="form-signin mt-4" onSubmit={fnSignIn}>
+        <form className="" onSubmit={fnSignIn}>
           {sError ? (
-            <div className="alert alert-danger" role="alert">
+            <div className="" role="alert">
               {sError}
             </div>
           ) : null}
           <input
             aria-describedby="emailHelp"
             autoFocus
-            className="form-control  mb-1"
+            className="signIn-input-field"
             id="email-input"
             name="email-input"
             placeholder="Email address"
@@ -128,7 +124,7 @@ export default function SignInContainer() {
           {sLayoutType === "resetPass-btn" ? null : (
             <input
               aria-describedby="passwordHelp"
-              className="form-control mb-1"
+              className="signIn-input-field"
               id="password-input"
               name="password-input"
               placeholder="Password"
@@ -140,7 +136,7 @@ export default function SignInContainer() {
           {sLayoutType === "signUp-btn" ? (
             <input
               aria-describedby="passwordHelp"
-              className="form-control  mb-1"
+              className="signIn-input-field"
               id="confirm-password-input"
               name="confirm-password-input"
               placeholder="Confirm Password"
@@ -150,10 +146,10 @@ export default function SignInContainer() {
             />
           ) : null}
 
-          <div className="d-grid gap-2">
+          <div className="">
             {sLayoutType === "signIn-btn" ? (
               <button
-                className="btn btn-success mt-2 mb-2"
+                className="submit-btn"
                 id="submitBtn"
                 type="submit"
                 onClick={fnSignIn}
@@ -162,7 +158,7 @@ export default function SignInContainer() {
               </button>
             ) : sLayoutType === "resetPass-btn" ? (
               <button
-                className="btn btn-success mt-2 mb-2"
+                className="submit-btn"
                 id="resetPassBtn"
                 type="submit"
                 onClick={fnResetPassword}
@@ -171,7 +167,7 @@ export default function SignInContainer() {
               </button>
             ) : (
               <button
-                className="btn btn-success mt-2 mb-2"
+                className="submit-btn"
                 id="signUpBtn"
                 type="submit"
                 onClick={fnSignUp}
@@ -183,7 +179,7 @@ export default function SignInContainer() {
           <div>
             {sLayoutType === "signIn-btn" || sLayoutType === "resetPass-btn" ? (
               <button
-                className="btn btn-sm btn-outline-primary m-1"
+                className="outline-btn"
                 id="signUp-btn"
                 onClick={fnChangeType}
               >
@@ -193,7 +189,7 @@ export default function SignInContainer() {
 
             {sLayoutType === "signUp-btn" || sLayoutType === "resetPass-btn" ? (
               <button
-                className="btn btn-sm btn-outline-primary m-1"
+                className="outline-btn"
                 id="signIn-btn"
                 onClick={fnChangeType}
               >
@@ -203,7 +199,7 @@ export default function SignInContainer() {
 
             {sLayoutType === "signIn-btn" || sLayoutType === "signUp-btn" ? (
               <button
-                className="btn btn-sm btn-outline-primary m-1"
+                className="outline-btn"
                 id="resetPass-btn"
                 onClick={fnChangeType}
               >

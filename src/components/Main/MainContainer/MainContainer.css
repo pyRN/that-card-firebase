@@ -9,6 +9,19 @@
 
 .main-container {
   color: #09c372;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  margin: 20px 5% 0 5%;
+  margin-top: 20px;
+}
+
+.main-card {
+  background-color: #2a3166;
+  border: solid 1px #09c372;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 5px;
+  width: 320px;
 }

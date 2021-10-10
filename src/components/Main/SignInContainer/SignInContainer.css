@@ -1,0 +1,76 @@
+/*Colors used in project:
+#EE7879 - dark pink
+#2A3166 - dark blue
+#F4ABAA - pink
+#CAE7DF - light blue
+#dc3545 - danger red
+#09c372 - mint green
+*/
+.signIn-input-field {
+  background-color: #222;
+  border: solid 1px #09c372;
+  color: #09c372;
+  border-radius: 7px;
+  margin: 5px;
+  padding: 5px;
+  width: 95%;
+}
+
+.signIn-input-field::placeholder {
+  color: #ee7879;
+  text-align: center;
+}
+
+.signIn-input-field:focus {
+  color: #ee7879;
+}
+
+.signIn-container {
+  color: #09c372;
+  display: flex;
+  justify-content: center;
+  margin: 20px 5% 0 5%;
+}
+
+.signIn-card {
+  background-color: #2a3166;
+  border: solid 1px #09c372;
+  border-radius: 7px;
+  color: #09c372;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 5px;
+  width: 320px;
+}
+
+.submit-btn {
+  background-color: #09c372;
+  border-radius: 7px;
+  color: black;
+  margin: 3px;
+  padding: 5px 10px 5px 10px;
+  width: 95%;
+}
+
+.submit-btn:hover {
+  background-color: #ee7879;
+  color: white;
+  transform: scale(0.9);
+  transition: 0.1s;
+}
+
+.outline-btn {
+  background-color: #2a3166;
+  border: solid 2px #ee7879;
+  border-radius: 7px;
+  color: #09c372;
+  margin: 3px;
+}
+
+.outline-btn:hover {
+  background-color: #ee7879;
+  color: white;
+  transform: scale(0.9);
+  transition: 0.1s;
+}

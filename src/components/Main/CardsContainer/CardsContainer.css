@@ -18,7 +18,7 @@
 .card-container {
   background-color: #2a3166;
   border: solid 1px #09c372;
-  border-radius: 4%;
+  border-radius: 7px;
   display: flex;
   margin: 5px;
 }
@@ -39,7 +39,7 @@
 
 .flip-btn {
   background-color: #09c372;
-  border-radius: 5px;
+  border-radius: 7px;
   color: black;
   margin: 0 0 0 3px;
   padding: 5px 10px 5px 10px;

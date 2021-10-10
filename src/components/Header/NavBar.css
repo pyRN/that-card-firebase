@@ -34,6 +34,7 @@
 
 header {
   background-color: #2a3166;
+  border-bottom: solid 1px #ee7879;
   display: flex;
   height: 50px;
   justify-content: space-between;
@@ -53,7 +54,7 @@ header a,
 
 .signOut-btn {
   background-color: #dc3545;
-  border-radius: 10%;
+  border-radius: 7px;
   color: white;
   padding: 7px;
 }
@@ -122,7 +123,7 @@ ul li:hover,
 
 .search-btn {
   background-color: #09c372;
-  border-radius: 10%;
+  border-radius: 7px;
   color: black;
   margin: 0 3px 0 3px;
   padding: 5px 10px 5px 10px;
@@ -139,9 +140,18 @@ ul li:hover,
   background-color: #222;
   border: solid 1px #09c372;
   color: #09c372;
-  border-radius: 5%;
+  border-radius: 7px;
   margin-left: 5px;
   padding: 5px;
+}
+
+.input-field::placeholder {
+  color: #ee7879;
+  text-align: center;
+}
+
+.input-field:focus {
+  color: #ee7879;
 }
 
 @media only screen and (max-width: 600px) {
@@ -150,11 +160,6 @@ ul li:hover,
   }
   .hamburger-icon {
     display: block;
-  }
-
-  .input-field::placeholder {
-    color: #ee7879;
-    text-align: center;
   }
 
   .mobile-item {
