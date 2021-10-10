@@ -1,7 +1,13 @@
 import React, { useRef } from "react";
+import { useSelector } from "react-redux";
+
+//Components
+import Spinner from "./Spinner";
 
 export default function CardComponent({ oCardInfo }) {
   let aCardImage;
+  const oUser = useSelector((state) => state.oUserReducer.oUser);
+  const oCardImage = useRef(null);
 
   //For double sided cards
   const aCardImagesSrcs =
@@ -11,7 +17,6 @@ export default function CardComponent({ oCardInfo }) {
           oCardInfo.card_faces[1].image_uris.normal,
         ]
       : null;
-  const oCardImage = useRef(null);
 
   const fnOnFlipClick = (event) => {
     event.preventDefault();
@@ -45,7 +50,23 @@ export default function CardComponent({ oCardInfo }) {
             Flip
           </button>
         ) : null}
-        <div className="card-name-text">{oCardInfo.name}</div>
+        <div className="card-name-text">
+          {oCardInfo.name} ({oCardInfo.rarity.slice(0, 1).toUpperCase()})
+        </div>
+        <div className="spinner-container">
+          <div className="spinner">
+            {"Reg: "}
+            {!oCardInfo.prices.usd ? "$0.00" : "$" + oCardInfo.prices.usd}
+            {oUser ? <Spinner /> : null}
+          </div>
+          <div className="spinner">
+            {"Foil: "}
+            {!oCardInfo.prices.usd_foil
+              ? "$0.00"
+              : "$" + oCardInfo.prices.usd_foil}
+            {oUser ? <Spinner /> : null}
+          </div>
+        </div>
       </div>
     </div>
   );
