@@ -12,8 +12,7 @@ export default function NavBar() {
   const fnDispatch = useDispatch();
   const fnHistory = useHistory();
   const oHamburgerMenu = useRef(null);
-  // const oMobileSearchInput = useRef(null);
-  // const oSearchInput = useRef(null);
+  const oSearchInput = useRef(null);
 
   //Functions
   const fnSignOut = (event) => {
@@ -36,35 +35,69 @@ export default function NavBar() {
     oHamburgerMenu.current.classList.toggle("open");
   };
 
+  const fnSearchCard = (event) => {
+    event.preventDefault();
+    if (oSearchInput.current.value) {
+      fnGetCardsFromExpansion(
+        [],
+        `https://api.scryfall.com/cards/search?unique=prints&q=%22${oSearchInput.current.value}%22`
+      );
+      oSearchInput.current.value = "";
+      fnHistory.push("/cards");
+    }
+  };
+
+  const fnGetCardsFromExpansion = (cards, currentURL) => {
+    fetch(currentURL)
+      .then((response) => response.json())
+      .then((data) => {
+        //Check to see if search query returns cards
+        if (data.object === "list") {
+          //When searching for cards, only return cards that are printed (Not digital versions)
+          let aNonDigitalCards = data.data.filter((card) => {
+            return !card.digital;
+          });
+          cards = cards.concat(aNonDigitalCards);
+
+          if (data.has_more) {
+            fnGetCardsFromExpansion(cards, data.next_page);
+          } else {
+            fnDispatch({
+              type: "SET_CARDS_DISPLAYED",
+              payload: {
+                aDisplayedCards: cards,
+              },
+            });
+          }
+        }
+        //If search is invalid (error 404), return undefined card list
+        else {
+          fnDispatch({
+            type: "SET_CARDS_DISPLAYED",
+            payload: cards,
+          });
+        }
+      });
+  };
+
   return (
     <header className="sticky">
       <div className="brand">
         <a href="/">Do I Have That Card?</a>
       </div>
-      <form className="mobile-search">
-        <input
-          className="input-field"
-          type="search"
-          placeholder="Do I Have That Card?"
-          aria-label="Do I Have That Card?"
-        />
-        <button className="search-btn" type="submit">
-          Search
-        </button>
-      </form>
-      <nav className="nav-links">
+      <nav>
         <ul>
-          <li>
+          <li className="nav-links">
             <Link className="link-text" to="/">
               Main
             </Link>
           </li>
-          <li>
+          <li className="nav-links">
             <Link className="link-text" to="/expansions">
               Expansions
             </Link>
           </li>
-          <li>
+          <li className="nav-links">
             <Link className="link-text" to="/cards">
               Cards
             </Link>
@@ -72,37 +105,38 @@ export default function NavBar() {
 
           {oUser ? (
             <>
-              <li>
+              <li className="nav-links">
                 <Link className="link-text" to="/decks">
                   Decks
                 </Link>
               </li>
-              <li>
+              <li className="nav-links">
                 <Link className="link-text" to="/resources">
                   Resources
                 </Link>
               </li>
-              <li>
+              <li className="nav-links">
                 <Link className="signOut-btn" onClick={fnSignOut}>
                   Sign Out
                 </Link>
               </li>
             </>
           ) : (
-            <li>
+            <li className="nav-links">
               <Link className="link-text" to="/signIn">
                 Sign In
               </Link>
             </li>
           )}
-          <form>
+          <form className="input-form" onSubmit={fnSearchCard}>
             <input
               className="input-field"
               type="search"
               placeholder="Search"
               aria-label="Search"
+              ref={oSearchInput}
             />
-            <button className="search-btn" type="submit">
+            <button className="search-btn" type="submit" onClick={fnSearchCard}>
               Search
             </button>
           </form>
