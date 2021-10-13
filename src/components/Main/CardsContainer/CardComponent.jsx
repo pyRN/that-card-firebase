@@ -53,6 +53,9 @@ export default function CardComponent({ oCardInfo }) {
         <div className="card-name-text">
           {oCardInfo.name} ({oCardInfo.rarity.slice(0, 1).toUpperCase()})
         </div>
+        <div className="set-name-text">
+          {oCardInfo.set_name} ({oCardInfo.set.toUpperCase()})
+        </div>
         <div className="spinner-container">
           <div className="spinner">
             {"Reg: "}

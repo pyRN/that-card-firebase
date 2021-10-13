@@ -74,7 +74,9 @@ export default function NavBar() {
         else {
           fnDispatch({
             type: "SET_CARDS_DISPLAYED",
-            payload: cards,
+            payload: {
+              aDisplayedCards: [],
+            },
           });
         }
       });
@@ -116,9 +118,9 @@ export default function NavBar() {
                 </Link>
               </li>
               <li className="nav-links">
-                <Link className="signOut-btn" onClick={fnSignOut}>
+                <a href="#top" className="signOut-link" onClick={fnSignOut}>
                   Sign Out
-                </Link>
+                </a>
               </li>
             </>
           ) : (
@@ -152,7 +154,7 @@ export default function NavBar() {
         <div className="hamburger-bar-3"></div>
         <ul className="mobile-menu">
           <Link className="link-text mobile-item" to="/" align="center">
-            <li>Main</li>
+            <li align="center">Main</li>
           </Link>
 
           <Link
@@ -182,11 +184,14 @@ export default function NavBar() {
               >
                 <li>Resources</li>
               </Link>
-              <li>
-                <Link className="signOut-btn" onClick={fnSignOut}>
-                  Sign Out
-                </Link>
-              </li>
+              <a
+                href="#top"
+                className="signOut-link"
+                onClick={fnSignOut}
+                align="center"
+              >
+                Sign Out
+              </a>
             </>
           ) : (
             <Link className="link-text mobile-item" to="/signIn" align="center">

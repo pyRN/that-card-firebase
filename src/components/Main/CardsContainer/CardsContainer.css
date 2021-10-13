@@ -32,7 +32,15 @@
 .card-name-text {
   font-size: 12px;
   inline-size: 200px;
-  margin-bottom: 10px;
+  margin: 0 0 5px 0;
+  overflow-wrap: break-word;
+  width: 100%;
+}
+.set-name-text {
+  color: #ee7879;
+  font-size: 12px;
+  inline-size: 200px;
+  margin: 0 0 5px 0;
   overflow-wrap: break-word;
   width: 100%;
 }
@@ -64,6 +72,9 @@
   flex-direction: column;
   justify-content: center;
   /* margin: 0 0 10px 0; */
+  border: solid 1px #09c372;
+  border-radius: 7px;
+  padding: 5px;
   margin: auto;
 }
 

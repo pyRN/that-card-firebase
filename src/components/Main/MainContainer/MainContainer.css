@@ -20,8 +20,13 @@
   border: solid 1px #09c372;
   border-radius: 7px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   margin: 5px;
-  width: 320px;
+  width: 80%;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .main-card {
+    width: 320px;
+  }
 }

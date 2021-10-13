@@ -48,7 +48,9 @@ export default function ExpansionCard({ oExpansionInfo }) {
           className="expansion-img"
           alt={oExpansionInfo.name}
         />
-        <h5 className="expansion-text">{oExpansionInfo.name}</h5>
+        <h5 className="expansion-text">
+          {oExpansionInfo.name} ({oExpansionInfo.code.toUpperCase()})
+        </h5>
       </div>
     </div>
   );
