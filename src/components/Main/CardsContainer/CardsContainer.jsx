@@ -15,7 +15,7 @@ export default function CardsContainer() {
   return (
     <>
       {aCardsShown && aCardsShown.length ? (
-        <div align="center" className="cards-container">
+        <div className="page-container">
           {aCardsShown !== null
             ? aCardsShown.map(function (oCardInfo) {
                 return (
@@ -25,26 +25,21 @@ export default function CardsContainer() {
             : null}
         </div>
       ) : aCardsShown !== null && aCardsShown.length === 0 ? (
-        <div className="card-container" align="center">
-          <div>
-            <h1>Invalid Search</h1>
-            <img
-              src={LastChance}
-              className="mtg-card"
-              alt="Magic Card Back"
-              align="center"
-            />
+        <div className="page-container" align="center">
+          <div className="responsive-card">
+            <h1 className="card-title-text">Invalid Search</h1>
+            <img src={LastChance} className="mtg-card" alt="Magic Card Back" />
+            <h3>Search for another card</h3>
           </div>
         </div>
       ) : (
-        <div className="card-container" align="center">
-          <div>
-            <h1>Search for cards</h1>
+        <div className="page-container" align="center">
+          <div className="responsive-card">
+            <h1 className="card-title-text">Search for cards</h1>
             <img
               src={VampiricTutor}
               className="mtg-card"
               alt="Magic Card Back"
-              align="center"
             />
           </div>
         </div>

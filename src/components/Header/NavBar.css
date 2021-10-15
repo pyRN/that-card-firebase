@@ -1,12 +1,3 @@
-/*Colors used in project:
-#EE7879 - dark pink
-#2A3166 - dark blue
-#F4ABAA - pink
-#CAE7DF - light blue
-#dc3545 - danger red
-#09c372 - mint green
-*/
-
 .brand {
   align-items: center;
   display: flex;
@@ -94,12 +85,6 @@ ul li:hover,
   transition: 0.1s;
 }
 
-/* .signOut-btn:hover {
-  color: #ee7879;
-  transform: scale(0.9);
-  transition: 0.1s;
-} */
-
 .open .hamburger-bar-1 {
   -webkit-transform: rotate(-45deg) translate(-6px, 6px);
   transform: rotate(-45deg) translate(-6px, 6px);
@@ -148,19 +133,17 @@ ul li:hover,
 .input-field {
   background-color: #222;
   border: solid 1px #09c372;
-  color: #09c372;
   border-radius: 7px;
+  color: #ee7879;
   margin-left: 5px;
   padding: 5px;
-}
-
-.input-field::placeholder {
-  color: #ee7879;
   text-align: center;
 }
 
-.input-field:focus {
+.input-field:focus,
+.input-field::placeholder {
   color: #ee7879;
+  text-align: center;
 }
 
 @media only screen and (max-width: 600px) {

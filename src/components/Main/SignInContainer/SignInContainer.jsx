@@ -95,17 +95,17 @@ export default function SignInContainer() {
   };
 
   return (
-    <div className="signIn-container">
-      <div className="signIn-card" align="center">
+    <div className="page-container">
+      <div className="responsive-card" align="center">
         {sLayoutType === "signIn-btn" ? (
-          <h1>Sign In</h1>
+          <h1 className="card-title-text">Sign In</h1>
         ) : sLayoutType === "resetPass-btn" ? (
-          <h1>Reset Password</h1>
+          <h1 className="card-title-text">Reset Password</h1>
         ) : (
-          <h1>Sign Up</h1>
+          <h1 className="card-title-text">Sign Up</h1>
         )}
 
-        <form className="" onSubmit={fnSignIn}>
+        <form onSubmit={fnSignIn}>
           {sError ? (
             <div className="" role="alert">
               {sError}
@@ -145,37 +145,34 @@ export default function SignInContainer() {
               type="password"
             />
           ) : null}
-
-          <div className="">
-            {sLayoutType === "signIn-btn" ? (
-              <button
-                className="submit-btn"
-                id="submitBtn"
-                type="submit"
-                onClick={fnSignIn}
-              >
-                Sign In
-              </button>
-            ) : sLayoutType === "resetPass-btn" ? (
-              <button
-                className="submit-btn"
-                id="resetPassBtn"
-                type="submit"
-                onClick={fnResetPassword}
-              >
-                Reset Password
-              </button>
-            ) : (
-              <button
-                className="submit-btn"
-                id="signUpBtn"
-                type="submit"
-                onClick={fnSignUp}
-              >
-                Sign Up
-              </button>
-            )}
-          </div>
+          {sLayoutType === "signIn-btn" ? (
+            <button
+              className="submit-btn"
+              id="submitBtn"
+              type="submit"
+              onClick={fnSignIn}
+            >
+              Sign In
+            </button>
+          ) : sLayoutType === "resetPass-btn" ? (
+            <button
+              className="submit-btn"
+              id="resetPassBtn"
+              type="submit"
+              onClick={fnResetPassword}
+            >
+              Reset Password
+            </button>
+          ) : (
+            <button
+              className="submit-btn"
+              id="signUpBtn"
+              type="submit"
+              onClick={fnSignUp}
+            >
+              Sign Up
+            </button>
+          )}
           <div>
             {sLayoutType === "signIn-btn" || sLayoutType === "resetPass-btn" ? (
               <button

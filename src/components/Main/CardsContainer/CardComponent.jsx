@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
+import "./CardsContainer.css";
 
 //Components
 import Spinner from "./Spinner";
