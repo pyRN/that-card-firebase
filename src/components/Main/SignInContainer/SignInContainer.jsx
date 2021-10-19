@@ -106,11 +106,7 @@ export default function SignInContainer() {
         )}
 
         <form onSubmit={fnSignIn}>
-          {sError ? (
-            <div className="" role="alert">
-              {sError}
-            </div>
-          ) : null}
+          {sError ? <div className="alert-flag">{sError}</div> : null}
           <input
             aria-describedby="emailHelp"
             autoFocus

@@ -40,3 +40,12 @@
   transform: scale(0.9);
   transition: 0.1s;
 }
+
+.alert-flag {
+  background-color: red;
+  border: 1px solid red;
+  border-radius: 7px;
+  color: white;
+  margin: 5px;
+  width: 80%;
+}
