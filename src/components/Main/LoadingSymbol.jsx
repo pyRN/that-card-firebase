@@ -6,7 +6,8 @@ export default function LoadingSymbol() {
     <>
       {bIsLoading ? (
         <div className="responsive-card">
-          <div class="loading-symbol"></div>
+          <h2>Loading</h2>
+          <div className="loading-symbol"></div>
         </div>
       ) : null}
     </>
