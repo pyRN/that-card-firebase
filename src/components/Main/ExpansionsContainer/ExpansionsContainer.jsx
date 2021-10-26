@@ -59,5 +59,9 @@ export default function ExpansionsContainer() {
   }
 
   //If no expansion list, show loading
-  return <LoadingSymbol />;
+  return (
+    <div align="center" className="expansions-container">
+      <LoadingSymbol />
+    </div>
+  );
 }
