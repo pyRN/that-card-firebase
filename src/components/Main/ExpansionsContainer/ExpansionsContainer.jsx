@@ -4,6 +4,7 @@ import "./ExpansionsContainer.css";
 
 //Components
 import ExpansionCard from "./ExpansionCard";
+import LoadingSymbol from "../LoadingSymbol";
 
 export default function ExpansionsContainer() {
   const aExpansionsList = useSelector(
@@ -14,12 +15,24 @@ export default function ExpansionsContainer() {
   useEffect(() => {
     //Only make one call to this API for list of sets and save in state
     if (!aExpansionsList.length) {
+      fnDispatch({
+        type: "SET_IS_LOADING",
+        payload: {
+          bIsLoading: true,
+        },
+      });
       fetch("https://api.scryfall.com/sets")
         .then((response) => response.json())
         .then((data) => {
           fnDispatch({
             type: "SET_EXPANSION_LIST",
             payload: data.data,
+          });
+          fnDispatch({
+            type: "SET_IS_LOADING",
+            payload: {
+              bIsLoading: false,
+            },
           });
         });
     }
@@ -46,17 +59,5 @@ export default function ExpansionsContainer() {
   }
 
   //If no expansion list, show loading
-  //TODO: Add Loading component without bootstrap
-  return (
-    <div align="center" className="justify-content-center mt-3">
-      <button className="btn btn-primary" type="button" disabled>
-        <span
-          className="spinner-border spinner-border-sm"
-          role="status"
-          aria-hidden="true"
-        ></span>
-        Loading...
-      </button>
-    </div>
-  );
+  return <LoadingSymbol />;
 }

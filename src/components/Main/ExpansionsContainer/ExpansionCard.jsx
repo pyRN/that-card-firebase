@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import "./ExpansionsContainer.css";
 
 export default function ExpansionCard({ oExpansionInfo }) {
-  const fDispatch = useDispatch();
-  const fHistory = useHistory();
+  const fnDispatch = useDispatch();
+  const fnHistory = useHistory();
 
   const handleOnClick = (event) => {
     event.preventDefault();
@@ -15,10 +15,22 @@ export default function ExpansionCard({ oExpansionInfo }) {
       [],
       `https://api.scryfall.com/cards/search?order=set&q=e%3A${oExpansionInfo.code}&unique=prints`
     );
-    fHistory.push("/cards");
+    fnHistory.push("/cards");
   };
 
   function getCardsFromExpansion(cards, currentURL) {
+    fnDispatch({
+      type: "SET_CARDS_DISPLAYED",
+      payload: {
+        aDisplayedCards: null,
+      },
+    });
+    fnDispatch({
+      type: "SET_IS_LOADING",
+      payload: {
+        bIsLoading: true,
+      },
+    });
     fetch(currentURL)
       .then((response) => response.json())
       .then((data) => {
@@ -26,14 +38,16 @@ export default function ExpansionCard({ oExpansionInfo }) {
         if (data.has_more) {
           getCardsFromExpansion(cards, data.next_page);
         } else {
-          fDispatch({
+          fnDispatch({
             type: "SET_CARDS_DISPLAYED",
             payload: {
-              sTitle: `Do I Have Cards From: ${oExpansionInfo.name}`,
-              bIsFromSet: true,
-              sInputValue: oExpansionInfo.code,
               aDisplayedCards: cards,
-              bIsDataLoading: false,
+            },
+          });
+          fnDispatch({
+            type: "SET_IS_LOADING",
+            payload: {
+              bIsLoading: false,
             },
           });
         }

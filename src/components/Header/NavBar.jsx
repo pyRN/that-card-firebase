@@ -38,6 +38,18 @@ export default function NavBar() {
   const fnSearchCard = (event) => {
     event.preventDefault();
     if (oSearchInput.current.value) {
+      fnDispatch({
+        type: "SET_CARDS_DISPLAYED",
+        payload: {
+          aDisplayedCards: null,
+        },
+      });
+      fnDispatch({
+        type: "SET_IS_LOADING",
+        payload: {
+          bIsLoading: true,
+        },
+      });
       fnGetCardsFromExpansion(
         [],
         `https://api.scryfall.com/cards/search?unique=prints&q=%22${oSearchInput.current.value}%22`
@@ -68,6 +80,12 @@ export default function NavBar() {
                 aDisplayedCards: cards,
               },
             });
+            fnDispatch({
+              type: "SET_IS_LOADING",
+              payload: {
+                bIsLoading: false,
+              },
+            });
           }
         }
         //If search is invalid (error 404), return undefined card list
@@ -76,6 +94,12 @@ export default function NavBar() {
             type: "SET_CARDS_DISPLAYED",
             payload: {
               aDisplayedCards: [],
+            },
+          });
+          fnDispatch({
+            type: "SET_IS_LOADING",
+            payload: {
+              bIsLoading: false,
             },
           });
         }

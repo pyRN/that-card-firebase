@@ -1,8 +1,14 @@
-import { SIGN_IN, SIGN_OUT, SET_CARDS_DISPLAYED } from "../actions/types";
+import {
+  SIGN_IN,
+  SIGN_OUT,
+  SET_CARDS_DISPLAYED,
+  SET_IS_LOADING,
+} from "../actions/types";
 
 const initialState = {
   aCardsShown: null,
   oUser: null,
+  bIsLoading: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -17,6 +23,11 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         aCardsShown: action.payload.aDisplayedCards,
+      };
+    case SET_IS_LOADING:
+      return {
+        ...state,
+        bIsLoading: action.payload.bIsLoading,
       };
     default:
       return state;
