@@ -51,6 +51,24 @@ html,
   color: #ee7879;
 }
 
+.loading-symbol {
+  border: 16px solid #ee7879;
+  border-top: 16px solid #09c372;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .responsive-card {
     width: 320px;
