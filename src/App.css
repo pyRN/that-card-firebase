@@ -7,11 +7,18 @@
 #09c372 - mint green
 #222 - dark gray
 */
+html {
+  background: #222;
+  margin: 0px;
+  width: 100%;
+}
 
-body,
-html,
+body {
+  margin: 0px;
+  width: 100%;
+}
+
 .mainContainer {
-  margin: 0;
   background: #222;
 }
 

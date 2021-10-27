@@ -18,8 +18,8 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
+        <NavBar />
         <div className="mainContainer">
-          <NavBar />
           <Route path="/" exact render={(props) => <MainContainer />} />
           <Route
             path="/expansions"

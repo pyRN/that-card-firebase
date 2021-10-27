@@ -3,6 +3,7 @@
   display: flex;
   font-size: 18px;
   font-weight: bold;
+  padding-left: 10px;
 }
 
 .brand a {
@@ -29,9 +30,6 @@ header {
   display: flex;
   height: 50px;
   justify-content: space-between;
-  margin-top: 0;
-  padding: 0 20px;
-  width: 100%;
 }
 
 header a,
@@ -52,11 +50,13 @@ ul {
   height: 100%;
   justify-content: space-around;
   list-style: none;
+  margin: 0 20px 0 0;
 }
 
 ul a,
 .nav-link {
   color: #09c372;
+  font-size: 18px;
 }
 
 ul li {
@@ -113,6 +113,7 @@ ul li:hover,
   position: absolute;
   top: 50px;
   width: 100%;
+  padding: 0;
 }
 
 .search-btn {
@@ -121,6 +122,7 @@ ul li:hover,
   color: black;
   margin: 0 3px 0 3px;
   padding: 5px 10px 5px 10px;
+  height: 40px;
 }
 
 .search-btn:hover {
@@ -138,6 +140,8 @@ ul li:hover,
   margin-left: 5px;
   padding: 5px;
   text-align: center;
+  height: 40px;
+  font-size: 15px;
 }
 
 .input-field:focus,
@@ -153,6 +157,7 @@ ul li:hover,
 
   .hamburger-icon {
     display: block;
+    margin-right: 10px;
   }
 
   .mobile-item {
@@ -170,7 +175,7 @@ ul li:hover,
 
   .open .mobile-menu {
     align-items: center;
-    background-color: #222;
+    background-color: #333;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
