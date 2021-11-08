@@ -2,11 +2,11 @@
   background-color: #222;
   border: solid 1px #09c372;
   border-radius: 7px;
-  color: #ee7879;
+  color: #fac9ca;
+  padding: 0;
   margin: 5px;
-  padding: 5px;
   text-align: center;
-  width: 95%;
+  height: 30px;
 }
 
 .signIn-input-field:focus,
@@ -19,9 +19,11 @@
   background-color: #09c372;
   border-radius: 7px;
   color: black;
-  margin: 3px;
-  padding: 5px 10px 5px 10px;
-  width: 95%;
+  padding: 0;
+  margin: 5px;
+  text-align: center;
+  height: 30px;
+  width: 50%;
 }
 
 .outline-btn {
@@ -29,8 +31,11 @@
   border: solid 2px #ee7879;
   border-radius: 7px;
   color: #09c372;
-  margin: 3px;
-  width: 45%;
+  padding: 0;
+  margin: 5px;
+  text-align: center;
+  height: 30px;
+  width: 50%;
 }
 
 .outline-btn:hover,
@@ -43,9 +48,24 @@
 
 .alert-flag {
   background-color: red;
-  border: 1px solid red;
+  border: solid 2px red;
   border-radius: 7px;
   color: white;
+  padding: 0;
+  padding-left: 5px;
+  padding-right: 5px;
   margin: 5px;
-  width: 80%;
+  text-align: center;
+  height: 20px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

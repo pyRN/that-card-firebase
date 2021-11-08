@@ -46,18 +46,9 @@ export default function SignInContainer() {
         fnHistory.push("/cards");
       })
       .catch((error) => {
-        fnSetError("Email or Password Incorrect");
+        fnSetError("Incorrect Email or Password");
         console.log("error: ", error);
       });
-
-    // onAuthStateChanged(auth, (user) => {
-    //   if (user != null) {
-    //     //TODO: Once user is logged in, change reducer
-    //     console.log("logged in!  ", user);
-    //   } else {
-    //     console.log("No user");
-    //   }
-    // });
   };
 
   const fnResetPassword = (event) => {
@@ -88,15 +79,15 @@ export default function SignInContainer() {
           }
         });
     } else if (!sEmail) {
-      fnSetError("Must input email");
+      fnSetError("Email Address Required");
     } else if (sPassword !== sConfirmPassword) {
-      fnSetError("Passwords do no match");
+      fnSetError("Passwords do not match");
     }
   };
 
   return (
     <div className="page-container">
-      <div className="responsive-card" align="center">
+      <div className="responsive-card">
         {sLayoutType === "signIn-btn" ? (
           <h1 className="card-title-text">Sign In</h1>
         ) : sLayoutType === "resetPass-btn" ? (
@@ -104,16 +95,17 @@ export default function SignInContainer() {
         ) : (
           <h1 className="card-title-text">Sign Up</h1>
         )}
-
-        <form onSubmit={fnSignIn}>
-          {sError ? <div className="alert-flag">{sError}</div> : null}
+        {/* <div className="row"> */}
+        {sError ? <div className="alert-flag">{sError}</div> : null}
+        {/* </div> */}
+        <div className="col">
           <input
             aria-describedby="emailHelp"
             autoFocus
             className="signIn-input-field"
             id="email-input"
             name="email-input"
-            placeholder="Email address"
+            placeholder="Email Address"
             required
             type="email"
           />
@@ -141,66 +133,68 @@ export default function SignInContainer() {
               type="password"
             />
           ) : null}
-          {sLayoutType === "signIn-btn" ? (
+        </div>
+        {/* <div className="row"> */}
+        {sLayoutType === "signIn-btn" ? (
+          <button
+            className="submit-btn"
+            id="submitBtn"
+            type="submit"
+            onClick={fnSignIn}
+          >
+            Sign In
+          </button>
+        ) : sLayoutType === "resetPass-btn" ? (
+          <button
+            className="submit-btn"
+            id="resetPassBtn"
+            type="submit"
+            onClick={fnResetPassword}
+          >
+            Reset Password
+          </button>
+        ) : (
+          <button
+            className="submit-btn"
+            id="signUpBtn"
+            type="submit"
+            onClick={fnSignUp}
+          >
+            Sign Up
+          </button>
+        )}
+        {/* </div> */}
+        <div className="row">
+          {sLayoutType === "signIn-btn" || sLayoutType === "resetPass-btn" ? (
             <button
-              className="submit-btn"
-              id="submitBtn"
-              type="submit"
-              onClick={fnSignIn}
-            >
-              Sign In
-            </button>
-          ) : sLayoutType === "resetPass-btn" ? (
-            <button
-              className="submit-btn"
-              id="resetPassBtn"
-              type="submit"
-              onClick={fnResetPassword}
-            >
-              Reset Password
-            </button>
-          ) : (
-            <button
-              className="submit-btn"
-              id="signUpBtn"
-              type="submit"
-              onClick={fnSignUp}
+              className="outline-btn"
+              id="signUp-btn"
+              onClick={fnChangeType}
             >
               Sign Up
             </button>
-          )}
-          <div>
-            {sLayoutType === "signIn-btn" || sLayoutType === "resetPass-btn" ? (
-              <button
-                className="outline-btn"
-                id="signUp-btn"
-                onClick={fnChangeType}
-              >
-                Sign Up
-              </button>
-            ) : null}
+          ) : null}
 
-            {sLayoutType === "signUp-btn" || sLayoutType === "resetPass-btn" ? (
-              <button
-                className="outline-btn"
-                id="signIn-btn"
-                onClick={fnChangeType}
-              >
-                Sign In
-              </button>
-            ) : null}
+          {sLayoutType === "signUp-btn" || sLayoutType === "resetPass-btn" ? (
+            <button
+              className="outline-btn"
+              id="signIn-btn"
+              onClick={fnChangeType}
+            >
+              Sign In
+            </button>
+          ) : null}
 
-            {sLayoutType === "signIn-btn" || sLayoutType === "signUp-btn" ? (
-              <button
-                className="outline-btn"
-                id="resetPass-btn"
-                onClick={fnChangeType}
-              >
-                Reset Password
-              </button>
-            ) : null}
-          </div>
-        </form>
+          {sLayoutType === "signIn-btn" || sLayoutType === "signUp-btn" ? (
+            <button
+              className="outline-btn"
+              id="resetPass-btn"
+              onClick={fnChangeType}
+            >
+              Reset
+            </button>
+          ) : null}
+        </div>
       </div>
     </div>
   );

@@ -56,8 +56,10 @@ body {
 
 .card-title-text {
   color: #ee7879;
+  margin: 10px 0 10px 0;
 }
 
+/*Styles for Loading Symbol*/
 .loading-symbol {
   border: 16px solid #ee7879;
   border-top: 16px solid #09c372;
