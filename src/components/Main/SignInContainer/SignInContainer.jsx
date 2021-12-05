@@ -39,21 +39,33 @@ export default function SignInContainer() {
     const sEmail = document.getElementById("email-input").value;
     const sPassword = document.getElementById("password-input").value;
 
-    signInWithEmailAndPassword(auth, sEmail, sPassword)
-      .then((userCredential) => {
-        // Signed in
-        fnDispatch(signIn(userCredential.user));
-        fnHistory.push("/cards");
-      })
-      .catch((error) => {
-        fnSetError("Incorrect Email or Password");
-        console.log("error: ", error);
-      });
+    if (!sEmail) {
+      fnSetError("Email Address Required");
+    } else if (!sPassword) {
+      fnSetError("Password Required");
+    } else {
+      signInWithEmailAndPassword(auth, sEmail, sPassword)
+        .then((userCredential) => {
+          // Signed in
+          fnDispatch(signIn(userCredential.user));
+          fnHistory.push("/cards");
+        })
+        .catch((error) => {
+          fnSetError("Incorrect Email or Password");
+          console.log("error: ", error);
+        });
+    }
   };
 
   const fnResetPassword = (event) => {
     event.preventDefault();
-    // const sEmail = document.getElementById("email-input").value;
+    const sEmail = document.getElementById("email-input").value;
+
+    if (!sEmail) {
+      fnSetError("Email Address Required");
+    } else {
+      //Send email message
+    }
   };
 
   const fnSignUp = (event) => {
@@ -191,7 +203,7 @@ export default function SignInContainer() {
               id="resetPass-btn"
               onClick={fnChangeType}
             >
-              Reset
+              Reset Password
             </button>
           ) : null}
         </div>
