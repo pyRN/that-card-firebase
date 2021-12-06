@@ -73,10 +73,8 @@ ul li:hover,
 
 .signOut-link {
   color: red;
-  border: solid 1px red;
-  border-radius: 7px;
-  padding: 3px 5px 5px 5px;
-  margin-right: 5px;
+  font-size: 25px;
+  margin-right: 10px;
 }
 
 .signOut-link:hover {
@@ -179,5 +177,10 @@ ul li:hover,
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    height: 400px;
+  }
+
+  .signOut-link {
+    margin-right: 0px;
   }
 }
