@@ -88,3 +88,69 @@
   color: #ee7879;
   margin: auto 5px auto 5px;
 }
+
+.sticky-bottom {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}
+
+.footer {
+  background-color: #2a3166;
+  border-top: solid 1px #ee7879;
+  display: flex;
+  height: 50px;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.filter-select {
+  background-color: #222;
+  border: solid 1px #09c372;
+  border-radius: 7px;
+  color: #ee7879;
+  height: 40px;
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+  width: 100px;
+}
+
+.save-btn {
+  background-color: green;
+  border-radius: 7px;
+  color: white;
+  margin: 0 3px 0 3px;
+  padding: 5px 10px 5px 10px;
+  height: 40px;
+  width: 100px;
+}
+.save-btn:hover {
+  background-color: #333;
+  border: solid 1px green;
+  color: white;
+  transform: scale(0.9);
+  transition: 0.1s;
+}
+
+.cancel-btn {
+  background-color: red;
+  color: white;
+  border-radius: 7px;
+  color: white;
+  margin: 0 3px 0 3px;
+  padding: 5px 10px 5px 10px;
+  height: 40px;
+  width: 100px;
+}
+.cancel-btn:hover {
+  background-color: #333;
+  border: solid 1px red;
+  transform: scale(0.9);
+  transition: 0.1s;
+}
+
+.btn-container {
+  margin: 5px;
+}
