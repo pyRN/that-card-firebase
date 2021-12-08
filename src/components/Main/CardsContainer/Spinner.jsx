@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-export default function Spinner() {
+export default function Spinner({ oCardInfo }) {
   const [iAmnt, fnSetAmnt] = useState(0);
+  console.log(oCardInfo);
 
   const fnOnAmntChange = (event) => {
     event.preventDefault();

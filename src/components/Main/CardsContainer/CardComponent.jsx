@@ -58,18 +58,22 @@ export default function CardComponent({ oCardInfo }) {
           {oCardInfo.set_name} ({oCardInfo.set.toUpperCase()})
         </div>
         <div className="spinner-container">
-          <div className="spinner">
-            {"Reg: "}
-            {!oCardInfo.prices.usd ? "$0.00" : "$" + oCardInfo.prices.usd}
-            {oUser ? <Spinner /> : null}
-          </div>
-          <div className="spinner">
-            {"Foil: "}
-            {!oCardInfo.prices.usd_foil
-              ? "$0.00"
-              : "$" + oCardInfo.prices.usd_foil}
-            {oUser ? <Spinner /> : null}
-          </div>
+          {oCardInfo.nonfoil ? (
+            <div className="spinner">
+              {"Reg: "}
+              {!oCardInfo.prices.usd ? "$0.00" : "$" + oCardInfo.prices.usd}
+              {oUser ? <Spinner oCardInfo={oCardInfo} /> : null}
+            </div>
+          ) : null}
+          {oCardInfo.foil ? (
+            <div className="spinner">
+              {"Foil: "}
+              {!oCardInfo.prices.usd_foil
+                ? "$0.00"
+                : "$" + oCardInfo.prices.usd_foil}
+              {oUser ? <Spinner oCardInfo={oCardInfo} /> : null}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
