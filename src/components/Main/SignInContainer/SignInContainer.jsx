@@ -99,7 +99,7 @@ export default function SignInContainer() {
 
   return (
     <div className="page-container">
-      <div className="responsive-card">
+      <div className="signIn-card">
         {sLayoutType === "signIn-btn" ? (
           <h1 className="card-title-text">Sign In</h1>
         ) : sLayoutType === "resetPass-btn" ? (

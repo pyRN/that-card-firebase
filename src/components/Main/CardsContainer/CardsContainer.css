@@ -73,6 +73,7 @@
 .btn-row {
   display: flex;
   flex-direction: row;
+  margin: 5px;
 }
 
 .spinner-btn {
@@ -81,9 +82,16 @@
   color: #09c372;
   font-weight: bold;
   width: 30px;
+  height: 30px;
   justify-content: center;
   vertical-align: middle;
+  margin: 3px;
 }
+
+.spinner-btn:hover {
+  border: 1px solid #ee7879;
+}
+
 .spinner-text {
   color: #ee7879;
   margin: auto 5px auto 5px;
