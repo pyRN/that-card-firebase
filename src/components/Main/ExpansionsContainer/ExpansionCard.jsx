@@ -31,6 +31,9 @@ export default function ExpansionCard({ oExpansionInfo }) {
         bIsLoading: true,
       },
     });
+    fnDispatch({
+      type: "RESET_FILTER",
+    });
     fetch(currentURL)
       .then((response) => response.json())
       .then((data) => {

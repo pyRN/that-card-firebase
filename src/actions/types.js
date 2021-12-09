@@ -5,6 +5,8 @@ export const SET_IS_LOADING = "SET_IS_LOADING";
 
 //Type used to set expansions in expansions container
 export const SET_EXPANSION_LIST = "SET_EXPANSION_LIST";
+export const SET_EXPANSION_FILTER = "SET_EXPANSION_FILTER";
+export const RESET_FILTER = "RESET_FILTER";
 
 //Type used to set displayed cards in card container
 export const SET_CARDS_DISPLAYED = "SET_CARDS_DISPLAYED";

@@ -12,6 +12,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 20px;
   margin-top: 20px;
 }
 
@@ -45,4 +46,42 @@
   color: #2a3166;
   transform: scale(1.05);
   transition: 0.1s;
+}
+
+.expansion-footer {
+  background-color: #2a3166;
+  border-top: solid 1px #ee7879;
+  display: flex;
+  height: 50px;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.expansion-search-field {
+  margin: 5px;
+  background-color: #222;
+  border: solid 1px #09c372;
+  border-radius: 7px;
+  color: #ee7879;
+  height: 40px;
+  margin: 5px;
+  margin-right: 20px;
+  padding: 5px;
+  text-align: center;
+  width: 300px;
+}
+
+.expansion-search-field:focus,
+.expansion-search-field::placeholder {
+  color: #ee7879;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1050px) {
+  .expansion-footer {
+    justify-content: center;
+  }
+  .expansion-search-field {
+    margin: 5px;
+  }
 }

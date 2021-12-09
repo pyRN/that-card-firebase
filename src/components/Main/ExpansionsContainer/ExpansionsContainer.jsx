@@ -4,11 +4,15 @@ import "./ExpansionsContainer.css";
 
 //Components
 import ExpansionCard from "./ExpansionCard";
+import Footer from "./Footer.jsx";
 import LoadingSymbol from "../LoadingSymbol";
 
 export default function ExpansionsContainer() {
   const aExpansionsList = useSelector(
     (state) => state.oExpansionsReducer.aExpansions
+  );
+  const aFilteredExpansions = useSelector(
+    (state) => state.oExpansionsReducer.aFilteredExpansions
   );
   const fnDispatch = useDispatch();
 
@@ -46,7 +50,9 @@ export default function ExpansionsContainer() {
       <>
         <div align="center" className="expansions-container">
           {aExpansionsList.map(function (oExpansionInfo) {
-            return !oExpansionInfo.digital ? (
+            return !oExpansionInfo.digital &&
+              (aFilteredExpansions.length === 0 ||
+                aFilteredExpansions.includes(oExpansionInfo.name)) ? (
               <ExpansionCard
                 key={oExpansionInfo.name}
                 oExpansionInfo={oExpansionInfo}
@@ -54,6 +60,7 @@ export default function ExpansionsContainer() {
             ) : null;
           })}
         </div>
+        <Footer />
       </>
     );
   }
