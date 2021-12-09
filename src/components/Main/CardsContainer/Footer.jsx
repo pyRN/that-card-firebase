@@ -11,6 +11,10 @@ export default function Footer() {
         </option>
         <option value="High to Low">High to Low</option>
         <option value="Low to High">Low to High</option>
+        <option value="Mythic">Mythic</option>
+        <option value="Rare">Rare</option>
+        <option value="Uncommon">Uncommon</option>
+        <option value="Common">Common</option>
         <option value="White">White</option>
         <option value="Blue">Blue</option>
         <option value="Black">Black</option>
