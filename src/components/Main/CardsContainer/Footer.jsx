@@ -6,7 +6,7 @@ export default function Footer() {
         <button className="save-btn">Save</button>
       </div> */}
       <select id="select-filter" className="filter-select">
-        <option selected value="All">
+        <option defaultValue value="All">
           All
         </option>
         <option value="High to Low">High to Low</option>
