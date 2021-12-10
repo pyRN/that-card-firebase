@@ -50,6 +50,10 @@ export default function NavBar() {
           bIsLoading: true,
         },
       });
+      fnDispatch({
+        type: "SET_FILTERED_CARDS",
+        payload: null,
+      });
       fnGetCardsFromExpansion(
         [],
         `https://api.scryfall.com/cards/search?unique=prints&q=%22${oSearchInput.current.value}%22`

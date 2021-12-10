@@ -34,6 +34,10 @@ export default function ExpansionCard({ oExpansionInfo }) {
     fnDispatch({
       type: "RESET_FILTER",
     });
+    fnDispatch({
+      type: "SET_FILTERED_CARDS",
+      payload: null,
+    });
     fetch(currentURL)
       .then((response) => response.json())
       .then((data) => {

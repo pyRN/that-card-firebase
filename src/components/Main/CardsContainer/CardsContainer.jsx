@@ -1,3 +1,4 @@
+//TODO: Component is rerendering on laod.
 import { useSelector } from "react-redux";
 import "./CardsContainer.css";
 
@@ -13,6 +14,9 @@ import VampiricTutor from "../../../multimedia/Vampiric-tutor.jpg";
 export default function CardsContainer() {
   const aCardsShown = useSelector((state) => state.oUserReducer.aCardsShown);
   const bIsLoading = useSelector((state) => state.oUserReducer.bIsLoading);
+  const aFilteredCards = useSelector(
+    (state) => state.oUserReducer.aFilteredCards
+  );
 
   return (
     <div className="page-container">
@@ -20,9 +24,17 @@ export default function CardsContainer() {
       {aCardsShown && aCardsShown.length && !bIsLoading ? (
         aCardsShown !== null ? (
           <>
-            {aCardsShown.map(function (oCardInfo) {
-              return <CardComponent oCardInfo={oCardInfo} key={oCardInfo.id} />;
-            })}
+            {aFilteredCards === null
+              ? aCardsShown.map((oCardInfo) => {
+                  return (
+                    <CardComponent oCardInfo={oCardInfo} key={oCardInfo.id} />
+                  );
+                })
+              : aFilteredCards.map((oCardInfo) => {
+                  return (
+                    <CardComponent oCardInfo={oCardInfo} key={oCardInfo.id} />
+                  );
+                })}
             <Footer />
           </>
         ) : null

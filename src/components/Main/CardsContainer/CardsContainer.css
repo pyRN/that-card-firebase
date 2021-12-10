@@ -104,7 +104,7 @@
   z-index: 1;
 }
 
-.footer {
+.cards-footer {
   background-color: #2a3166;
   border-top: solid 1px #ee7879;
   display: flex;
@@ -120,9 +120,10 @@
   color: #ee7879;
   height: 40px;
   margin: 5px;
+  margin-right: 20px;
   padding: 5px;
   text-align: center;
-  width: 100px;
+  width: 150px;
 }
 
 .save-btn {
