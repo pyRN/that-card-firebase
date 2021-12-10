@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { signIn } from "../../../actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import * as firebaseKeys from "../../../config/default.json";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -12,13 +13,12 @@ import "./SignInContainer.css";
 
 export default function SignInContainer() {
   const firebaseApp = initializeApp({
-    apiKey: "AIzaSyDgGTGxg0YAohZugcenYtadnrJvCzqaXGo",
-    authDomain: "do-i-have-that-card.firebaseapp.com",
-    projectId: "do-i-have-that-card",
-    storageBucket: "do-i-have-that-card.appspot.com",
-    messagingSenderId: "1017228611963",
-    appId: "1:1017228611963:web:adac839707eeb5b2d8adde",
-    measurementId: "G-98YT8VMVL2",
+    apiKey: firebaseKeys.apiKey,
+    authDomain: firebaseKeys.authDomain,
+    projectId: firebaseKeys.projectId,
+    storageBucket: firebaseKeys.storageBucket,
+    messagingSenderId: firebaseKeys.messagingSenderId,
+    appId: firebaseKeys.appId,
   });
 
   const auth = getAuth(firebaseApp);
