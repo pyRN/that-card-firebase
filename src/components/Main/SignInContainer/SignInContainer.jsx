@@ -1,31 +1,21 @@
 import React, { useState } from "react";
-import { initializeApp } from "firebase/app";
+import { auth } from "./../../../firebase";
+import { getFirestore, setDoc, doc } from "firebase/firestore";
 import { signIn } from "../../../actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import * as firebaseKeys from "../../../config/default.json";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import "./SignInContainer.css";
 
 export default function SignInContainer() {
-  const firebaseApp = initializeApp({
-    apiKey: firebaseKeys.apiKey,
-    authDomain: firebaseKeys.authDomain,
-    projectId: firebaseKeys.projectId,
-    storageBucket: firebaseKeys.storageBucket,
-    messagingSenderId: firebaseKeys.messagingSenderId,
-    appId: firebaseKeys.appId,
-  });
-
-  const auth = getAuth(firebaseApp);
   const [sLayoutType, fnSetLayoutType] = useState("signIn-btn");
   const [sError, fnSetError] = useState("");
   const fnHistory = useHistory();
   const fnDispatch = useDispatch();
+  const db = getFirestore();
 
   const fnChangeType = (event) => {
     //Function rerenders component based on signIn/Sign Up/resetPassword
@@ -81,6 +71,10 @@ export default function SignInContainer() {
         .then((userCredential) => {
           // Registration successful and signed in
           fnDispatch(signIn(userCredential.user));
+          setDoc(doc(db, "users", userCredential.user.uid), {
+            sEmail: userCredential.user.email,
+            id: userCredential.user.uid,
+          });
           fnHistory.push("/cards");
         })
         .catch((error) => {
