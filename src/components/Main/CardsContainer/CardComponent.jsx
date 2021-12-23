@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
 import "./CardsContainer.css";
 
 //Components
@@ -7,7 +6,6 @@ import Spinner from "./Spinner";
 
 export default function CardComponent({ oCardInfo }) {
   let aCardImage;
-  const oUser = useSelector((state) => state.oUserReducer.oUser);
   const oCardImage = useRef(null);
 
   //For double sided cards
@@ -57,24 +55,7 @@ export default function CardComponent({ oCardInfo }) {
         <div className="set-name-text">
           {oCardInfo.set_name} ({oCardInfo.set.toUpperCase()})
         </div>
-        <div className="spinner-container">
-          {oCardInfo.nonfoil ? (
-            <div className="spinner">
-              {"Reg: "}
-              {!oCardInfo.prices.usd ? "$0.00" : "$" + oCardInfo.prices.usd}
-              {oUser ? <Spinner oCardInfo={oCardInfo} /> : null}
-            </div>
-          ) : null}
-          {oCardInfo.foil ? (
-            <div className="spinner">
-              {"Foil: "}
-              {!oCardInfo.prices.usd_foil
-                ? "$0.00"
-                : "$" + oCardInfo.prices.usd_foil}
-              {oUser ? <Spinner oCardInfo={oCardInfo} /> : null}
-            </div>
-          ) : null}
-        </div>
+        <Spinner oCardInfo={oCardInfo} />
       </div>
     </div>
   );
