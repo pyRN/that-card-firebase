@@ -126,40 +126,6 @@
   width: 150px;
 }
 
-.save-btn {
-  background-color: green;
-  border-radius: 7px;
-  color: white;
-  margin: 0 3px 0 3px;
-  padding: 5px 10px 5px 10px;
-  height: 40px;
-  width: 100px;
-}
-.save-btn:hover {
-  background-color: #333;
-  border: solid 1px green;
-  color: white;
-  transform: scale(0.9);
-  transition: 0.1s;
-}
-
-.cancel-btn {
-  background-color: red;
-  color: white;
-  border-radius: 7px;
-  color: white;
-  margin: 0 3px 0 3px;
-  padding: 5px 10px 5px 10px;
-  height: 40px;
-  width: 100px;
-}
-.cancel-btn:hover {
-  background-color: #333;
-  border: solid 1px red;
-  transform: scale(0.9);
-  transition: 0.1s;
-}
-
 .btn-container {
   margin: 5px;
 }
