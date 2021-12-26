@@ -11,6 +11,7 @@ export default function Modal() {
     } else {
       fnDispatch({ type: "RESET_STAGE" });
       fnDispatch({ type: "SET_DIRTY", payload: false });
+      fnDispatch({ type: "SET_MODAL_OPEN" });
     }
   };
   return (
@@ -29,7 +30,11 @@ export default function Modal() {
               <button className="save-btn" name="return" onClick={fnOnClick}>
                 Return
               </button>
-              <button className="cancel-btn" name="continue">
+              <button
+                className="cancel-btn"
+                name="continue"
+                onClick={fnOnClick}
+              >
                 Continue
               </button>
             </div>
