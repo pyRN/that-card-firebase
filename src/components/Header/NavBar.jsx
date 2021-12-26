@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { signOutUser } from "../../actions";
+import { resetCardSearch, setCardSearch, signOutUser } from "../../actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
@@ -9,19 +8,18 @@ import "./NavBar.css";
 
 export default function NavBar() {
   const oUser = useSelector((state) => state.oUserReducer.oUser);
+  const bIsDirty = useSelector((state) => state.oUserReducer.bIsDirty);
   const fnDispatch = useDispatch();
   const fnHistory = useHistory();
   const oHamburgerMenu = useRef(null);
   const oSearchInput = useRef(null);
 
-  //Functions
   const fnSignOut = (event) => {
     event.preventDefault();
 
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
         fnDispatch(signOutUser());
         fnHistory.push("/signIn");
       })
@@ -35,31 +33,33 @@ export default function NavBar() {
     oHamburgerMenu.current.classList.toggle("open");
   };
 
+  const fnOnLinkClick = (event) => {
+    event.preventDefault();
+    bIsDirty
+      ? fnDispatch({ type: "SET_MODAL_OPEN" })
+      : fnHistory.push("/" + event.target.id.split("-")[0]);
+  };
+
+  const fnOnSearchChange = (event) => {
+    if (bIsDirty) {
+      fnDispatch({ type: "SET_MODAL_OPEN" });
+    }
+  };
+
   const fnSearchCard = (event) => {
     event.preventDefault();
-    if (oSearchInput.current.value) {
-      fnDispatch({
-        type: "SET_CARDS_DISPLAYED",
-        payload: {
-          aDisplayedCards: null,
-        },
-      });
-      fnDispatch({
-        type: "SET_IS_LOADING",
-        payload: {
-          bIsLoading: true,
-        },
-      });
-      fnDispatch({
-        type: "SET_FILTERED_CARDS",
-        payload: null,
-      });
-      fnGetCardsFromExpansion(
-        [],
-        `https://api.scryfall.com/cards/search?unique=prints&q=%22${oSearchInput.current.value}%22`
-      );
-      oSearchInput.current.value = "";
-      fnHistory.push("/cards");
+    if (bIsDirty) {
+      fnDispatch({ type: "SET_MODAL_OPEN" });
+    } else {
+      if (oSearchInput.current.value) {
+        fnDispatch(resetCardSearch());
+        fnGetCardsFromExpansion(
+          [],
+          `https://api.scryfall.com/cards/search?unique=prints&q=%22${oSearchInput.current.value}%22`
+        );
+        oSearchInput.current.value = "";
+        fnHistory.push("/cards");
+      }
     }
   };
 
@@ -78,72 +78,46 @@ export default function NavBar() {
           if (data.has_more) {
             fnGetCardsFromExpansion(cards, data.next_page);
           } else {
-            fnDispatch({
-              type: "SET_CARDS_DISPLAYED",
-              payload: {
-                aDisplayedCards: cards,
-              },
-            });
-            fnDispatch({
-              type: "SET_IS_LOADING",
-              payload: {
-                bIsLoading: false,
-              },
-            });
+            fnDispatch(setCardSearch(cards, false));
           }
         }
         //If search is invalid (error 404), return undefined card list
         else {
-          fnDispatch({
-            type: "SET_CARDS_DISPLAYED",
-            payload: {
-              aDisplayedCards: [],
-            },
-          });
-          fnDispatch({
-            type: "SET_IS_LOADING",
-            payload: {
-              bIsLoading: false,
-            },
-          });
+          fnDispatch(setCardSearch([], false));
         }
       });
   };
 
   return (
     <header className="sticky">
-      <div className="brand">
-        <a href="/">Do I Have That Card?</a>
-      </div>
+      <h2 className="brand">Do I Have That Card?</h2>
       <nav>
         <ul>
-          <li className="nav-links">
-            <Link className="link-text" to="/">
-              Main
-            </Link>
+          <li className="nav-links" onClick={fnOnLinkClick}>
+            Main
           </li>
-          <li className="nav-links">
-            <Link className="link-text" to="/expansions">
-              Expansions
-            </Link>
+          <li
+            className="nav-links"
+            id="expansions-link"
+            onClick={fnOnLinkClick}
+          >
+            Expansions
           </li>
-          <li className="nav-links">
-            <Link className="link-text" to="/cards">
-              Cards
-            </Link>
+          <li className="nav-links" id="cards-link" onClick={fnOnLinkClick}>
+            Cards
           </li>
 
           {oUser ? (
             <>
-              <li className="nav-links">
-                <Link className="link-text" to="/decks">
-                  Decks
-                </Link>
+              <li className="nav-links" id="decks-link" onClick={fnOnLinkClick}>
+                Decks
               </li>
-              <li className="nav-links">
-                <Link className="link-text" to="/resources">
-                  Resources
-                </Link>
+              <li
+                className="nav-links"
+                id="resources-link"
+                onClick={fnOnLinkClick}
+              >
+                Resources
               </li>
               <li className="nav-links">
                 <a href="#top" className="signOut-link" onClick={fnSignOut}>
@@ -152,10 +126,8 @@ export default function NavBar() {
               </li>
             </>
           ) : (
-            <li className="nav-links">
-              <Link className="link-text" to="/signIn">
-                Sign In
-              </Link>
+            <li className="nav-links" id="signIn-link" onClick={fnOnLinkClick}>
+              Sign In
             </li>
           )}
           <form className="input-form" onSubmit={fnSearchCard}>
@@ -165,6 +137,7 @@ export default function NavBar() {
               placeholder="Search"
               aria-label="Search"
               ref={oSearchInput}
+              onChange={fnOnSearchChange}
             />
             <button className="search-btn" type="submit" onClick={fnSearchCard}>
               Search
@@ -181,37 +154,24 @@ export default function NavBar() {
         <div className="hamburger-bar-2"></div>
         <div className="hamburger-bar-3"></div>
         <ul className="mobile-menu">
-          <Link className="link-text mobile-item" to="/" align="center">
-            <li align="center">Main</li>
-          </Link>
-
-          <Link
-            className="link-text mobile-item"
-            to="/expansions"
-            align="center"
-          >
-            <li>Expansions</li>
-          </Link>
-          <Link className="link-text mobile-item" to="/cards" align="center">
-            <li>Cards</li>
-          </Link>
+          <li align="center" onClick={fnOnLinkClick}>
+            Main
+          </li>
+          <li id="expansions-mobile-link" onClick={fnOnLinkClick}>
+            Expansions
+          </li>
+          <li id="cards-mobile-link" onClick={fnOnLinkClick}>
+            Cards
+          </li>
 
           {oUser ? (
             <>
-              <Link
-                className="link-text mobile-item"
-                to="/decks"
-                align="center"
-              >
-                <li>Decks</li>
-              </Link>
-              <Link
-                className="link-text mobile-item"
-                to="/resources"
-                align="center"
-              >
-                <li>Resources</li>
-              </Link>
+              <li id="decks-mobile-link" onClick={fnOnLinkClick}>
+                Decks
+              </li>
+              <li id="resource-mobile-links" onClick={fnOnLinkClick}>
+                Resources
+              </li>
               <a
                 href="#top"
                 className="signOut-link"
@@ -222,9 +182,9 @@ export default function NavBar() {
               </a>
             </>
           ) : (
-            <Link className="link-text mobile-item" to="/signIn" align="center">
-              <li>Sign In</li>
-            </Link>
+            <li id="signIn-mobile-link" onClick={fnOnLinkClick}>
+              Sign In
+            </li>
           )}
         </ul>
       </div>
