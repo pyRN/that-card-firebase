@@ -18,6 +18,14 @@ body {
   width: 100%;
 }
 
+h1 {
+  color: #ee7879;
+}
+
+p {
+  color: #09c372;
+}
+
 .mainContainer {
   background: #222;
 }
@@ -76,6 +84,62 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/*Styles for modal*/
+.modal-container {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2a3166;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 350px;
+  height: 400px;
+}
+
+.save-btn {
+  background-color: green;
+  border-radius: 7px;
+  color: white;
+  margin: 0 3px 0 3px;
+  padding: 5px 10px 5px 10px;
+  height: 40px;
+  width: 100px;
+}
+.save-btn:hover {
+  background-color: #333;
+  border: solid 1px green;
+  color: white;
+  transform: scale(0.9);
+  transition: 0.1s;
+}
+
+.cancel-btn {
+  background-color: red;
+  color: white;
+  border-radius: 7px;
+  color: white;
+  margin: 0 3px 0 3px;
+  padding: 5px 10px 5px 10px;
+  height: 40px;
+  width: 100px;
+}
+.cancel-btn:hover {
+  background-color: #333;
+  border: solid 1px red;
+  transform: scale(0.9);
+  transition: 0.1s;
 }
 
 @media only screen and (max-width: 600px) {

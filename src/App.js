@@ -11,6 +11,7 @@ import NavBar from "./components/Header/NavBar";
 import CardsContainer from "./components/Main/CardsContainer/CardsContainer";
 import DecksContainer from "./components/Main/DecksContainer/DecksContainer";
 import MainContainer from "./components/Main/MainContainer/MainContainer";
+import Modal from "./components/Main/Modal";
 import ResourcesContainer from "./components/Main/ResourcesContainer/ResourcesContainer";
 import ExpansionsContainer from "./components/Main/ExpansionsContainer/ExpansionsContainer";
 import SignInContainer from "./components/Main/SignInContainer/SignInContainer";
@@ -20,6 +21,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <NavBar />
+        <Modal />
         <div className="mainContainer">
           <Route path="/" exact render={(props) => <MainContainer />} />
           <Route

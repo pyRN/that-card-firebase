@@ -14,4 +14,6 @@ export const SET_FILTERED_CARDS = "SET_FILTERED_CARDS";
 
 //Type used to add cards to DB
 export const ADD_TO_STAGE = "ADD_TO_STAGE";
+export const RESET_STAGE = "RESET_STAGE";
 export const SET_DIRTY = "SET_DIRTY";
+export const SET_MODAL_OPEN = "SET_MODAL_OPEN";
