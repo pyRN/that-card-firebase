@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { auth } from "./../../../firebase";
-import { getFirestore, setDoc, doc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, Timestamp } from "firebase/firestore";
 import { signIn } from "../../../actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -71,9 +71,10 @@ export default function SignInContainer() {
         .then((userCredential) => {
           // Registration successful and signed in
           fnDispatch(signIn(userCredential.user));
-          setDoc(doc(db, "users", userCredential.user.uid), {
+          setDoc(doc(db, userCredential.user.uid, "Information"), {
             sEmail: userCredential.user.email,
-            id: userCredential.user.uid,
+            sId: userCredential.user.uid,
+            dCreated: Timestamp.now(),
           });
           fnHistory.push("/cards");
         })
@@ -101,9 +102,7 @@ export default function SignInContainer() {
         ) : (
           <h1 className="card-title-text">Sign Up</h1>
         )}
-        {/* <div className="row"> */}
         {sError ? <div className="alert-flag">{sError}</div> : null}
-        {/* </div> */}
         <div className="col">
           <input
             aria-describedby="emailHelp"
