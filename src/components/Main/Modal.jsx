@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { resetStaging } from "../../actions";
 
 export default function Modal() {
   const fnDispatch = useDispatch();
@@ -9,8 +10,7 @@ export default function Modal() {
     if (event.target.name === "return") {
       fnDispatch({ type: "SET_MODAL_OPEN" });
     } else {
-      fnDispatch({ type: "RESET_STAGE" });
-      fnDispatch({ type: "SET_DIRTY", payload: false });
+      fnDispatch(resetStaging());
       fnDispatch({ type: "SET_MODAL_OPEN" });
     }
   };
