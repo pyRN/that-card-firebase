@@ -24,22 +24,17 @@ export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_TO_STAGE:
       //Check if card is already in staging area
-      let bInStaging = false;
       for (let i = 0; i < state.aStaging.length; i++) {
         //In in staging, update values
-        if (state.aStaging[i].id === action.payload.id) {
-          console.log("Already in");
+        if (state.aStaging[i].sId === action.payload.sId) {
           state.aStaging[i] = action.payload;
-          bInStaging = true;
+          return state;
         }
       }
-
-      return bInStaging
-        ? state
-        : { ...state, aStaging: [...state.aStaging, action.payload] };
+      state.aStaging.push(action.payload);
+      return state;
 
     case RESET_STAGE:
-      console.log("Reset stage");
       return { ...state, aStaging: [] };
 
     case SET_CARDS_DISPLAYED:
@@ -49,8 +44,7 @@ export default function userReducer(state = initialState, action) {
       };
 
     case SET_DIRTY:
-      console.log("Set dirty");
-      return { ...state, bIsDirty: action.payload };
+      return { ...state, bIsDirty: !state.bIsDirty };
 
     case SET_FILTERED_CARDS:
       return { ...state, aFilteredCards: action.payload };
