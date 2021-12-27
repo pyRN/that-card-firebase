@@ -1,10 +1,41 @@
 import React, { useRef } from "react";
+import { resetStaging } from "../../../actions";
+import { getFirestore, doc, writeBatch } from "firebase/firestore"; //addDoc,collection,
 import { useSelector, useDispatch } from "react-redux";
+import { auth } from "./../../../firebase";
 
 export default function Footer() {
   const aCardsShown = useSelector((state) => state.oUserReducer.aCardsShown);
+  const bIsDirty = useSelector((state) => state.oUserReducer.bIsDirty);
+  const aStaging = useSelector((state) => state.oUserReducer.aStaging);
   const fnDispatch = useDispatch();
   const oFilterSelect = useRef(null);
+  const db = getFirestore();
+
+  const fnOnClick = (event) => {
+    event.preventDefault();
+    const oUser = auth.currentUser;
+    if (event.target.name === "save") {
+      if (oUser) {
+        const batch = writeBatch(db);
+        try {
+          for (let i = 0; i < aStaging.length; i++) {
+            batch.set(
+              doc(db, oUser.uid, aStaging[i].sId.replace(/-/g, "")),
+              aStaging[i]
+            );
+          }
+          batch.commit();
+          fnDispatch(resetStaging());
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      }
+    }
+    if (event.target.name === "cancel") {
+      fnDispatch(resetStaging());
+    }
+  };
 
   const fnOnChange = (event) => {
     event.preventDefault();
@@ -69,10 +100,16 @@ export default function Footer() {
   };
   return (
     <div className="sticky-bottom cards-footer">
-      {/* <div className="btn-container">
-        <button className="cancel-btn" onClick={fnOnClick}>Cancel</button>
-        <button className="save-btn" onClick={fnOnClick}>Save</button>
-      </div> */}
+      {bIsDirty ? (
+        <div className="btn-container">
+          <button className="cancel-btn" onClick={fnOnClick} name="cancel">
+            Cancel
+          </button>
+          <button className="save-btn" onClick={fnOnClick} name="save">
+            Save
+          </button>
+        </div>
+      ) : null}
       <select
         id="select-filter"
         className="filter-select"
