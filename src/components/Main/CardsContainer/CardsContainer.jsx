@@ -21,6 +21,7 @@ export default function CardsContainer() {
   return (
     <div className="page-container">
       <LoadingSymbol />
+
       {aCardsShown && aCardsShown.length && !bIsLoading ? (
         aCardsShown !== null ? (
           <>
