@@ -1,5 +1,7 @@
 import {
+  RESET_STAGE,
   SET_CARDS_DISPLAYED,
+  SET_DIRTY,
   SET_FILTERED_CARDS,
   SET_IS_LOADING,
   SIGN_IN,
@@ -52,4 +54,9 @@ export const setCardSearch = (aDisplayedCards, bIsLoading) => (dispatch) => {
       bIsLoading: bIsLoading,
     },
   });
+};
+
+export const resetStaging = () => (dispatch) => {
+  dispatch({ type: RESET_STAGE });
+  dispatch({ type: SET_DIRTY });
 };
