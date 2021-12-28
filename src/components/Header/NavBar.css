@@ -27,7 +27,7 @@ header {
   justify-content: space-between;
 }
 
-.sticky {
+.sticky-top {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -46,6 +46,11 @@ ul {
 ul li {
   margin-right: 10px;
   padding: 5px;
+}
+
+.input-form {
+  display: flex;
+  width: 280px;
 }
 
 .signOut-link {
@@ -107,10 +112,6 @@ ul li {
 
   .nav-links {
     display: none;
-  }
-  .input-form {
-    display: flex;
-    width: 280px;
   }
 
   .open .mobile-menu {

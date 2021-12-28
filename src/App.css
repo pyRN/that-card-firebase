@@ -1,12 +1,4 @@
-/*Colors used in project:
-#EE7879 - dark pink
-#2A3166 - dark blue
-#F4ABAA - pink
-#CAE7DF - light blue
-#dc3545 - danger red
-#09c372 - mint green
-#222 - dark gray
-*/
+/*Tags*/
 html {
   background: #222;
   margin: 0px;
@@ -22,10 +14,13 @@ body {
 h1,
 h2 {
   color: #ee7879;
+  overflow-wrap: break-word;
+  margin: 0;
 }
 
 p {
   color: #09c372;
+  overflow-wrap: break-word;
 }
 
 li {
@@ -57,6 +52,27 @@ input::placeholder {
   text-align: center;
 }
 
+footer {
+  background-color: #2a3166;
+  border-top: solid 1px #ee7879;
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+select {
+  background-color: #222;
+  border: solid 1px #09c372;
+  border-radius: 7px;
+  color: #ee7879;
+  height: 40px;
+  padding: 5px;
+  text-align: center;
+  width: 250px;
+}
+
+/*Classes*/
 .mainContainer {
   background: #222;
 }
@@ -69,7 +85,7 @@ input::placeholder {
 
 .mtg-card {
   margin: 10px;
-  width: 300px;
+  width: 350px;
 }
 
 .page-container {
@@ -80,36 +96,24 @@ input::placeholder {
   margin-top: 20px;
 }
 
-.responsive-card {
-  background-color: #2a3166;
-  border: solid 1px #09c372;
-  border-radius: 7px;
-  color: #09c372;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 5px;
-  padding: 5px;
-  width: 80%;
-}
-
 .static-card {
   background-color: #2a3166;
   box-shadow: 0px 0px 5px #09c372;
   border-radius: 7px;
   color: #09c372;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: 5px;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px;
   padding: 5px;
-  width: 350px;
+  width: 400px;
 }
 
-.card-title-text {
+/* .card-title-text {
   color: #ee7879;
   margin: 10px 0 10px 0;
-}
+} */
 
 /*Styles for Loading Symbol*/
 .loading-symbol {
@@ -152,6 +156,7 @@ input::placeholder {
   height: 400px;
 }
 
+/*Buttons*/
 .submit-btn {
   background-color: #09c372;
   border-radius: 7px;
@@ -186,8 +191,39 @@ input::placeholder {
   transition: 0.1s;
 }
 
-@media only screen and (max-width: 600px) {
-  .responsive-card {
-    width: 320px;
+.sticky-bottom {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}
+
+.footer-form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1075px) {
+  .static-card {
+    width: 350px;
+  }
+
+  .mtg-card {
+    width: 300px;
+  }
+
+  .footer-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .mobile-select {
+    width: 100px;
   }
 }

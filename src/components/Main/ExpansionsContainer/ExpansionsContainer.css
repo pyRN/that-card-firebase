@@ -1,33 +1,25 @@
-/*Colors used in project:
-#EE7879 - dark pink
-#2A3166 - dark blue
-#F4ABAA - pink
-#CAE7DF - light blue
-#dc3545 - danger red
-#09c372 - mint green
-*/
-
 .expansions-container {
   color: #09c372;
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   margin-bottom: 20px;
   margin-top: 20px;
 }
 
 .expansion-card {
   background-color: #2a3166;
-  border: solid 1px #09c372;
+  box-shadow: 0px 0px 5px #09c372;
   border-radius: 7px;
   cursor: pointer;
-  height: 250px;
-  margin: 5px;
-  width: 320px;
-}
-
-.expansion-items {
-  padding: 5%;
+  height: 200px;
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .expansion-img {
@@ -35,52 +27,20 @@
   height: 100px;
   width: 100px;
 }
-
-.expansion-text {
-  margin-top: 10%;
-}
-
 .expansion-card:hover {
   background-color: #ee7879;
-  border: solid 1px #2a3166;
   color: #2a3166;
   transform: scale(1.05);
   transition: 0.1s;
 }
 
-.expansion-footer {
-  background-color: #2a3166;
-  border-top: solid 1px #ee7879;
-  display: flex;
-  height: 50px;
-  justify-content: flex-end;
-  width: 100%;
+.expansion-card:hover .expansion-img {
+  filter: drop-shadow(0px 0px 5px #2a3166);
 }
 
-.expansion-search-field {
-  background-color: #222;
-  border: solid 1px #09c372;
-  border-radius: 7px;
-  color: #ee7879;
-  height: 40px;
-  margin: 5px;
-  margin-right: 20px;
-  padding: 5px;
-  text-align: center;
-  width: 300px;
-}
-
-.expansion-search-field:focus,
-.expansion-search-field::placeholder {
-  color: #ee7879;
-  text-align: center;
-}
-
-@media only screen and (max-width: 1050px) {
-  .expansion-footer {
-    justify-content: center;
-  }
-  .expansion-search-field {
-    margin: 5px;
+@media only screen and (max-width: 1075px) {
+  .expansion-card {
+    width: 300px;
+    height: 300px;
   }
 }

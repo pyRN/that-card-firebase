@@ -63,7 +63,7 @@ export default function ExpansionCard({ oExpansionInfo }) {
 
   return (
     <div className="expansion-card" onClick={handleOnClick}>
-      <div className="expansion-items" align="center">
+      <div>
         <img
           src={oExpansionInfo.icon_svg_uri}
           className="expansion-img"

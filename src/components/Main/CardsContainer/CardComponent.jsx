@@ -41,11 +41,11 @@ export default function CardComponent({ oCardInfo }) {
   );
 
   return (
-    <div className="card-container">
+    <div className="static-card">
       <div className="card-items" align="center">
         {aCardImage}
         {aCardImagesSrcs ? (
-          <button className="flip-btn" onClick={fnOnFlipClick}>
+          <button className="submit-btn" onClick={fnOnFlipClick}>
             Flip
           </button>
         ) : null}

@@ -99,41 +99,43 @@ export default function Footer() {
     });
   };
   return (
-    <div className="sticky-bottom cards-footer">
-      {bIsDirty ? (
-        <div className="btn-container">
-          <button className="cancel-btn" onClick={fnOnClick} name="cancel">
-            Cancel
-          </button>
-          <button className="save-btn" onClick={fnOnClick} name="save">
-            Save
-          </button>
-        </div>
-      ) : null}
-      <select
-        id="select-filter"
-        className="filter-select"
-        ref={oFilterSelect}
-        onChange={fnOnChange}
-      >
-        <option defaultValue value="All">
-          All
-        </option>
-        <option value="HTL">High to Low</option>
-        <option value="LTH">Low to High</option>
-        <option value="Mythic">Mythic</option>
-        <option value="Rare">Rare</option>
-        <option value="Uncommon">Uncommon</option>
-        <option value="Common">Common</option>
-        <option value="W">White</option>
-        <option value="U">Blue</option>
-        <option value="B">Black</option>
-        <option value="R">Red</option>
-        <option value="G">Green</option>
-        <option value="Multicolored">Multicolored</option>
-        <option value="Colorless">Colorless</option>
-        <option value="Land">Land</option>
-      </select>
-    </div>
+    <footer className="sticky-bottom">
+      <form className="footer-form">
+        {bIsDirty ? (
+          <div>
+            <button className="cancel-btn" onClick={fnOnClick} name="cancel">
+              Cancel
+            </button>
+            <button className="submit-btn" onClick={fnOnClick} name="save">
+              Save
+            </button>
+          </div>
+        ) : null}
+        <select
+          id="select-filter"
+          ref={oFilterSelect}
+          onChange={fnOnChange}
+          className="mobile-select"
+        >
+          <option defaultValue value="All">
+            All
+          </option>
+          <option value="HTL">High to Low</option>
+          <option value="LTH">Low to High</option>
+          <option value="Mythic">Mythic</option>
+          <option value="Rare">Rare</option>
+          <option value="Uncommon">Uncommon</option>
+          <option value="Common">Common</option>
+          <option value="W">White</option>
+          <option value="U">Blue</option>
+          <option value="B">Black</option>
+          <option value="R">Red</option>
+          <option value="G">Green</option>
+          <option value="Multicolored">Multicolored</option>
+          <option value="Colorless">Colorless</option>
+          <option value="Land">Land</option>
+        </select>
+      </form>
+    </footer>
   );
 }

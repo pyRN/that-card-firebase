@@ -89,7 +89,7 @@ export default function NavBar() {
   };
 
   return (
-    <header className="sticky">
+    <header className="sticky-top">
       <h2 className="brand">Do I Have That Card?</h2>
       <nav>
         <ul>

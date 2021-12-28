@@ -38,10 +38,10 @@ export default function SignInContainer() {
 
   return (
     <div className="page-container">
-      <div className="static-card" align="center">
+      <div className="static-card">
         <h2>Sign In</h2>
 
-        <form onSubmit={fnOnSubmit}>
+        <form className="signIn-form" onSubmit={fnOnSubmit}>
           <input
             type="text"
             placeholder="Email"

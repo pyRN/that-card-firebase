@@ -40,13 +40,13 @@ export default function CardsContainer() {
           </>
         ) : null
       ) : aCardsShown !== null && aCardsShown.length === 0 && !bIsLoading ? (
-        <div className="responsive-card">
+        <div className="static-card">
           <h1 className="card-title-text">Invalid Search</h1>
           <img src={LastChance} className="mtg-card" alt="Magic Card Back" />
           <h3>Search for another card</h3>
         </div>
       ) : !bIsLoading ? (
-        <div className="responsive-card">
+        <div className="static-card">
           <h1 className="card-title-text">Search for cards</h1>
           <img src={VampiricTutor} className="mtg-card" alt="Magic Card Back" />
         </div>

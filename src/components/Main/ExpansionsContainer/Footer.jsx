@@ -26,15 +26,16 @@ export default function Footer() {
   };
 
   return (
-    <div className="sticky-bottom expansion-footer">
-      <input
-        className="expansion-search-field"
-        type="search"
-        placeholder="Search Expansions"
-        aria-label="Search"
-        onChange={fnOnChange}
-        ref={oExpansionSearch}
-      />
-    </div>
+    <footer className="sticky-bottom">
+      <form className="footer-form">
+        <input
+          type="search"
+          placeholder="Search Expansions"
+          aria-label="Search"
+          onChange={fnOnChange}
+          ref={oExpansionSearch}
+        />
+      </form>
+    </footer>
   );
 }

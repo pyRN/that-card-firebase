@@ -29,9 +29,9 @@ export default function ForgotContainer() {
 
   return (
     <div className="page-container">
-      <div className="static-card" align="center">
+      <div className="static-card">
         <h2>Forgot Password</h2>
-        <form onSubmit={fnOnSubmit}>
+        <form onSubmit={fnOnSubmit} className="signIn-form">
           <input
             type="text"
             placeholder="Email"

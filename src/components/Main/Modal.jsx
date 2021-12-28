@@ -27,7 +27,7 @@ export default function Modal() {
               </p>
             </div>
             <div className="modal-footer">
-              <button className="save-btn" name="return" onClick={fnOnClick}>
+              <button className="submit-btn" name="return" onClick={fnOnClick}>
                 Return
               </button>
               <button
