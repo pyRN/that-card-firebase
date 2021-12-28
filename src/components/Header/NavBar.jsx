@@ -132,14 +132,14 @@ export default function NavBar() {
           )}
           <form className="input-form" onSubmit={fnSearchCard}>
             <input
-              className="input-field"
+              // className="input-field"
               type="search"
               placeholder="Search"
               aria-label="Search"
               ref={oSearchInput}
               onChange={fnOnSearchChange}
             />
-            <button className="search-btn" type="submit" onClick={fnSearchCard}>
+            <button className="submit-btn" type="submit" onClick={fnSearchCard}>
               Search
             </button>
           </form>
