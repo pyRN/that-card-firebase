@@ -40,6 +40,23 @@ li:hover {
   cursor: pointer;
 }
 
+input {
+  background-color: #222;
+  border: solid 1px #09c372;
+  border-radius: 7px;
+  color: #ee7879;
+  text-align: center;
+  height: 40px !important;
+  width: 250px;
+  font-size: 15px;
+}
+
+input:focus,
+input::placeholder {
+  color: #ee7879;
+  text-align: center;
+}
+
 .mainContainer {
   background: #222;
 }
@@ -74,6 +91,19 @@ li:hover {
   margin: 5px;
   padding: 5px;
   width: 80%;
+}
+
+.static-card {
+  background-color: #2a3166;
+  box-shadow: 0px 0px 5px #09c372;
+  border-radius: 7px;
+  color: #09c372;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+  width: 350px;
 }
 
 .card-title-text {
@@ -122,18 +152,18 @@ li:hover {
   height: 400px;
 }
 
-.save-btn {
-  background-color: green;
+.submit-btn {
+  background-color: #09c372;
   border-radius: 7px;
-  color: white;
+  color: black;
   margin: 0 3px 0 3px;
   padding: 5px 10px 5px 10px;
   height: 40px;
   width: 100px;
 }
-.save-btn:hover {
-  background-color: #333;
-  border: solid 1px green;
+.submit-btn:hover {
+  background-color: #ee7879;
+  border: solid 1px #09c372;
   color: white;
   transform: scale(0.9);
   transition: 0.1s;

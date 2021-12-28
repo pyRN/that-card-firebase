@@ -10,11 +10,13 @@ import NavBar from "./components/Header/NavBar";
 //Containers
 import CardsContainer from "./components/Main/CardsContainer/CardsContainer";
 import DecksContainer from "./components/Main/DecksContainer/DecksContainer";
+import ExpansionsContainer from "./components/Main/ExpansionsContainer/ExpansionsContainer";
+import ForgotContainer from "./components/Main/SignInContainer/ForgotContainer";
 import MainContainer from "./components/Main/MainContainer/MainContainer";
 import Modal from "./components/Main/Modal";
 import ResourcesContainer from "./components/Main/ResourcesContainer/ResourcesContainer";
-import ExpansionsContainer from "./components/Main/ExpansionsContainer/ExpansionsContainer";
 import SignInContainer from "./components/Main/SignInContainer/SignInContainer";
+import SignUpContainer from "./components/Main/SignInContainer/SignUpContainer";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           />
           <Route path="/cards" exact render={(props) => <CardsContainer />} />
           <Route path="/signIn" exact render={(props) => <SignInContainer />} />
+          <Route path="/signUp" exact render={(props) => <SignUpContainer />} />
+          <Route path="/forgot" exact render={(props) => <ForgotContainer />} />
           <Route path="/decks" exact render={(props) => <DecksContainer />} />
           <Route
             path="/resources"
