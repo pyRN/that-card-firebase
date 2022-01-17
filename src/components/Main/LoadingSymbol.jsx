@@ -5,9 +5,13 @@ export default function LoadingSymbol() {
   return (
     <>
       {bIsLoading ? (
-        <div className="responsive-card">
-          <h2>Loading</h2>
-          <div className="loading-symbol"></div>
+        <div className="modal-container">
+          <div className="modal-content" align="center">
+            <h1>Loading</h1>
+            <div className="modal-body">
+              <div className="loading-symbol"></div>
+            </div>
+          </div>
         </div>
       ) : null}
     </>
