@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { setCardSearch } from "../../../actions/index";
 import "./ExpansionsContainer.css";
 
 export default function ExpansionCard({ oExpansionInfo }) {
@@ -18,7 +19,7 @@ export default function ExpansionCard({ oExpansionInfo }) {
     fnHistory.push("/cards");
   };
 
-  function getCardsFromExpansion(cards, currentURL) {
+  function getCardsFromExpansion(aCardFromExpansion, currentURL) {
     fnDispatch({
       type: "SET_CARDS_DISPLAYED",
       payload: {
@@ -34,29 +35,18 @@ export default function ExpansionCard({ oExpansionInfo }) {
     fnDispatch({
       type: "RESET_FILTER",
     });
-    fnDispatch({
-      type: "SET_FILTERED_CARDS",
-      payload: null,
-    });
+    // fnDispatch({
+    //   type: "SET_FILTERED_CARDS",
+    //   payload: null,
+    // });
     fetch(currentURL)
       .then((response) => response.json())
       .then((data) => {
-        cards = cards.concat(data.data);
+        aCardFromExpansion = aCardFromExpansion.concat(data.data);
         if (data.has_more) {
-          getCardsFromExpansion(cards, data.next_page);
+          getCardsFromExpansion(aCardFromExpansion, data.next_page);
         } else {
-          fnDispatch({
-            type: "SET_CARDS_DISPLAYED",
-            payload: {
-              aDisplayedCards: cards,
-            },
-          });
-          fnDispatch({
-            type: "SET_IS_LOADING",
-            payload: {
-              bIsLoading: false,
-            },
-          });
+          fnDispatch(setCardSearch(aCardFromExpansion, false));
         }
       });
   }

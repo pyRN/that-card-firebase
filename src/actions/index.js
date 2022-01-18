@@ -24,12 +24,6 @@ export const signOutUser = () => (dispatch) => {
 
 export const resetCardSearch = () => (dispatch) => {
   dispatch({
-    type: SET_CARDS_DISPLAYED,
-    payload: {
-      aDisplayedCards: null,
-    },
-  });
-  dispatch({
     type: SET_IS_LOADING,
     payload: {
       bIsLoading: true,
@@ -41,18 +35,23 @@ export const resetCardSearch = () => (dispatch) => {
   });
 };
 
-export const setCardSearch = (aDisplayedCards, bIsLoading) => (dispatch) => {
+export const setCardSearch = (aFetchedPromises, bIsLoading) => (dispatch) => {
+  //Check if from search or expansion
   dispatch({
     type: SET_CARDS_DISPLAYED,
-    payload: {
-      aDisplayedCards: aDisplayedCards,
-    },
+    payload:
+      aFetchedPromises.length === 2 ? aFetchedPromises : [aFetchedPromises],
   });
   dispatch({
     type: SET_IS_LOADING,
     payload: {
       bIsLoading: bIsLoading,
     },
+  });
+  dispatch({
+    type: SET_FILTERED_CARDS,
+    payload:
+      aFetchedPromises.length === 2 ? aFetchedPromises[0] : aFetchedPromises,
   });
 };
 

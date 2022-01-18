@@ -1,10 +1,13 @@
 import React, { useRef } from "react";
+import { useSelector } from "react-redux";
 import "./CardsContainer.css";
 
 //Components
 import Spinner from "./Spinner";
+import UserSpinner from "./UserSpinner";
 
 export default function CardComponent({ oCardInfo }) {
+  const oUser = useSelector((state) => state.oUserReducer.oUser);
   let aCardImage;
   const oCardImage = useRef(null);
 
@@ -55,7 +58,27 @@ export default function CardComponent({ oCardInfo }) {
         <div className="set-name-text">
           {oCardInfo.set_name} ({oCardInfo.set.toUpperCase()})
         </div>
-        <Spinner oCardInfo={oCardInfo} />
+        <div className="spinner-container">
+          {oUser ? (
+            <>
+              {oCardInfo.nonfoil ? (
+                <UserSpinner oCardInfo={oCardInfo} sType={"Regular"} />
+              ) : null}
+              {oCardInfo.foil ? (
+                <UserSpinner oCardInfo={oCardInfo} sType={"Foil"} />
+              ) : null}
+            </>
+          ) : (
+            <>
+              {oCardInfo.nonfoil ? (
+                <Spinner oCardInfo={oCardInfo} sType={"Regular"} />
+              ) : null}
+              {oCardInfo.foil ? (
+                <Spinner oCardInfo={oCardInfo} sType={"Foil"} />
+              ) : null}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

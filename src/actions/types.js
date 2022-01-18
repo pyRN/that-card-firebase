@@ -10,6 +10,7 @@ export const RESET_FILTER = "RESET_FILTER";
 
 //Type used to set displayed cards in card container
 export const SET_CARDS_DISPLAYED = "SET_CARDS_DISPLAYED";
+export const SET_DOCS_FETCHED = "SET_DOCS_FETCHED";
 export const SET_FILTERED_CARDS = "SET_FILTERED_CARDS";
 
 //Type used to add cards to DB

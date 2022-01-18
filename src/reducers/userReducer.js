@@ -3,6 +3,7 @@ import {
   RESET_STAGE,
   SET_CARDS_DISPLAYED,
   SET_DIRTY,
+  SET_DOCS_FETCHED,
   SET_FILTERED_CARDS,
   SET_IS_LOADING,
   SET_MODAL_OPEN,
@@ -11,7 +12,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  aCardsShown: null,
+  aFetchedPromises: null,
   aFilteredCards: null,
   aStaging: [],
   bIsDirty: false,
@@ -27,7 +28,10 @@ export default function userReducer(state = initialState, action) {
       for (let i = 0; i < state.aStaging.length; i++) {
         //In in staging, update values
         if (state.aStaging[i].sId === action.payload.sId) {
-          state.aStaging[i] = action.payload;
+          if (action.payload.sType === "Regular")
+            state.aStaging[i].iRegular = action.payload.iRegular;
+          if (action.payload.sType === "Foil")
+            state.aStaging[i].iFoil = action.payload.iFoil;
           return state;
         }
       }
@@ -40,11 +44,15 @@ export default function userReducer(state = initialState, action) {
     case SET_CARDS_DISPLAYED:
       return {
         ...state,
-        aCardsShown: action.payload.aDisplayedCards,
+        aFetchedPromises: action.payload,
       };
 
     case SET_DIRTY:
-      return { ...state, bIsDirty: !state.bIsDirty };
+      return { ...state, bIsDirty: action.payload };
+    //  return { ...state, bIsDirty: !state.bIsDirty };
+
+    case SET_DOCS_FETCHED:
+      return { ...state, aDocsFetched: action.payload };
 
     case SET_FILTERED_CARDS:
       return { ...state, aFilteredCards: action.payload };

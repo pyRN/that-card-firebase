@@ -1,9 +1,16 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { resetCardSearch, setCardSearch, signOutUser } from "../../actions";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getAuth, signOut } from "firebase/auth";
+import { auth } from "./../../firebase";
+import { signOut } from "firebase/auth";
 import React, { useRef } from "react";
+import {
+  getFirestore,
+  getDocs,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
 import "./NavBar.css";
 
 export default function NavBar() {
@@ -13,11 +20,10 @@ export default function NavBar() {
   const fnHistory = useHistory();
   const oHamburgerMenu = useRef(null);
   const oSearchInput = useRef(null);
+  const db = getFirestore();
 
   const fnSignOut = (event) => {
     event.preventDefault();
-
-    const auth = getAuth();
     signOut(auth)
       .then(() => {
         fnDispatch(signOutUser());
@@ -48,44 +54,91 @@ export default function NavBar() {
 
   const fnSearchCard = (event) => {
     event.preventDefault();
+
     if (bIsDirty) {
       fnDispatch({ type: "SET_MODAL_OPEN" });
     } else {
       if (oSearchInput.current.value) {
-        fnDispatch(resetCardSearch());
-        fnGetCardsFromExpansion(
-          [],
-          `https://api.scryfall.com/cards/search?unique=prints&q=%22${oSearchInput.current.value}%22`
+        //TODO: add reject clauses
+        let fFetchCardsPromise = new Promise((fnResolve, fnReject) => {
+          fnGetCardsFromSearch(
+            [],
+            `https://api.scryfall.com/cards/search?unique=prints&q=%22${oSearchInput.current.value}%22`,
+            oSearchInput.current.value,
+            fnResolve
+          );
+        });
+        let fFetchDocsPromise = new Promise((fnResolve, fnReject) => {
+          fnGetDocsFromSearch(
+            oSearchInput.current.value.toLowerCase(),
+            fnResolve
+          );
+        });
+        Promise.all([fFetchCardsPromise, fFetchDocsPromise]).then(
+          (aResponse, loading) => {
+            fnDispatch(setCardSearch(aResponse, false));
+          }
         );
+
+        fnDispatch(resetCardSearch());
         oSearchInput.current.value = "";
-        fnHistory.push("/cards");
+        //If already on /cards path, no need to reload page
+        if (fnHistory.location.pathname !== "/cards") {
+          fnHistory.push("/cards");
+        }
       }
     }
   };
 
-  const fnGetCardsFromExpansion = (cards, currentURL) => {
-    fetch(currentURL)
+  const fnGetCardsFromSearch = (
+    aCards,
+    sCurrentURL,
+    sSearchValue,
+    fnResolve
+  ) => {
+    fetch(sCurrentURL)
       .then((response) => response.json())
       .then((data) => {
         //Check to see if search query returns cards
         if (data.object === "list") {
           //When searching for cards, only return cards that are printed (Not digital versions)
-          let aNonDigitalCards = data.data.filter((card) => {
-            return !card.digital;
+          let aNonDigitalCards = data.data.filter((oCard) => {
+            return !oCard.digital;
           });
-          cards = cards.concat(aNonDigitalCards);
+
+          let aExactMatch = aNonDigitalCards.filter((oCard) => {
+            return oCard.name.toLowerCase() === sSearchValue.toLowerCase();
+          });
+          aCards = aCards.concat(aExactMatch);
 
           if (data.has_more) {
-            fnGetCardsFromExpansion(cards, data.next_page);
+            fnGetCardsFromSearch(aCards, data.next_page);
           } else {
-            fnDispatch(setCardSearch(cards, false));
+            fnResolve(aCards);
           }
         }
         //If search is invalid (error 404), return undefined card list
         else {
-          fnDispatch(setCardSearch([], false));
+          fnResolve([]);
         }
       });
+  };
+
+  const fnGetDocsFromSearch = (sSearchValue, fnResolve) => {
+    //TODO: change the search to where it is fuzzy by where("sId", "in", [IDs])
+    if (oUser) {
+      getDocs(
+        query(collection(db, oUser.uid), where("sName", "==", sSearchValue))
+      ).then((docs) => {
+        let aDocsFetched = [];
+        docs.forEach((oCard) => {
+          aDocsFetched.push(oCard.data());
+        });
+        fnResolve(aDocsFetched);
+      });
+    } else {
+      fnResolve(null);
+    }
   };
 
   return (

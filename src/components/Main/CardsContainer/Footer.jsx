@@ -5,7 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { auth } from "./../../../firebase";
 
 export default function Footer() {
-  const aCardsShown = useSelector((state) => state.oUserReducer.aCardsShown);
+  const aFetchedPromises = useSelector(
+    (state) => state.oUserReducer.aFetchedPromises
+  );
   const bIsDirty = useSelector((state) => state.oUserReducer.bIsDirty);
   const aStaging = useSelector((state) => state.oUserReducer.aStaging);
   const fnDispatch = useDispatch();
@@ -20,10 +22,13 @@ export default function Footer() {
         const batch = writeBatch(db);
         try {
           for (let i = 0; i < aStaging.length; i++) {
-            batch.set(
-              doc(db, oUser.uid, aStaging[i].sId.replace(/-/g, "")),
-              aStaging[i]
-            );
+            batch.set(doc(db, oUser.uid, aStaging[i].sId.replace(/-/g, "")), {
+              sId: aStaging[i].sId,
+              sName: aStaging[i].sName,
+              sExpansion: aStaging[i].sExpansion,
+              iRegular: aStaging[i].iRegular,
+              iFoil: aStaging[i].iFoil,
+            });
           }
           batch.commit();
           fnDispatch(resetStaging());
@@ -37,66 +42,67 @@ export default function Footer() {
     }
   };
 
-  const fnOnChange = (event) => {
+  const fnOnChangeFilter = (event) => {
     event.preventDefault();
     let aFilteredCards;
-
-    switch (oFilterSelect.current.value) {
-      case "All":
-        aFilteredCards = null;
-        break;
-      case "HTL":
-        aFilteredCards = aCardsShown.sort((a, b) =>
-          parseFloat(a.prices.usd) < parseFloat(b.prices.usd) ? 1 : -1
-        );
-        break;
-      case "LTH":
-        aFilteredCards = aCardsShown.sort((a, b) =>
-          parseFloat(a.prices.usd) > parseFloat(b.prices.usd) ? 1 : -1
-        );
-        break;
-      case "Mythic":
-      case "Rare":
-      case "Uncommon":
-      case "Common":
-        aFilteredCards = aCardsShown.filter((oCard) => {
-          return oCard.rarity === oFilterSelect.current.value.toLowerCase();
-        });
-        break;
-      case "W":
-      case "U":
-      case "B":
-      case "R":
-      case "G":
-        aFilteredCards = aCardsShown.filter((oCard) => {
-          return (
-            oCard.color_identity.length === 1 &&
-            oCard.color_identity.includes(oFilterSelect.current.value)
+    if (aFetchedPromises && aFetchedPromises[0].length > 0) {
+      switch (oFilterSelect.current.value) {
+        case "All":
+          aFilteredCards = aFetchedPromises[0];
+          break;
+        case "HTL":
+          aFilteredCards = aFetchedPromises[0].sort((a, b) =>
+            parseFloat(a.prices.usd) < parseFloat(b.prices.usd) ? 1 : -1
           );
-        });
-        break;
-      case "Multicolored":
-        aFilteredCards = aCardsShown.filter((oCard) => {
-          return oCard.color_identity.length > 1;
-        });
-        break;
-      case "Colorless":
-        aFilteredCards = aCardsShown.filter((oCard) => {
-          return oCard.color_identity.length === 0;
-        });
-        break;
-      case "Land":
-        aFilteredCards = aCardsShown.filter((oCard) => {
-          return oCard.type_line.includes("Land");
-        });
-        break;
-      default:
-        break;
+          break;
+        case "LTH":
+          aFilteredCards = aFetchedPromises[0].sort((a, b) =>
+            parseFloat(a.prices.usd) > parseFloat(b.prices.usd) ? 1 : -1
+          );
+          break;
+        case "Mythic":
+        case "Rare":
+        case "Uncommon":
+        case "Common":
+          aFilteredCards = aFetchedPromises[0].filter((oCard) => {
+            return oCard.rarity === oFilterSelect.current.value.toLowerCase();
+          });
+          break;
+        case "W":
+        case "U":
+        case "B":
+        case "R":
+        case "G":
+          aFilteredCards = aFetchedPromises[0].filter((oCard) => {
+            return (
+              oCard.color_identity.length === 1 &&
+              oCard.color_identity.includes(oFilterSelect.current.value)
+            );
+          });
+          break;
+        case "Multicolored":
+          aFilteredCards = aFetchedPromises[0].filter((oCard) => {
+            return oCard.color_identity.length > 1;
+          });
+          break;
+        case "Colorless":
+          aFilteredCards = aFetchedPromises[0].filter((oCard) => {
+            return oCard.color_identity.length === 0;
+          });
+          break;
+        case "Land":
+          aFilteredCards = aFetchedPromises[0].filter((oCard) => {
+            return oCard.type_line.includes("Land");
+          });
+          break;
+        default:
+          break;
+      }
+      fnDispatch({
+        type: "SET_FILTERED_CARDS",
+        payload: aFilteredCards,
+      });
     }
-    fnDispatch({
-      type: "SET_FILTERED_CARDS",
-      payload: aFilteredCards,
-    });
   };
   return (
     <footer className="sticky-bottom">
@@ -114,7 +120,7 @@ export default function Footer() {
         <select
           id="select-filter"
           ref={oFilterSelect}
-          onChange={fnOnChange}
+          onChange={fnOnChangeFilter}
           className="mobile-select"
         >
           <option defaultValue value="All">
