@@ -60,25 +60,25 @@ export default function NavBar() {
     } else {
       if (oSearchInput.current.value) {
         //TODO: add reject clauses
-        let fFetchCardsPromise = new Promise((fnResolve, fnReject) => {
+        new Promise((fnResolve, fnReject) => {
           fnGetCardsFromSearch(
             [],
             `https://api.scryfall.com/cards/search?unique=prints&q=%22${oSearchInput.current.value}%22`,
-            oSearchInput.current.value,
             fnResolve
           );
+        }).then((aCards) => {
+          let aCardIds = [];
+
+          aCards.forEach((oCard) => {
+            aCardIds.push(oCard.id.replace(/-/g, ""));
+          });
+
+          new Promise((fnResolve, fnReject) => {
+            fnGetDocsFromSearch(aCardIds, fnResolve);
+          }).then((aOwnedCards) => {
+            fnDispatch(setCardSearch([aCards, aOwnedCards], false));
+          });
         });
-        let fFetchDocsPromise = new Promise((fnResolve, fnReject) => {
-          fnGetDocsFromSearch(
-            oSearchInput.current.value.toLowerCase(),
-            fnResolve
-          );
-        });
-        Promise.all([fFetchCardsPromise, fFetchDocsPromise]).then(
-          (aResponse, loading) => {
-            fnDispatch(setCardSearch(aResponse, false));
-          }
-        );
 
         fnDispatch(resetCardSearch());
         oSearchInput.current.value = "";
@@ -90,12 +90,7 @@ export default function NavBar() {
     }
   };
 
-  const fnGetCardsFromSearch = (
-    aCards,
-    sCurrentURL,
-    sSearchValue,
-    fnResolve
-  ) => {
+  const fnGetCardsFromSearch = (aCards, sCurrentURL, fnResolve) => {
     fetch(sCurrentURL)
       .then((response) => response.json())
       .then((data) => {
@@ -106,10 +101,7 @@ export default function NavBar() {
             return !oCard.digital;
           });
 
-          let aExactMatch = aNonDigitalCards.filter((oCard) => {
-            return oCard.name.toLowerCase() === sSearchValue.toLowerCase();
-          });
-          aCards = aCards.concat(aExactMatch);
+          aCards = aCards.concat(aNonDigitalCards);
 
           if (data.has_more) {
             fnGetCardsFromSearch(aCards, data.next_page);
@@ -124,17 +116,43 @@ export default function NavBar() {
       });
   };
 
-  const fnGetDocsFromSearch = (sSearchValue, fnResolve) => {
+  const fnGetDocsFromSearch = (aCardIds, fnResolve) => {
+    //(sSearchValue, fnResolve) => {
     //TODO: change the search to where it is fuzzy by where("sId", "in", [IDs])
+
     if (oUser) {
-      getDocs(
-        query(collection(db, oUser.uid), where("sName", "==", sSearchValue))
-      ).then((docs) => {
-        let aDocsFetched = [];
-        docs.forEach((oCard) => {
-          aDocsFetched.push(oCard.data());
+      //Firebase only allows for 10 comparison values, have to make multiple queries
+      let aBatchQueries = [];
+
+      while (aCardIds.length) {
+        let aChunkOfTenIds = aCardIds.splice(0, 10);
+
+        aBatchQueries.push(
+          new Promise((fnResolveQuery, fnRejectQuery) => {
+            getDocs(
+              query(
+                collection(db, oUser.uid),
+                where("sId", "in", aChunkOfTenIds)
+              )
+            ).then((docs) => {
+              let aDocsFetched = [];
+              docs.forEach((oCard) => {
+                aDocsFetched.push(oCard.data());
+              });
+              fnResolveQuery(aDocsFetched);
+            });
+          })
+        );
+      }
+
+      Promise.all(aBatchQueries).then((aRetrievedQueries) => {
+        let aDocsRetrieved = [];
+
+        aRetrievedQueries.forEach((aQuery) => {
+          aDocsRetrieved = aDocsRetrieved.concat(aQuery);
         });
-        fnResolve(aDocsFetched);
+
+        fnResolve(aDocsRetrieved);
       });
     } else {
       fnResolve(null);
