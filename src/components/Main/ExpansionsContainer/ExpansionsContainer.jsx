@@ -49,6 +49,7 @@ export default function ExpansionsContainer() {
     return (
       <>
         <div align="center" className="expansions-container">
+          <LoadingSymbol />
           {aExpansionsList.map(function (oExpansionInfo) {
             return !oExpansionInfo.digital &&
               (aFilteredExpansions.length === 0 ||
