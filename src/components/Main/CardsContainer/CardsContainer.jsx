@@ -16,16 +16,16 @@ export default function CardsContainer() {
   );
 
   return (
-    <div className="page-container">
-      <LoadingSymbol />
-      <>
+    <>
+      <div className="page-container">
+        <LoadingSymbol />
         {aFilteredCards
           ? aFilteredCards.map((oCardInfo) => {
               return <CardComponent oCardInfo={oCardInfo} key={oCardInfo.id} />;
             })
           : null}
-        <Footer />
-      </>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }

@@ -58,7 +58,6 @@ footer {
   display: flex;
   height: 50px;
   justify-content: space-between;
-  width: 100%;
 }
 
 select {
@@ -91,8 +90,10 @@ select {
 .page-container {
   color: #09c372;
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
   margin-top: 20px;
 }
 
@@ -109,11 +110,6 @@ select {
   padding: 5px;
   width: 400px;
 }
-
-/* .card-title-text {
-  color: #ee7879;
-  margin: 10px 0 10px 0;
-} */
 
 /*Styles for Loading Symbol*/
 .loading-symbol {

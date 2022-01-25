@@ -48,7 +48,7 @@ export default function ExpansionsContainer() {
   if (aExpansionsList !== undefined && aExpansionsList.length) {
     return (
       <>
-        <div align="center" className="expansions-container">
+        <div className="page-container">
           <LoadingSymbol />
           {aExpansionsList.map(function (oExpansionInfo) {
             return !oExpansionInfo.digital &&
