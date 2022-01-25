@@ -225,9 +225,7 @@ export default function NavBar() {
         <div className="hamburger-bar-2"></div>
         <div className="hamburger-bar-3"></div>
         <ul className="mobile-menu">
-          <li align="center" onClick={fnOnLinkClick}>
-            Main
-          </li>
+          <li onClick={fnOnLinkClick}>Main</li>
           <li id="expansions-mobile-link" onClick={fnOnLinkClick}>
             Expansions
           </li>
