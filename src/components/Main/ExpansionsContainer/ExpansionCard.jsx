@@ -19,7 +19,6 @@ export default function ExpansionCard({ oExpansionInfo }) {
 
   const handleOnClick = (event) => {
     event.preventDefault();
-    console.log("here");
     fnDispatch(resetCardSearch());
 
     new Promise((fnResolveExpansions, fnReject) => {
@@ -61,7 +60,6 @@ export default function ExpansionCard({ oExpansionInfo }) {
             fnResolveExpansions
           );
         } else {
-          console.log(aCardsFromExpansion);
           fnResolveExpansions(aCardsFromExpansion);
         }
       });
