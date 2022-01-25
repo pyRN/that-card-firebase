@@ -47,6 +47,7 @@ export default function SignInContainer() {
             placeholder="Email"
             className="signIn-input"
             ref={oEmail}
+            autoFocus
           ></input>
           <input
             type="password"

@@ -34,6 +34,7 @@ export default function Footer() {
           aria-label="Search"
           onChange={fnOnChange}
           ref={oExpansionSearch}
+          autoFocus
         />
       </form>
     </footer>

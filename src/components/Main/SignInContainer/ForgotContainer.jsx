@@ -37,6 +37,7 @@ export default function ForgotContainer() {
             placeholder="Email"
             className="signIn-input"
             ref={oEmail}
+            autoFocus
           ></input>
           <button className="submit-btn" onClick={fnOnSubmit}>
             Reset
