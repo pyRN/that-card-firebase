@@ -107,16 +107,14 @@ export default function ExpansionCard({ oExpansionInfo }) {
 
   return (
     <div className="expansion-card" onClick={handleOnClick}>
-      <div>
-        <img
-          src={oExpansionInfo.icon_svg_uri}
-          className="expansion-img"
-          alt={oExpansionInfo.name}
-        />
-        <h5 className="expansion-text">
-          {oExpansionInfo.name} ({oExpansionInfo.code.toUpperCase()})
-        </h5>
-      </div>
+      <img
+        src={oExpansionInfo.icon_svg_uri}
+        className="expansion-img"
+        alt={oExpansionInfo.name}
+      />
+      <h5 className="expansion-text">
+        {oExpansionInfo.name} ({oExpansionInfo.code.toUpperCase()})
+      </h5>
     </div>
   );
 }
