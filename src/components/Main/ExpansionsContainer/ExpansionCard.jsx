@@ -39,6 +39,10 @@ export default function ExpansionCard({ oExpansionInfo }) {
         fnGetDocsFromSearch(aCardIds, fnResolve);
       }).then((aOwnedCards) => {
         fnDispatch(setCardSearch([aCards, aOwnedCards], false));
+        fnDispatch({
+          type: "SET_EXPANSION_FILTER",
+          payload: [],
+        });
         fnHistory.push("/cards");
       });
     });
