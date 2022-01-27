@@ -59,7 +59,6 @@ export default function NavBar() {
       fnDispatch({ type: "SET_MODAL_OPEN" });
     } else {
       if (oSearchInput.current.value) {
-        //TODO: add reject clauses
         new Promise((fnResolve, fnReject) => {
           fnGetCardsFromSearch(
             [],
@@ -117,9 +116,6 @@ export default function NavBar() {
   };
 
   const fnGetDocsFromSearch = (aCardIds, fnResolve) => {
-    //(sSearchValue, fnResolve) => {
-    //TODO: change the search to where it is fuzzy by where("sId", "in", [IDs])
-
     if (oUser) {
       //Firebase only allows for 10 comparison values, have to make multiple queries
       let aBatchQueries = [];
