@@ -22,13 +22,19 @@ export default function Footer() {
         const batch = writeBatch(db);
         try {
           for (let i = 0; i < aStaging.length; i++) {
-            batch.set(doc(db, oUser.uid, aStaging[i].sId.replace(/-/g, "")), {
-              sId: aStaging[i].sId,
-              sName: aStaging[i].sName,
-              sExpansion: aStaging[i].sExpansion,
-              iRegular: aStaging[i].iRegular,
-              iFoil: aStaging[i].iFoil,
-            });
+            if (aStaging[i].iRegular === 0 && aStaging[i].iFoil === 0) {
+              batch.delete(
+                doc(db, oUser.uid, aStaging[i].sId.replace(/-/g, ""))
+              );
+            } else {
+              batch.set(doc(db, oUser.uid, aStaging[i].sId.replace(/-/g, "")), {
+                sId: aStaging[i].sId,
+                sName: aStaging[i].sName,
+                sExpansion: aStaging[i].sExpansion,
+                iRegular: aStaging[i].iRegular,
+                iFoil: aStaging[i].iFoil,
+              });
+            }
           }
           batch.commit();
           fnDispatch(resetStaging());
