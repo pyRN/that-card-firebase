@@ -49,6 +49,7 @@ export default function Footer() {
   };
 
   const fnOnChangeFilter = (event) => {
+    //TODO: Fix the price filter
     event.preventDefault();
     let aFilteredCards;
     if (aFetchedPromises && aFetchedPromises[0].length > 0) {
@@ -56,16 +57,20 @@ export default function Footer() {
         case "All":
           aFilteredCards = aFetchedPromises[0];
           break;
-        case "HTL":
-          aFilteredCards = aFetchedPromises[0].sort((a, b) =>
-            parseFloat(a.prices.usd) < parseFloat(b.prices.usd) ? 1 : -1
-          );
-          break;
-        case "LTH":
-          aFilteredCards = aFetchedPromises[0].sort((a, b) =>
-            parseFloat(a.prices.usd) > parseFloat(b.prices.usd) ? 1 : -1
-          );
-          break;
+        // case "HTL":
+        //   aFilteredCards = aFetchedPromises[0].sort((a, b) => {
+        //     // parseFloat(a.prices.usd) < parseFloat(b.prices.usd) ? 1 : -1
+        //     return (
+        //       parseFloat(a.prices.usd ? a.prices.usd : 0) <
+        //       parseFloat(b.prices.usd ? b.prices.usd : 0)
+        //     );
+        //   });
+        //   break;
+        // case "LTH":
+        //   aFilteredCards = aFetchedPromises[0].sort((a, b) =>
+        //     parseFloat(a.prices.usd) > parseFloat(b.prices.usd) ? 1 : -1
+        //   );
+        //   break;
         case "Mythic":
         case "Rare":
         case "Uncommon":
@@ -104,6 +109,7 @@ export default function Footer() {
         default:
           break;
       }
+      console.log(aFilteredCards);
       fnDispatch({
         type: "SET_FILTERED_CARDS",
         payload: aFilteredCards,
@@ -132,8 +138,8 @@ export default function Footer() {
           <option defaultValue value="All">
             All
           </option>
-          <option value="HTL">High to Low</option>
-          <option value="LTH">Low to High</option>
+          {/* <option value="HTL">High to Low</option>
+          <option value="LTH">Low to High</option> */}
           <option value="Mythic">Mythic</option>
           <option value="Rare">Rare</option>
           <option value="Uncommon">Uncommon</option>
