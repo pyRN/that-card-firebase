@@ -10,9 +10,9 @@ export default function CardContainerHeader({ aFilteredCards }) {
   const iTotalCardsOwned = aFetchedPromises[1] ? aFetchedPromises[1].length : 0;
   const oProgressBarStyle = {
     background: `linear-gradient(135deg, #09c372 ${Math.ceil(
-      iTotalCardsOwned / iTotalCards
+      (iTotalCardsOwned / iTotalCards) * 100
     )}%, #ee7879 ${
-      iTotalCardsOwned - Math.ceil(iTotalCardsOwned / iTotalCards)
+      iTotalCards - Math.ceil((iTotalCardsOwned / iTotalCards) * 100)
     }%)`,
   };
 
