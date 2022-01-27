@@ -8,7 +8,6 @@ import LoadingSymbol from "../LoadingSymbol";
 import Footer from "./Footer";
 
 //Media
-import LastChance from "../../../multimedia/Last-chance.jpg";
 import VampiricTutor from "../../../multimedia/Vampiric-tutor.jpg";
 
 export default function CardsContainer() {
