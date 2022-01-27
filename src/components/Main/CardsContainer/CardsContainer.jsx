@@ -3,27 +3,36 @@ import "./CardsContainer.css";
 
 //Components
 import CardComponent from "./CardComponent";
+import CardContainerHeader from "./CardContainerHeader";
 import LoadingSymbol from "../LoadingSymbol";
 import Footer from "./Footer";
 
 //Media
-// import LastChance from "../../../multimedia/Last-chance.jpg";
-// import VampiricTutor from "../../../multimedia/Vampiric-tutor.jpg";
+import LastChance from "../../../multimedia/Last-chance.jpg";
+import VampiricTutor from "../../../multimedia/Vampiric-tutor.jpg";
 
 export default function CardsContainer() {
   const aFilteredCards = useSelector(
     (state) => state.oUserReducer.aFilteredCards
   );
 
+  console.log("aFilteredCards: ", aFilteredCards);
+
   return (
     <>
+      <LoadingSymbol />
+      <CardContainerHeader aFilteredCards={aFilteredCards} />
       <div className="page-container">
-        <LoadingSymbol />
-        {aFilteredCards
-          ? aFilteredCards.map((oCardInfo) => {
-              return <CardComponent oCardInfo={oCardInfo} key={oCardInfo.id} />;
-            })
-          : null}
+        {aFilteredCards ? (
+          aFilteredCards.map((oCardInfo) => {
+            return <CardComponent oCardInfo={oCardInfo} key={oCardInfo.id} />;
+          })
+        ) : aFilteredCards === null ? (
+          <div className="static-card">
+            <h1 align="center">Search for a Card</h1>
+            <img src={VampiricTutor} className="mtg-card" alt="VampiricTutor" />
+          </div>
+        ) : null}
       </div>
       <Footer />
     </>

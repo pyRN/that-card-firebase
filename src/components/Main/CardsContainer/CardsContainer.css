@@ -1,3 +1,10 @@
+.card-header-container {
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: center;
+  margin: 20px;
+}
+
 .card-items {
   display: flex;
   flex-direction: column;
