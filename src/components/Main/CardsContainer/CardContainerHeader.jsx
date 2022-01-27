@@ -6,8 +6,16 @@ export default function CardContainerHeader({ aFilteredCards }) {
   );
   const oUser = useSelector((state) => state.oUserReducer.oUser);
 
-  const iTotalCards = aFetchedPromises[0] ? aFetchedPromises[0].length : 0;
-  const iTotalCardsOwned = aFetchedPromises[1] ? aFetchedPromises[1].length : 0;
+  console.log(aFetchedPromises);
+
+  const iTotalCards =
+    aFetchedPromises !== null && aFetchedPromises[0]
+      ? aFetchedPromises[0].length
+      : 0;
+  const iTotalCardsOwned =
+    aFetchedPromises !== null && aFetchedPromises[1]
+      ? aFetchedPromises[1].length
+      : 0;
   const oProgressBarStyle = {
     background: `linear-gradient(135deg, #09c372 ${Math.ceil(
       (iTotalCardsOwned / iTotalCards) * 100
