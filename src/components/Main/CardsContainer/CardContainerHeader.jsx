@@ -6,8 +6,6 @@ export default function CardContainerHeader({ aFilteredCards }) {
   );
   const oUser = useSelector((state) => state.oUserReducer.oUser);
 
-  console.log(aFetchedPromises);
-
   const iTotalCards =
     aFetchedPromises !== null && aFetchedPromises[0]
       ? aFetchedPromises[0].length
