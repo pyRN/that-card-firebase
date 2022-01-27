@@ -16,8 +16,6 @@ export default function CardsContainer() {
     (state) => state.oUserReducer.aFilteredCards
   );
 
-  console.log("aFilteredCards: ", aFilteredCards);
-
   return (
     <>
       <LoadingSymbol />
