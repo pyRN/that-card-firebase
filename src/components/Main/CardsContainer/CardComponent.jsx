@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fnFetchCards } from "./../../../actions/";
 import "./CardsContainer.css";
 
 //Components
@@ -10,6 +11,8 @@ export default function CardComponent({ oCardInfo }) {
   const oUser = useSelector((state) => state.oUserReducer.oUser);
   let aCardImage;
   const oCardImage = useRef(null);
+  // const sCardName = useRef(null);
+  const fnDispatch = useDispatch();
 
   //For double sided cards
   const aCardImagesSrcs =
@@ -43,6 +46,17 @@ export default function CardComponent({ oCardInfo }) {
     />
   );
 
+  const fnOnNameClick = (oEvent) => {
+    oEvent.preventDefault();
+    fnDispatch(fnFetchCards(oCardInfo.name, oUser, true));
+  };
+
+  const fnOnSetClick = (oEvent) => {
+    oEvent.preventDefault();
+    console.log(oCardInfo.name);
+    // fnDispatch(fnFetchCards(oCardInfo.name, oUser, true));
+  };
+
   return (
     <div className="static-card">
       <div className="card-items" align="center">
@@ -52,10 +66,10 @@ export default function CardComponent({ oCardInfo }) {
             Flip
           </button>
         ) : null}
-        <div className="card-name-text">
+        <div className="card-name-text" onClick={fnOnNameClick}>
           {oCardInfo.name} ({oCardInfo.rarity.slice(0, 1).toUpperCase()})
         </div>
-        <div className="set-name-text">
+        <div className="set-name-text" onClick={fnOnSetClick}>
           {oCardInfo.set_name} ({oCardInfo.set.toUpperCase()})
         </div>
         <div className="spinner-container">
