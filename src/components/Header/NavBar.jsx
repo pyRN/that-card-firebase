@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { resetCardSearch, signOutUser, fnFetchCards } from "../../actions";
+import { fnFetchCards, fnSignOutUser } from "../../actions";
 import { useHistory } from "react-router-dom";
 import { auth } from "./../../firebase";
 import { signOut } from "firebase/auth";
@@ -14,11 +14,11 @@ export default function NavBar() {
   const oHamburgerMenu = useRef(null);
   const oSearchInput = useRef(null);
 
-  const fnSignOut = (event) => {
-    event.preventDefault();
+  const fnSignOut = (oEvent) => {
+    oEvent.preventDefault();
     signOut(auth)
       .then(() => {
-        fnDispatch(signOutUser());
+        fnDispatch(fnSignOutUser());
         fnHistory.push("/signIn");
       })
       .catch((error) => {
@@ -26,33 +26,34 @@ export default function NavBar() {
       });
   };
 
-  const fnToggleMobileMenu = (event) => {
-    event.preventDefault();
+  const fnToggleMobileMenu = (oEvent) => {
+    oEvent.preventDefault();
     oHamburgerMenu.current.classList.toggle("open");
   };
 
-  const fnOnLinkClick = (event) => {
-    event.preventDefault();
+  const fnOnLinkClick = (oEvent) => {
+    oEvent.preventDefault();
     bIsDirty
       ? fnDispatch({ type: "SET_MODAL_OPEN" })
-      : fnHistory.push("/" + event.target.id.split("-")[0]);
+      : fnHistory.push("/" + oEvent.target.id.split("-")[0]);
   };
 
-  const fnOnSearchChange = (event) => {
+  const fnOnSearchChange = (oEvent) => {
     if (bIsDirty) {
       fnDispatch({ type: "SET_MODAL_OPEN" });
     }
   };
 
-  const fnSearchCard = (event) => {
-    event.preventDefault();
+  const fnSearchCard = (oEvent) => {
+    oEvent.preventDefault();
 
     if (bIsDirty) {
       fnDispatch({ type: "SET_MODAL_OPEN" });
     } else {
       if (oSearchInput.current.value) {
-        fnDispatch(fnFetchCards(oSearchInput.current.value, oUser));
-        fnDispatch(resetCardSearch());
+        fnDispatch(
+          fnFetchCards(oSearchInput.current.value, oUser, false, false)
+        );
         oSearchInput.current.value = "";
 
         //If already on /cards path, no need to reload page
