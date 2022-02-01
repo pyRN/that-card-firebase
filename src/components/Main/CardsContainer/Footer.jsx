@@ -14,10 +14,10 @@ export default function Footer() {
   const oFilterSelect = useRef(null);
   const db = getFirestore();
 
-  const fnOnClick = (event) => {
-    event.preventDefault();
+  const fnOnClick = (oEvent) => {
+    oEvent.preventDefault();
     const oUser = auth.currentUser;
-    if (event.target.name === "save") {
+    if (oEvent.target.name === "save") {
       if (oUser) {
         const batch = writeBatch(db);
         try {
@@ -43,14 +43,14 @@ export default function Footer() {
         }
       }
     }
-    if (event.target.name === "cancel") {
+    if (oEvent.target.name === "cancel") {
       fnDispatch(resetStaging());
     }
   };
 
-  const fnOnChangeFilter = (event) => {
+  const fnOnChangeFilter = (oEvent) => {
     //TODO: Fix the price filter
-    event.preventDefault();
+    oEvent.preventDefault();
     let aFilteredCards;
     if (aFetchedPromises && aFetchedPromises[0].length > 0) {
       switch (oFilterSelect.current.value) {
@@ -109,7 +109,6 @@ export default function Footer() {
         default:
           break;
       }
-      console.log(aFilteredCards);
       fnDispatch({
         type: "SET_FILTERED_CARDS",
         payload: aFilteredCards,
