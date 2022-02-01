@@ -11,7 +11,6 @@ export default function CardComponent({ oCardInfo }) {
   const oUser = useSelector((state) => state.oUserReducer.oUser);
   let aCardImage;
   const oCardImage = useRef(null);
-  // const sCardName = useRef(null);
   const fnDispatch = useDispatch();
 
   //For double sided cards
@@ -23,8 +22,8 @@ export default function CardComponent({ oCardInfo }) {
         ]
       : null;
 
-  const fnOnFlipClick = (event) => {
-    event.preventDefault();
+  const fnOnFlipClick = (oEvent) => {
+    oEvent.preventDefault();
     oCardImage.current.src =
       oCardImage.current.src === aCardImagesSrcs[0]
         ? aCardImagesSrcs[1]
@@ -48,13 +47,12 @@ export default function CardComponent({ oCardInfo }) {
 
   const fnOnNameClick = (oEvent) => {
     oEvent.preventDefault();
-    fnDispatch(fnFetchCards(oCardInfo.name, oUser, true));
+    fnDispatch(fnFetchCards(oCardInfo.name, oUser, true, false));
   };
 
   const fnOnSetClick = (oEvent) => {
     oEvent.preventDefault();
-    console.log(oCardInfo.name);
-    // fnDispatch(fnFetchCards(oCardInfo.name, oUser, true));
+    fnDispatch(fnFetchCards(oCardInfo.set, oUser, false, true));
   };
 
   return (
