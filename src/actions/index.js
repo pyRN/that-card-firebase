@@ -2,6 +2,7 @@ import {
   RESET_STAGE,
   SET_CARDS_DISPLAYED,
   SET_DIRTY,
+  SET_EXPANSION_FILTER,
   SET_FILTERED_CARDS,
   SET_IS_LOADING,
   SIGN_IN,
@@ -22,43 +23,10 @@ export const signIn = (oUser) => (dispatch) => {
   });
 };
 
-export const signOutUser = () => (dispatch) => {
+export const fnSignOutUser = () => (dispatch) => {
   dispatch({
     type: SIGN_OUT,
     payload: null,
-  });
-};
-
-export const resetCardSearch = () => (dispatch) => {
-  dispatch({
-    type: SET_IS_LOADING,
-    payload: {
-      bIsLoading: true,
-    },
-  });
-  dispatch({
-    type: SET_FILTERED_CARDS,
-    payload: null,
-  });
-};
-
-export const setCardSearch = (aFetchedPromises, bIsLoading) => (dispatch) => {
-  //Check if from search or expansion
-  dispatch({
-    type: SET_CARDS_DISPLAYED,
-    payload:
-      aFetchedPromises.length === 2 ? aFetchedPromises : [aFetchedPromises],
-  });
-  dispatch({
-    type: SET_IS_LOADING,
-    payload: {
-      bIsLoading: bIsLoading,
-    },
-  });
-  dispatch({
-    type: SET_FILTERED_CARDS,
-    payload:
-      aFetchedPromises.length === 2 ? aFetchedPromises[0] : aFetchedPromises,
   });
 };
 
@@ -68,12 +36,28 @@ export const resetStaging = () => (dispatch) => {
 };
 
 export const fnFetchCards =
-  (sSearchInput, oUser, bExactMatch) => (dispatch) => {
-    new Promise((fnResolve, fnReject) => {
+  (sSearchInput, oUser, bExactMatch, bExpansion) => (dispatch) => {
+    dispatch({
+      type: SET_IS_LOADING,
+      payload: {
+        bIsLoading: true,
+      },
+    });
+
+    if (bExpansion) {
+      dispatch({
+        type: SET_EXPANSION_FILTER,
+        payload: [],
+      });
+    }
+
+    new Promise((fnResolveGetCards, fnReject) => {
       fnGetCardsFromSearch(
         [],
-        `https://api.scryfall.com/cards/search?unique=prints&q=%22${sSearchInput}%22`,
-        fnResolve,
+        bExpansion
+          ? `https://api.scryfall.com/cards/search?order=set&q=e%3A${sSearchInput}&unique=prints`
+          : `https://api.scryfall.com/cards/search?unique=prints&q=%22${sSearchInput}%22`,
+        fnResolveGetCards,
         bExactMatch,
         sSearchInput
       );
@@ -84,8 +68,8 @@ export const fnFetchCards =
         aCardIds.push(oCard.id.replace(/-/g, ""));
       });
 
-      new Promise((fnResolve, fnReject) => {
-        fnGetDocsFromSearch(aCardIds, oUser, fnResolve);
+      new Promise((fnResolveGetDocs, fnReject) => {
+        fnGetDocsFromSearch(aCardIds, oUser, fnResolveGetDocs);
       }).then((aOwnedCards) => {
         let aFetchedPromises = [aCards, aOwnedCards];
         //Check if from search or expansion
@@ -117,7 +101,7 @@ export const fnFetchCards =
 const fnGetCardsFromSearch = (
   aCards,
   sCurrentURL,
-  fnResolve,
+  fnResolveGetCards,
   bExactMatch,
   sSearchInput
 ) => {
@@ -141,21 +125,25 @@ const fnGetCardsFromSearch = (
         aCards = aCards.concat(aNonDigitalCards);
 
         if (data.has_more) {
-          fnGetCardsFromSearch(aCards, data.next_page);
+          fnGetCardsFromSearch(
+            aCards,
+            data.next_page,
+            fnResolveGetCards,
+            bExactMatch,
+            sSearchInput
+          );
         } else {
-          fnResolve(aCards);
+          fnResolveGetCards(aCards);
         }
       }
       //If search is invalid (error 404), return undefined card list
       else {
-        fnResolve([]);
+        fnResolveGetCards([]);
       }
     });
 };
 
-export const fnFetchDocs = (aCardIds) => (dispatch) => {};
-
-const fnGetDocsFromSearch = (aCardIds, oUser, fnResolve) => {
+const fnGetDocsFromSearch = (aCardIds, oUser, fnResolveGetDocs) => {
   if (oUser) {
     //Firebase only allows for 10 comparison values, have to make multiple queries
     let aBatchQueries = [];
@@ -186,9 +174,9 @@ const fnGetDocsFromSearch = (aCardIds, oUser, fnResolve) => {
         aDocsRetrieved = aDocsRetrieved.concat(aQuery);
       });
 
-      fnResolve(aDocsRetrieved);
+      fnResolveGetDocs(aDocsRetrieved);
     });
   } else {
-    fnResolve(null);
+    fnResolveGetDocs(null);
   }
 };
