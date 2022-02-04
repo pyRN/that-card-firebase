@@ -39,35 +39,37 @@ export default function SignInContainer() {
   return (
     <div className="page-container">
       <div className="static-card">
-        <h2>Sign In</h2>
+        <div className="card-items" align="center">
+          <h2>Sign In</h2>
 
-        <form className="signIn-form" onSubmit={fnOnSubmit}>
-          <input
-            type="text"
-            placeholder="Email"
-            className="signIn-input"
-            ref={oEmail}
-            autoFocus
-          ></input>
-          <input
-            type="password"
-            placeholder="Password"
-            className="signIn-input"
-            ref={oPassword}
-          ></input>
-          <button className="submit-btn" onClick={fnOnSubmit}>
-            Sign In
-          </button>
-        </form>
-        <div>
-          <Link to="/forgot" className="signIn-link">
-            Forgot Password
-          </Link>
-          <Link to="/signUp" className="signIn-link">
-            Sign Up
-          </Link>
+          <form className="signIn-form" onSubmit={fnOnSubmit}>
+            <input
+              type="text"
+              placeholder="Email"
+              className="signIn-input"
+              ref={oEmail}
+              autoFocus
+            ></input>
+            <input
+              type="password"
+              placeholder="Password"
+              className="signIn-input"
+              ref={oPassword}
+            ></input>
+            <button className="submit-btn" onClick={fnOnSubmit}>
+              Sign In
+            </button>
+          </form>
+          <div>
+            <Link to="/forgot" className="signIn-link">
+              Forgot Password
+            </Link>
+            <Link to="/signUp" className="signIn-link">
+              Sign Up
+            </Link>
+          </div>
+          {sError ? <div className="error-flag">{sError}</div> : null}
         </div>
-        {sError ? <div className="error-flag">{sError}</div> : null}
       </div>
     </div>
   );

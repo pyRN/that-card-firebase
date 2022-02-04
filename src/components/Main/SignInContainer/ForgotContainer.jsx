@@ -30,29 +30,31 @@ export default function ForgotContainer() {
   return (
     <div className="page-container">
       <div className="static-card">
-        <h2>Forgot Password</h2>
-        <form onSubmit={fnOnSubmit} className="signIn-form">
-          <input
-            type="text"
-            placeholder="Email"
-            className="signIn-input"
-            ref={oEmail}
-            autoFocus
-          ></input>
-          <button className="submit-btn" onClick={fnOnSubmit}>
-            Reset
-          </button>
-        </form>
-        <div>
-          <Link to="/signIn" className="signIn-link">
-            Sign In
-          </Link>
-          <Link to="/signUp" className="signIn-link">
-            Sign Up
-          </Link>
+        <div className="card-items" align="center">
+          <h2>Forgot Password</h2>
+          <form onSubmit={fnOnSubmit} className="signIn-form">
+            <input
+              type="text"
+              placeholder="Email"
+              className="signIn-input"
+              ref={oEmail}
+              autoFocus
+            ></input>
+            <button className="submit-btn" onClick={fnOnSubmit}>
+              Reset
+            </button>
+          </form>
+          <div>
+            <Link to="/signIn" className="signIn-link">
+              Sign In
+            </Link>
+            <Link to="/signUp" className="signIn-link">
+              Sign Up
+            </Link>
+          </div>
+          {sError ? <div className="error-flag">{sError}</div> : null}
+          {sMessage ? <div className="message-flag">{sMessage}</div> : null}
         </div>
-        {sError ? <div className="error-flag">{sError}</div> : null}
-        {sMessage ? <div className="message-flag">{sMessage}</div> : null}
       </div>
     </div>
   );

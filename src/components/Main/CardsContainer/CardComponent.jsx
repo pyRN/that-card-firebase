@@ -59,11 +59,7 @@ export default function CardComponent({ oCardInfo }) {
     <div className="static-card">
       <div className="card-items" align="center">
         {aCardImage}
-        {aCardImagesSrcs ? (
-          <button className="submit-btn" onClick={fnOnFlipClick}>
-            Flip
-          </button>
-        ) : null}
+
         <div className="card-name-text" onClick={fnOnNameClick}>
           {oCardInfo.name} ({oCardInfo.rarity.slice(0, 1).toUpperCase()})
         </div>
@@ -91,6 +87,11 @@ export default function CardComponent({ oCardInfo }) {
             </>
           )}
         </div>
+        {aCardImagesSrcs ? (
+          <button className="flip-btn" onClick={fnOnFlipClick}>
+            Flip
+          </button>
+        ) : null}
       </div>
     </div>
   );
