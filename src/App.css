@@ -90,13 +90,6 @@ select {
 }
 
 .page-container {
-  /* color: #09c372;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-  margin-top: 20px; */
   color: #09c372;
   display: flex;
   justify-content: center;
@@ -106,22 +99,12 @@ select {
 }
 
 .static-card {
-  /* background-color: #2a3166;
-  box-shadow: 0px 0px 5px #09c372;
-  border-radius: 7px;
-  color: #09c372;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: 10px;
-  padding: 5px;
-  width: 400px; */
   background-color: #2a3166;
   box-shadow: 0px 0px 5px #09c372;
   border-radius: 7px;
   margin: 10px;
   padding: 5px;
+  width: 400px;
 }
 
 /*Styles for Loading Symbol*/

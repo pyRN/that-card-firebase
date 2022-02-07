@@ -15,11 +15,12 @@ export default function CardContainerHeader({ aFilteredCards }) {
       ? aFetchedPromises[1].length
       : 0;
   const oProgressBarStyle = {
-    background: `linear-gradient(135deg, #09c372 ${Math.ceil(
+    background: `linear-gradient(135deg, #09c372 ${
       (iTotalCardsOwned / iTotalCards) * 100
-    )}%, #ee7879 ${
-      iTotalCards - Math.ceil((iTotalCardsOwned / iTotalCards) * 100)
-    }%)`,
+    }%, #ee7879 ${
+      ((iTotalCards - iTotalCardsOwned) / iTotalCards) * 100
+    }% 100%)`,
+    margin: "10px",
   };
 
   return (
