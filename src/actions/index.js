@@ -1,6 +1,7 @@
 import {
   RESET_STAGE,
   SET_CARDS_DISPLAYED,
+  SET_DECK_CARD_SEARCH,
   SET_DIRTY,
   SET_EXPANSION_FILTER,
   SET_FILTERED_CARDS,
@@ -33,6 +34,23 @@ export const fnSignOutUser = () => (dispatch) => {
 export const resetStaging = () => (dispatch) => {
   dispatch({ type: RESET_STAGE });
   dispatch({ type: SET_DIRTY });
+};
+
+export const fnFetchDecks = (sDeckName) => (dispatch) => {
+  console.log("Fetch Decks and return deck names in an array");
+  console.log("Dispatch array of deck names to reducer");
+};
+
+export const fnFetchSingleCard = (sSearchInput) => (dispatch) => {
+  fetch(`https://api.scryfall.com/cards/named?exact=${sSearchInput}`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      dispatch({
+        type: SET_DECK_CARD_SEARCH,
+        payload: data.status === 404 ? null : data,
+      });
+    });
 };
 
 export const fnFetchCards =

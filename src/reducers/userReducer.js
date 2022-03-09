@@ -1,7 +1,9 @@
 import {
+  ADD_CARD_TO_DECK,
   ADD_TO_STAGE,
   RESET_STAGE,
   SET_CARDS_DISPLAYED,
+  SET_DECK_CARD_SEARCH,
   SET_DIRTY,
   SET_DOCS_FETCHED,
   SET_FILTERED_CARDS,
@@ -15,6 +17,9 @@ const initialState = {
   aFetchedPromises: null,
   aFilteredCards: null,
   aStaging: [],
+  aDecks: [],
+  oDeckCardSearch: null,
+  oCurrentDeck: [],
   bIsDirty: false,
   bIsLoading: false,
   bIsModalOpen: false,
@@ -23,6 +28,12 @@ const initialState = {
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
+    case ADD_CARD_TO_DECK:
+      //TODO: Check if card is already in array under same board, if so, replace
+      return {
+        ...state,
+        oCurrentDeck: state.oCurrentDeck.concat(action.payload),
+      };
     case ADD_TO_STAGE:
       //Check if card is already in staging area
       for (let i = 0; i < state.aStaging.length; i++) {
@@ -46,10 +57,11 @@ export default function userReducer(state = initialState, action) {
         ...state,
         aFetchedPromises: action.payload,
       };
+    case SET_DECK_CARD_SEARCH:
+      return { ...state, oDeckCardSearch: action.payload };
 
     case SET_DIRTY:
       return { ...state, bIsDirty: action.payload };
-    //  return { ...state, bIsDirty: !state.bIsDirty };
 
     case SET_DOCS_FETCHED:
       return { ...state, aDocsFetched: action.payload };
