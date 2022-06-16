@@ -9,8 +9,6 @@ import NavBar from "./components/Header/NavBar";
 
 //Containers
 import CardsContainer from "./components/Main/CardsContainer/CardsContainer";
-import DeckContainer from "./components/Main/DecksContainer/DeckContainer";
-import DecksContainer from "./components/Main/DecksContainer/DecksContainer";
 import ExpansionsContainer from "./components/Main/ExpansionsContainer/ExpansionsContainer";
 import ForgotContainer from "./components/Main/SignInContainer/ForgotContainer";
 import MainContainer from "./components/Main/MainContainer/MainContainer";
@@ -36,8 +34,6 @@ function App() {
           <Route path="/signIn" exact render={(props) => <SignInContainer />} />
           <Route path="/signUp" exact render={(props) => <SignUpContainer />} />
           <Route path="/forgot" exact render={(props) => <ForgotContainer />} />
-          <Route path="/decks" exact render={(props) => <DecksContainer />} />
-          <Route path="/deck" exact render={(props) => <DeckContainer />} />
           <Route
             path="/resources"
             exact
