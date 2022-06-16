@@ -1,10 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { fnFetchCards, fnSignOutUser } from "../../actions";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { auth } from "./../../firebase";
 import { signOut } from "firebase/auth";
 import React, { useRef } from "react";
 import "./NavBar.css";
+
+//Multimedia
+import PhyrexianSymbol from "../../multimedia/PhyrexianSymbol.svg";
 
 export default function NavBar() {
   const oUser = useSelector((state) => state.oUserReducer.oUser);
@@ -31,13 +34,6 @@ export default function NavBar() {
     oHamburgerMenu.current.classList.toggle("open");
   };
 
-  const fnOnLinkClick = (oEvent) => {
-    oEvent.preventDefault();
-    bIsDirty
-      ? fnDispatch({ type: "SET_MODAL_OPEN" })
-      : fnHistory.push("/" + oEvent.target.id.split("-")[0]);
-  };
-
   const fnOnSearchChange = (oEvent) => {
     if (bIsDirty) {
       fnDispatch({ type: "SET_MODAL_OPEN" });
@@ -56,7 +52,7 @@ export default function NavBar() {
         );
         oSearchInput.current.value = "";
 
-        //If already on /cards path, no need to reload page
+        //If already on path:/cards, no need to reload page
         if (fnHistory.location.pathname !== "/cards") {
           fnHistory.push("/cards");
         }
@@ -65,61 +61,72 @@ export default function NavBar() {
   };
 
   return (
-    <header className="sticky-top">
-      <h2 className="brand">Do I Have That Card?</h2>
-      <nav>
-        <ul>
-          <li className="nav-links" onClick={fnOnLinkClick}>
-            Main
-          </li>
-          <li
-            className="nav-links"
-            id="expansions-link"
-            onClick={fnOnLinkClick}
-          >
-            Expansions
-          </li>
-          <li className="nav-links" id="cards-link" onClick={fnOnLinkClick}>
-            Cards
-          </li>
+    <header className="flex-row sticky-top">
+      <Link to="/" className="brand">
+        Do I Have That Card?
+      </Link>
+      <nav class="flex-row">
+        <div className="nav-links flex-row center">
+          <div class="flex-row menu-link center">
+            <img
+              class="hover-icon"
+              src={PhyrexianSymbol}
+              alt="Phyrexian Symbol"
+              width="15px"
+              height="15px"
+            />
+            <Link className="nav-link" to="/expansions">
+              Expansions
+            </Link>
+          </div>
+          <div class="flex-row menu-link center">
+            <img
+              class="hover-icon"
+              src={PhyrexianSymbol}
+              alt="Phyrexian Symbol"
+              width="15px"
+              height="15px"
+            />
+            <Link className="nav-link" to="/cards">
+              Cards
+            </Link>
+          </div>
 
           {oUser ? (
-            <>
-              <li className="nav-links" id="decks-link" onClick={fnOnLinkClick}>
-                Decks
-              </li>
-              <li
-                className="nav-links"
-                id="resources-link"
-                onClick={fnOnLinkClick}
-              >
-                Resources
-              </li>
-              <li className="nav-links">
-                <a href="#top" className="signOut-link" onClick={fnSignOut}>
-                  Sign Out
-                </a>
-              </li>
-            </>
-          ) : (
-            <li className="nav-links" id="signIn-link" onClick={fnOnLinkClick}>
-              Sign In
-            </li>
-          )}
-          <form className="input-form" onSubmit={fnSearchCard}>
-            <input
-              // className="input-field"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              ref={oSearchInput}
-              onChange={fnOnSearchChange}
-            />
-            <button className="submit-btn" type="submit" onClick={fnSearchCard}>
-              Search
+            <button className="btn btn-danger" onClick={fnSignOut}>
+              Sign Out
             </button>
-          </form>
-        </ul>
+          ) : (
+            <div class="flex-row menu-link center">
+              <img
+                class="hover-icon"
+                src={PhyrexianSymbol}
+                alt="Phyrexian Symbol"
+                width="15px"
+                height="15px"
+              />
+              <Link className="nav-link" to="/signIn">
+                Sign In
+              </Link>
+            </div>
+          )}
+        </div>
+        <form className="flex-row center search-form" onSubmit={fnSearchCard}>
+          <input
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            ref={oSearchInput}
+            onChange={fnOnSearchChange}
+          />
+          <button
+            className="btn btn-submit"
+            type="submit"
+            onClick={fnSearchCard}
+          >
+            Search
+          </button>
+        </form>
       </nav>
       <div
         className="hamburger-icon"
@@ -129,36 +136,24 @@ export default function NavBar() {
         <div className="hamburger-bar-1"></div>
         <div className="hamburger-bar-2"></div>
         <div className="hamburger-bar-3"></div>
-        <ul className="mobile-menu">
-          <li onClick={fnOnLinkClick}>Main</li>
-          <li id="expansions-mobile-link" onClick={fnOnLinkClick}>
+        <ul className="flex-column mobile-menu">
+          <Link to="/" className="mobile-brand mobile-nav-link">
+            Main
+          </Link>
+          <Link className="mobile-nav-link" to="/expansions">
             Expansions
-          </li>
-          <li id="cards-mobile-link" onClick={fnOnLinkClick}>
+          </Link>
+          <Link className="mobile-nav-link" to="/cards">
             Cards
-          </li>
-
+          </Link>
           {oUser ? (
-            <>
-              <li id="decks-mobile-link" onClick={fnOnLinkClick}>
-                Decks
-              </li>
-              <li id="resource-mobile-links" onClick={fnOnLinkClick}>
-                Resources
-              </li>
-              <a
-                href="#top"
-                className="signOut-link"
-                onClick={fnSignOut}
-                align="center"
-              >
-                Sign Out
-              </a>
-            </>
+            <div className="signOut-link" onClick={fnSignOut}>
+              Sign Out
+            </div>
           ) : (
-            <li id="signIn-mobile-link" onClick={fnOnLinkClick}>
+            <Link className="mobile-nav-link" to="/signIn">
               Sign In
-            </li>
+            </Link>
           )}
         </ul>
       </div>
