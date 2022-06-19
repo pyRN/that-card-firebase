@@ -16,9 +16,21 @@
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .center {
   justify-content: center;
   align-items: center;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-100 {
+  width: 100%;
 }
 
 .btn {
@@ -44,19 +56,25 @@
   border: 1px solid var(--green);
 }
 
+.card {
+  background-color: var(--blue);
+  box-shadow: 0px 0px 5px var(--green);
+  border-radius: 7px;
+  padding: 30px;
+  margin: 5%;
+  width: auto;
+}
+
 /*Tags*/
-html {
+html,
+body {
   background: var(--gray);
   margin: 0px;
+  padding: 0px;
   width: 100%;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
     Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
-}
-
-body {
-  margin: 0px;
-  width: 100%;
 }
 
 h1,
@@ -121,7 +139,7 @@ select {
 }
 
 /*Classes*/
-.mainContainer {
+.main-container {
   background: var(--gray);
 }
 
@@ -134,15 +152,6 @@ select {
 .mtg-card {
   margin: 10px;
   width: 350px;
-}
-
-.page-container {
-  color: var(--green);
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-  margin-top: 20px;
 }
 
 .static-card {
@@ -162,13 +171,6 @@ select {
   width: 120px;
   height: 120px;
   animation: spin 1s linear infinite;
-}
-
-.card-items {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 @keyframes spin {
@@ -219,10 +221,6 @@ select {
 }
 
 @media only screen and (max-width: 1075px) {
-  .static-card {
-    width: 350px;
-  }
-
   .mtg-card {
     width: 300px;
   }
