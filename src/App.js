@@ -23,7 +23,7 @@ function App() {
       <Router>
         <NavBar />
         <Modal />
-        <div className="mainContainer">
+        <div className="main-container flex-column center">
           <Route path="/" exact render={(props) => <MainContainer />} />
           <Route
             path="/expansions"
