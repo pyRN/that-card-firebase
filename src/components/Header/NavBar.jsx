@@ -9,7 +9,7 @@ import "./NavBar.css";
 //Multimedia
 import PhyrexianSymbol from "../../multimedia/PhyrexianSymbol.svg";
 
-export default function NavBar() {
+const NavBar = () => {
   const oUser = useSelector((state) => state.oUserReducer.oUser);
   const bIsDirty = useSelector((state) => state.oUserReducer.bIsDirty);
   const fnDispatch = useDispatch();
@@ -159,4 +159,6 @@ export default function NavBar() {
       </div>
     </header>
   );
-}
+};
+
+export default NavBar;
