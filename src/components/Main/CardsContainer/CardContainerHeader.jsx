@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-export default function CardContainerHeader({ aFilteredCards }) {
+const CardContainerHeader = ({ aFilteredCards }) => {
   const aFetchedPromises = useSelector(
     (state) => state.oUserReducer.aFetchedPromises
   );
@@ -24,22 +24,22 @@ export default function CardContainerHeader({ aFilteredCards }) {
   };
 
   return (
-    <>
+    <div className="flex-column center">
       {aFilteredCards === null ? null : (
-        <div align="center" className="card-header-container">
-          <h2>
-            {aFilteredCards.length === 0 ? (
-              "Card searched does not exist or no cards in current filter"
-            ) : oUser ? (
-              <div style={oProgressBarStyle}>
-                <p style={{ color: "#2a3166" }}>
-                  {iTotalCardsOwned + " / " + iTotalCards} Owned
-                </p>
-              </div>
-            ) : null}
-          </h2>
-        </div>
+        <h2>
+          {aFilteredCards.length === 0 ? (
+            "Card searched does not exist or no cards in current filter"
+          ) : oUser ? (
+            <div style={oProgressBarStyle}>
+              <p style={{ color: "#2a3166" }}>
+                {iTotalCardsOwned + " / " + iTotalCards} Owned
+              </p>
+            </div>
+          ) : null}
+        </h2>
       )}
-    </>
+    </div>
   );
-}
+};
+
+export default CardContainerHeader;
