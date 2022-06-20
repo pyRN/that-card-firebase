@@ -5,10 +5,7 @@ export default function Footer() {
   const aExpansionsList = useSelector(
     (state) => state.oExpansionsReducer.aExpansions
   );
-  let aExpansionNames = [];
-  for (let i = 0; i < aExpansionsList.length; i++) {
-    aExpansionNames.push(aExpansionsList[i].name);
-  }
+  let aExpansionNames = aExpansionsList.map((oExpansion) => oExpansion.name);
   const fnDispatch = useDispatch();
   const oExpansionSearch = useRef(null);
 
@@ -17,16 +14,16 @@ export default function Footer() {
 
     fnDispatch({
       type: "SET_EXPANSION_FILTER",
-      payload: aExpansionNames.filter(function (sName) {
-        return sName
+      payload: aExpansionNames.filter((sName) =>
+        sName
           .toLowerCase()
-          .includes(oExpansionSearch.current.value.toLowerCase());
-      }),
+          .includes(oExpansionSearch.current.value.toLowerCase())
+      ),
     });
   };
 
   return (
-    <footer className="sticky-bottom">
+    <footer className="sticky-bottom flex-row w-100">
       <form className="footer-form">
         <input
           type="search"
