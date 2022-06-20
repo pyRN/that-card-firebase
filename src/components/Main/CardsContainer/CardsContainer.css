@@ -1,33 +1,22 @@
-.card-header-container {
-  display: flex;
-  flex-direction: column;
-  overflow-wrap: center;
-  margin: 20px;
+.card-name {
+  font-size: 10pt;
+  word-break: break-word;
+  text-align: center;
+  margin: 0;
 }
 
-.card-name-text {
-  font-size: 12px;
-  inline-size: 200px;
-  margin: 0 0 5px 0;
-  overflow-wrap: break-word;
-  width: 100%;
-  cursor: pointer;
-}
-
-.set-name-text {
-  color: #ee7879;
-  font-size: 12px;
-  inline-size: 200px;
-  margin: 0 0 5px 0;
-  overflow-wrap: break-word;
-  width: 100%;
-  cursor: pointer;
+.card-expansion {
+  font-size: 8pt;
+  word-break: break-word;
+  text-align: center;
+  color: var(--green);
+  margin: 0;
 }
 
 .flip-btn {
-  background-color: #09c372;
+  background-color: var(--green);
   border-radius: 7px;
-  color: black;
+  color: var(--black);
   margin-bottom: 10px;
   padding: 5px 10px 5px 10px;
   height: 40px;
@@ -35,8 +24,8 @@
 }
 
 .flip-btn:hover {
-  background-color: #ee7879;
-  color: white;
+  background-color: var(--pink);
+  color: var(--white);
   transform: scale(0.9);
   transition: 0.1s;
 }
@@ -52,9 +41,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  border: solid 1px #09c372;
+  border: solid 1px var(--green);
   border-radius: 7px;
-  color: #ee7879;
+  color: var(--pink);
   padding: 5px;
   margin: 10px;
 }
@@ -66,9 +55,9 @@
 }
 
 .spinner-btn {
-  background-color: #333;
+  background-color: var(--gray);
   border-radius: 7px;
-  color: #09c372;
+  color: var(--green);
   font-weight: bold;
   width: 30px;
   height: 30px;
@@ -78,10 +67,10 @@
 }
 
 .spinner-btn:hover {
-  border: 1px solid #ee7879;
+  border: 1px solid var(--pink);
 }
 
 .spinner-text {
-  color: #ee7879;
+  color: var(--pink);
   margin: auto 5px auto 5px;
 }

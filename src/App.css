@@ -1,8 +1,10 @@
 :root {
+  --black: #000;
   --blue: #2a3166;
   --gray: #222;
   --green: #09c372;
   --pink: #ee7879;
+  --white: #fff;
 }
 
 /*Personal Bootstrap*/
@@ -65,6 +67,10 @@
   width: auto;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 /*Tags*/
 html,
 body {
@@ -122,7 +128,6 @@ input::placeholder {
 footer {
   background-color: var(--blue);
   border-top: solid 1px var(--pink);
-  display: flex;
   height: 50px;
   justify-content: space-between;
 }
@@ -156,11 +161,11 @@ select {
 
 .static-card {
   background-color: var(--blue);
-  box-shadow: 0px 0px 5px var(--green);
+  box-shadow: 0px 0px 8px var(--green);
   border-radius: 7px;
   margin: 10px;
   padding: 5px;
-  width: 400px;
+  width: 350px;
 }
 
 /*Styles for Loading Symbol*/

@@ -4,7 +4,7 @@ import { getFirestore, doc, writeBatch } from "firebase/firestore"; //addDoc,col
 import { useSelector, useDispatch } from "react-redux";
 import { auth } from "./../../../firebase";
 
-export default function Footer() {
+const Footer = () => {
   const aFetchedPromises = useSelector(
     (state) => state.oUserReducer.aFetchedPromises
   );
@@ -14,37 +14,30 @@ export default function Footer() {
   const oFilterSelect = useRef(null);
   const db = getFirestore();
 
-  const fnOnClick = (oEvent) => {
+  const fnOnSave = (oEvent) => {
     oEvent.preventDefault();
     const oUser = auth.currentUser;
-    if (oEvent.target.name === "save") {
-      if (oUser) {
-        const batch = writeBatch(db);
-        try {
-          for (let i = 0; i < aStaging.length; i++) {
-            if (aStaging[i].iRegular === 0 && aStaging[i].iFoil === 0) {
-              batch.delete(
-                doc(db, oUser.uid, aStaging[i].sId.replace(/-/g, ""))
-              );
-            } else {
-              batch.set(doc(db, oUser.uid, aStaging[i].sId.replace(/-/g, "")), {
-                sId: aStaging[i].sId,
-                sName: aStaging[i].sName,
-                sExpansion: aStaging[i].sExpansion,
-                iRegular: aStaging[i].iRegular,
-                iFoil: aStaging[i].iFoil,
-              });
-            }
+    if (oUser) {
+      const batch = writeBatch(db);
+      try {
+        for (let i = 0; i < aStaging.length; i++) {
+          if (aStaging[i].iRegular === 0 && aStaging[i].iFoil === 0) {
+            batch.delete(doc(db, oUser.uid, aStaging[i].sId.replace(/-/g, "")));
+          } else {
+            batch.set(doc(db, oUser.uid, aStaging[i].sId.replace(/-/g, "")), {
+              sId: aStaging[i].sId,
+              sName: aStaging[i].sName,
+              sExpansion: aStaging[i].sExpansion,
+              iRegular: aStaging[i].iRegular,
+              iFoil: aStaging[i].iFoil,
+            });
           }
-          batch.commit();
-          fnDispatch(resetStaging());
-        } catch (e) {
-          console.error("Error adding document: ", e);
         }
+        batch.commit();
+        fnDispatch(resetStaging());
+      } catch (e) {
+        console.error("Error adding document: ", e);
       }
-    }
-    if (oEvent.target.name === "cancel") {
-      fnDispatch(resetStaging());
     }
   };
 
@@ -116,14 +109,17 @@ export default function Footer() {
     }
   };
   return (
-    <footer className="sticky-bottom">
+    <footer className="sticky-bottom flex-row w-100">
       <form className="footer-form">
         {bIsDirty ? (
           <div>
-            <button className="cancel-btn" onClick={fnOnClick} name="cancel">
+            <button
+              className="btn btn-danger"
+              onClick={() => fnDispatch(resetStaging())}
+            >
               Cancel
             </button>
-            <button className="submit-btn" onClick={fnOnClick} name="save">
+            <button className="btn btn-submit" onClick={fnOnSave}>
               Save
             </button>
           </div>
@@ -155,4 +151,6 @@ export default function Footer() {
       </form>
     </footer>
   );
-}
+};
+
+export default Footer;

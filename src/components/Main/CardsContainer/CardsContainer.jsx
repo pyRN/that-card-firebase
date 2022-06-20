@@ -10,28 +10,37 @@ import Footer from "./Footer";
 //Media
 import VampiricTutor from "../../../multimedia/Vampiric-tutor.jpg";
 
-export default function CardsContainer() {
+const CardsContainer = () => {
   const aFilteredCards = useSelector(
     (state) => state.oUserReducer.aFilteredCards
   );
 
   return (
-    <>
+    <div className="flex-column center w-100">
       <LoadingSymbol />
       <CardContainerHeader aFilteredCards={aFilteredCards} />
-      <div className="page-container">
+      <div className="flex-row flex-wrap center w-100">
         {aFilteredCards ? (
           aFilteredCards.map((oCardInfo) => {
             return <CardComponent oCardInfo={oCardInfo} key={oCardInfo.id} />;
           })
         ) : aFilteredCards === null ? (
-          <div className="static-card">
-            <h1 align="center">Search for a Card</h1>
-            <img src={VampiricTutor} className="mtg-card" alt="VampiricTutor" />
+          <div className="landing-card flex-row center w-100">
+            <div className="flex-column  landing-content w-50 center">
+              <h2 className="main-heading">Search for a Card</h2>
+            </div>
+            <img
+              src={VampiricTutor}
+              className="mtg-card w-50"
+              alt="Vampiric Tutor"
+              id="landing-mtg-card"
+            />
           </div>
         ) : null}
       </div>
       <Footer />
-    </>
+    </div>
   );
-}
+};
+
+export default CardsContainer;

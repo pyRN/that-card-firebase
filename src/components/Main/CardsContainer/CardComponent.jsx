@@ -56,43 +56,45 @@ export default function CardComponent({ oCardInfo }) {
   };
 
   return (
-    <div className="static-card">
-      <div className="card-items" align="center">
-        {aCardImage}
+    <div className="flex-column center static-card">
+      {aCardImage}
 
-        <div className="card-name-text" onClick={fnOnNameClick}>
+      <div className="pointer" onClick={fnOnNameClick}>
+        <h2 className="card-name">
           {oCardInfo.name} ({oCardInfo.rarity.slice(0, 1).toUpperCase()})
-        </div>
-        <div className="set-name-text" onClick={fnOnSetClick}>
-          {oCardInfo.set_name} ({oCardInfo.set.toUpperCase()})
-        </div>
-        <div className="spinner-container">
-          {oUser ? (
-            <>
-              {oCardInfo.nonfoil ? (
-                <UserSpinner oCardInfo={oCardInfo} sType={"Regular"} />
-              ) : null}
-              {oCardInfo.foil ? (
-                <UserSpinner oCardInfo={oCardInfo} sType={"Foil"} />
-              ) : null}
-            </>
-          ) : (
-            <>
-              {oCardInfo.nonfoil ? (
-                <Spinner oCardInfo={oCardInfo} sType={"Regular"} />
-              ) : null}
-              {oCardInfo.foil ? (
-                <Spinner oCardInfo={oCardInfo} sType={"Foil"} />
-              ) : null}
-            </>
-          )}
-        </div>
-        {aCardImagesSrcs ? (
-          <button className="flip-btn" onClick={fnOnFlipClick}>
-            Flip
-          </button>
-        ) : null}
+        </h2>
       </div>
+      <div className="pointer" onClick={fnOnSetClick}>
+        <h3 className="card-expansion">
+          {oCardInfo.set_name} ({oCardInfo.set.toUpperCase()})
+        </h3>
+      </div>
+      <div className="spinner-container">
+        {oUser ? (
+          <>
+            {oCardInfo.nonfoil ? (
+              <UserSpinner oCardInfo={oCardInfo} sType={"Regular"} />
+            ) : null}
+            {oCardInfo.foil ? (
+              <UserSpinner oCardInfo={oCardInfo} sType={"Foil"} />
+            ) : null}
+          </>
+        ) : (
+          <>
+            {oCardInfo.nonfoil ? (
+              <Spinner oCardInfo={oCardInfo} sType={"Regular"} />
+            ) : null}
+            {oCardInfo.foil ? (
+              <Spinner oCardInfo={oCardInfo} sType={"Foil"} />
+            ) : null}
+          </>
+        )}
+      </div>
+      {aCardImagesSrcs ? (
+        <button className="flip-btn" onClick={fnOnFlipClick}>
+          Flip
+        </button>
+      ) : null}
     </div>
   );
 }
