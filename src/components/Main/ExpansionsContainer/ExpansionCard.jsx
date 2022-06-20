@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fnFetchCards } from "../../../actions/index";
 import "./ExpansionsContainer.css";
 
-export default function ExpansionCard({ oExpansionInfo }) {
+const ExpansionCard = ({ oExpansionInfo }) => {
   const oUser = useSelector((state) => state.oUserReducer.oUser);
   const fnDispatch = useDispatch();
   const fnHistory = useHistory();
@@ -28,4 +28,6 @@ export default function ExpansionCard({ oExpansionInfo }) {
       </h2>
     </div>
   );
-}
+};
+
+export default ExpansionCard;

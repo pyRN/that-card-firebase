@@ -9,7 +9,7 @@ import ExpansionCard from "./ExpansionCard";
 import Footer from "./Footer.jsx";
 import LoadingSymbol from "../LoadingSymbol";
 
-export default function ExpansionsContainer() {
+const ExpansionsContainer = () => {
   const aExpansionsList = useSelector(
     (state) => state.oExpansionsReducer.aExpansions
   );
@@ -74,4 +74,6 @@ export default function ExpansionsContainer() {
       <LoadingSymbol />
     </div>
   );
-}
+};
+
+export default ExpansionsContainer;

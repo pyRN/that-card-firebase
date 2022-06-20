@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function Footer() {
+const Footer = () => {
   const aExpansionsList = useSelector(
     (state) => state.oExpansionsReducer.aExpansions
   );
@@ -36,4 +36,6 @@ export default function Footer() {
       </form>
     </footer>
   );
-}
+};
+
+export default Footer;
