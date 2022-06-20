@@ -1,37 +1,43 @@
 .expansion-card {
-  background-color: #2a3166;
-  box-shadow: 0px 0px 5px #09c372;
+  background-color: var(--blue);
+  box-shadow: 0px 0px 8px var(--green);
   border-radius: 7px;
   cursor: pointer;
   height: 200px;
   margin: 10px;
   padding: 10px;
   width: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .expansion-img {
-  filter: drop-shadow(0px 0px 5px #ee7879);
+  filter: drop-shadow(0px 0px 10px var(--pink));
   height: 100px;
   width: 100px;
 }
 .expansion-card:hover {
-  background-color: #ee7879;
-  color: #2a3166;
+  background-color: var(--green);
+  color: var(--blue);
   transform: scale(1.05);
   transition: 0.1s;
 }
 
 .expansion-card:hover .expansion-img {
-  filter: drop-shadow(0px 0px 5px #2a3166);
+  filter: drop-shadow(0px 0px 15px var(--blue));
+}
+
+.expansion-card-text {
+  color: var(--green);
+  font-size: 10pt;
+  text-align: center;
+}
+
+.expansion-card:hover .expansion-card-text {
+  color: var(--blue);
 }
 
 @media only screen and (max-width: 1075px) {
   .expansion-card {
-    width: 300px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
   }
 }

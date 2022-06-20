@@ -17,15 +17,15 @@ export default function ExpansionCard({ oExpansionInfo }) {
   };
 
   return (
-    <div className="expansion-card" onClick={handleOnClick}>
+    <div className="flex-column center expansion-card" onClick={handleOnClick}>
       <img
         src={oExpansionInfo.icon_svg_uri}
         className="expansion-img"
         alt={oExpansionInfo.name}
       />
-      <h5 align="center">
+      <h2 className="expansion-card-text">
         {oExpansionInfo.name} ({oExpansionInfo.code.toUpperCase()})
-      </h5>
+      </h2>
     </div>
   );
 }

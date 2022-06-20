@@ -1,3 +1,5 @@
+//TODO:   When returning to expansions page, filtered expansions needs to reset.
+
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./ExpansionsContainer.css";
@@ -47,8 +49,8 @@ export default function ExpansionsContainer() {
   //Only show expansions if they exist
   if (aExpansionsList !== undefined && aExpansionsList.length) {
     return (
-      <>
-        <div className="page-container">
+      <div className="flex-column center w-100">
+        <div className="flex-row flex-wrap center">
           <LoadingSymbol />
           {aExpansionsList.map(function (oExpansionInfo) {
             return !oExpansionInfo.digital &&
@@ -62,13 +64,13 @@ export default function ExpansionsContainer() {
           })}
         </div>
         <Footer />
-      </>
+      </div>
     );
   }
 
   //If no expansion list, show loading
   return (
-    <div align="center" className="expansions-container">
+    <div className="expansions-container">
       <LoadingSymbol />
     </div>
   );
