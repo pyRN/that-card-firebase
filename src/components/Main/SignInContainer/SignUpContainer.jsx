@@ -7,6 +7,9 @@ import { getFirestore, doc, setDoc, Timestamp } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import "./SignInContainer.css";
 
+//Media
+import SignInBlood from "../../../multimedia/Sign-In-Blood.jpg";
+
 export default function SignUpContainer() {
   const [sError, fnSetError] = useState("");
   const fnHistory = useHistory();
@@ -53,44 +56,50 @@ export default function SignUpContainer() {
   };
 
   return (
-    <div className="page-container">
-      <div className="static-card">
-        <div className="card-items" align="center">
-          <h2>Sign Up</h2>
-          <form onSubmit={fnOnSubmit} className="signIn-form">
-            <input
-              type="text"
-              placeholder="Email"
-              className="signIn-input"
-              ref={oEmail}
-              autoFocus
-            ></input>
-            <input
-              type="password"
-              placeholder="Password"
-              className="signIn-input"
-              ref={oPassword}
-            ></input>
-            <input
-              type="password"
-              placeholder="Password"
-              className="signIn-input"
-              ref={oConfirmPass}
-            ></input>
-            <button className="submit-btn" onClick={fnOnSubmit}>
-              Sign Up
-            </button>
-          </form>
-          <div>
-            <Link to="/forgot" className="signIn-link">
-              Forgot Password
-            </Link>
-            <Link to="/signIn" className="signIn-link">
-              Sign In
-            </Link>
-          </div>
-          {sError ? <div className="error-flag">{sError}</div> : null}
+    <div className="landing-card flex-row center w-50">
+      <div className="flex-column  landing-content w-50 center">
+        <h2 className="main-heading">Sign Up</h2>
+
+        <form className="signIn-form" onSubmit={fnOnSubmit}>
+          <input
+            type="text"
+            placeholder="Email"
+            className="signIn-input"
+            ref={oEmail}
+            autoFocus
+          ></input>
+          <input
+            type="password"
+            placeholder="Password"
+            className="signIn-input"
+            ref={oPassword}
+          ></input>
+          <input
+            type="password"
+            placeholder="Password"
+            className="signIn-input"
+            ref={oConfirmPass}
+          ></input>
+          <button className="btn btn-submit" onClick={fnOnSubmit}>
+            Sign In
+          </button>
+        </form>
+        <div>
+          <Link to="/forgot" className="signIn-link sub-heading">
+            Forgot Password
+          </Link>
+          <Link to="/signIn" className="signIn-link sub-heading">
+            Sign In
+          </Link>
         </div>
+        {sError ? <div className="error-flag">{sError}</div> : null}
+      </div>
+      <div>
+        <img
+          src={SignInBlood}
+          className="landing-mtg-card w-50"
+          alt="Sign In Blood"
+        />
       </div>
     </div>
   );

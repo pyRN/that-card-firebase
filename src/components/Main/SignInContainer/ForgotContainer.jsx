@@ -3,6 +3,9 @@ import { auth } from "./../../../firebase";
 import { Link } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
 
+//Media
+import Forget from "../../../multimedia/Forget.jpg";
+
 export default function ForgotContainer() {
   const [sError, fnSetError] = useState("");
   const [sMessage, fnSetMessage] = useState("");
@@ -28,33 +31,35 @@ export default function ForgotContainer() {
   };
 
   return (
-    <div className="page-container">
-      <div className="static-card">
-        <div className="card-items" align="center">
-          <h2>Forgot Password</h2>
-          <form onSubmit={fnOnSubmit} className="signIn-form">
-            <input
-              type="text"
-              placeholder="Email"
-              className="signIn-input"
-              ref={oEmail}
-              autoFocus
-            ></input>
-            <button className="submit-btn" onClick={fnOnSubmit}>
-              Reset
-            </button>
-          </form>
-          <div>
-            <Link to="/signIn" className="signIn-link">
-              Sign In
-            </Link>
-            <Link to="/signUp" className="signIn-link">
-              Sign Up
-            </Link>
-          </div>
-          {sError ? <div className="error-flag">{sError}</div> : null}
-          {sMessage ? <div className="message-flag">{sMessage}</div> : null}
+    <div className="landing-card flex-row center w-100">
+      <div className="flex-column  landing-content w-50 center">
+        <h2 className="main-heading">Forgot Password</h2>
+
+        <form className="signIn-form" onSubmit={fnOnSubmit}>
+          <input
+            type="text"
+            placeholder="Email"
+            className="signIn-input"
+            ref={oEmail}
+            autoFocus
+          ></input>
+          <button className="btn btn-submit" onClick={fnOnSubmit}>
+            Reset
+          </button>
+        </form>
+        <div>
+          <Link to="/signIn" className="signIn-link sub-heading">
+            Sign In
+          </Link>
+          <Link to="/signUp" className="signIn-link sub-heading">
+            Sign Up
+          </Link>
         </div>
+        {sError ? <div className="error-flag">{sError}</div> : null}
+        {sMessage ? <div className="message-flag">{sMessage}</div> : null}
+      </div>
+      <div>
+        <img src={Forget} className="landing-mtg-card w-50" alt="Forget" />
       </div>
     </div>
   );

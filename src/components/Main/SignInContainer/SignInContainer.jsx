@@ -6,6 +6,9 @@ import { useHistory, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import "./SignInContainer.css";
 
+//Media
+import ScrollRack from "../../../multimedia/Scroll-Rack.jpg";
+
 export default function SignInContainer() {
   const [sError, fnSetError] = useState("");
   const fnHistory = useHistory();
@@ -37,39 +40,44 @@ export default function SignInContainer() {
   };
 
   return (
-    <div className="page-container">
-      <div className="static-card">
-        <div className="card-items" align="center">
-          <h2>Sign In</h2>
+    <div className="landing-card flex-row center w-100">
+      <div className="flex-column  landing-content w-50 center">
+        <h2 className="main-heading">Sign In</h2>
 
-          <form className="signIn-form" onSubmit={fnOnSubmit}>
-            <input
-              type="text"
-              placeholder="Email"
-              className="signIn-input"
-              ref={oEmail}
-              autoFocus
-            ></input>
-            <input
-              type="password"
-              placeholder="Password"
-              className="signIn-input"
-              ref={oPassword}
-            ></input>
-            <button className="submit-btn" onClick={fnOnSubmit}>
-              Sign In
-            </button>
-          </form>
-          <div>
-            <Link to="/forgot" className="signIn-link">
-              Forgot Password
-            </Link>
-            <Link to="/signUp" className="signIn-link">
-              Sign Up
-            </Link>
-          </div>
-          {sError ? <div className="error-flag">{sError}</div> : null}
+        <form className="signIn-form" onSubmit={fnOnSubmit}>
+          <input
+            type="text"
+            placeholder="Email"
+            className="signIn-input"
+            ref={oEmail}
+            autoFocus
+          ></input>
+          <input
+            type="password"
+            placeholder="Password"
+            className="signIn-input"
+            ref={oPassword}
+          ></input>
+          <button className="btn btn-submit" onClick={fnOnSubmit}>
+            Sign In
+          </button>
+        </form>
+        <div>
+          <Link to="/forgot" className="signIn-link sub-heading">
+            Forgot Password
+          </Link>
+          <Link to="/signUp" className="signIn-link sub-heading">
+            Sign Up
+          </Link>
         </div>
+        {sError ? <div className="error-flag">{sError}</div> : null}
+      </div>
+      <div>
+        <img
+          src={ScrollRack}
+          className="landing-mtg-card w-50"
+          alt="Scroll Rack"
+        />
       </div>
     </div>
   );
