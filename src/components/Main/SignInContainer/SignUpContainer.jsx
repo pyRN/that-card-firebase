@@ -23,7 +23,9 @@ export default function SignUpContainer() {
     event.preventDefault();
     if (
       oEmail.current.value &&
-      oPassword.current.value === oConfirmPass.current.value
+      oPassword.current.value === oConfirmPass.current.value &&
+      oPassword.current.value.length > 5 &&
+      oConfirmPass.current.value.length > 5
     ) {
       createUserWithEmailAndPassword(
         auth,
@@ -50,6 +52,13 @@ export default function SignUpContainer() {
         });
     } else if (!oEmail.current.value) {
       fnSetError("Email Address Required");
+    } else if (!oPassword.current.value.length || !oConfirmPass.current.value) {
+      fnSetError("Passwords cannot be blank");
+    } else if (
+      oPassword.current.value.length < 5 ||
+      oConfirmPass.current.value < 5
+    ) {
+      fnSetError("Passwords must be minimum 5 characters");
     } else if (oPassword.current.value !== oConfirmPass.current.value) {
       fnSetError("Passwords do not match");
     }
@@ -62,22 +71,25 @@ export default function SignUpContainer() {
 
         <form className="flex-column center signIn-form" onSubmit={fnOnSubmit}>
           <input
-            type="text"
+            type="email"
             placeholder="Email"
             className="signIn-input"
             ref={oEmail}
+            required
             autoFocus
           ></input>
           <input
             type="password"
             placeholder="Password"
             className="signIn-input"
+            required
             ref={oPassword}
           ></input>
           <input
             type="password"
             placeholder="Password"
             className="signIn-input"
+            required
             ref={oConfirmPass}
           ></input>
           <button className="btn btn-submit" onClick={fnOnSubmit}>

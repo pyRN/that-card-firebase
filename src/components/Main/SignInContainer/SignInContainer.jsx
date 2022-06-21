@@ -46,16 +46,18 @@ export default function SignInContainer() {
 
         <form className="flex-column center signIn-form" onSubmit={fnOnSubmit}>
           <input
-            type="text"
+            type="email"
             placeholder="Email"
             className="signIn-input"
             ref={oEmail}
+            required
             autoFocus
           ></input>
           <input
             type="password"
             placeholder="Password"
             className="signIn-input"
+            required
             ref={oPassword}
           ></input>
           <button className="btn btn-submit" onClick={fnOnSubmit}>

@@ -41,6 +41,7 @@ export default function ForgotContainer() {
             placeholder="Email"
             className="signIn-input"
             ref={oEmail}
+            required
             autoFocus
           ></input>
           <button className="btn btn-submit" onClick={fnOnSubmit}>
