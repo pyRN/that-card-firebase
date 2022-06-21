@@ -58,7 +58,9 @@ export default function ForgotContainer() {
         {sError ? (
           <div className="flex-row error-flag center">{sError}</div>
         ) : null}
-        {sMessage ? <div className="message-flag">{sMessage}</div> : null}
+        {sMessage ? (
+          <div className="flex-row message-flag center">{sMessage}</div>
+        ) : null}
       </div>
       <div>
         <img
