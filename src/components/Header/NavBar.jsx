@@ -147,9 +147,13 @@ const NavBar = () => {
             Cards
           </Link>
           {oUser ? (
-            <div className="signOut-link" onClick={fnSignOut}>
+            //TODO:  Fix Sign out on mobile menu
+            <span
+              className="mobile-nav-link mobile-sign-out"
+              onClick={fnSignOut}
+            >
               Sign Out
-            </div>
+            </span>
           ) : (
             <Link className="mobile-nav-link" to="/signIn">
               Sign In

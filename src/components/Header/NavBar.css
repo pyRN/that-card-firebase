@@ -81,17 +81,6 @@ header {
   margin-right: 20px;
 }
 
-.signOut-link {
-  color: var(--red);
-  text-decoration: none;
-}
-
-.signOut-link:hover {
-  color: var(--pink);
-  transform: scale(0.9);
-  transition: 0.1s;
-}
-
 .open .hamburger-bar-1 {
   -webkit-transform: rotate(-45deg) translate(-6px, 6px);
   transform: rotate(-45deg) translate(-6px, 6px);
@@ -140,6 +129,16 @@ header {
   color: var(--pink);
 }
 
+.mobile-sign-out {
+  color: var(--red);
+  text-decoration: none;
+}
+
+.mobile-sign-out:visited {
+  color: var(--red);
+  text-decoration: none;
+}
+
 @keyframes spin-svg {
   0% {
     transform: rotate(0deg);
@@ -168,11 +167,6 @@ header {
     align-items: flex-end;
     background-color: var(--gray);
     height: 100vh;
-  }
-
-  .signOut-link {
-    margin: 20px;
-    font-size: 18px;
   }
 
   .search-form {
