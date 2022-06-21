@@ -1,46 +1,4 @@
-.landing-card {
-  background-color: var(--blue);
-  box-shadow: 0px 0px 15px var(--green);
-  border-radius: 7px;
-  padding: 30px;
-  margin: 5%;
-  width: 75%;
-}
-
-.landing-content {
-  width: 100%;
-}
-.main-heading {
-  font-size: 30pt;
-  text-align: center;
-  width: 100%;
-  margin: 0;
-}
-
-.sub-heading {
-  font-size: 15pt;
-  text-align: center;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 .random-card {
   cursor: pointer;
-}
-
-@media only screen and (max-width: 750px) {
-  .landing-card {
-    flex-direction: column;
-  }
-  .main-heading {
-    font-size: 20pt;
-  }
-
-  .sub-heading {
-    font-size: 10pt;
-  }
-  .landing-content {
-    width: auto;
-  }
+  margin-top: 5px;
 }

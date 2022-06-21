@@ -39,7 +39,7 @@ const MainContainer = () => {
       <div className="random-card" onClick={fnGetRandomCard}>
         <img
           src={oLandingMtgCard}
-          className="mtg-card w-50"
+          className="landing-mtg-card w-50"
           alt="Magic Card Back"
           id="landing-mtg-card"
         />
