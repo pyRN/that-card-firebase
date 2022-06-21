@@ -65,11 +65,11 @@ const NavBar = () => {
       <Link to="/" className="brand">
         Do I Have That Card?
       </Link>
-      <nav class="flex-row">
+      <nav className="flex-row">
         <div className="nav-links flex-row center">
-          <div class="flex-row menu-link center">
+          <div className="flex-row menu-link center">
             <img
-              class="hover-icon"
+              className="hover-icon"
               src={PhyrexianSymbol}
               alt="Phyrexian Symbol"
               width="15px"
@@ -79,9 +79,9 @@ const NavBar = () => {
               Expansions
             </Link>
           </div>
-          <div class="flex-row menu-link center">
+          <div className="flex-row menu-link center">
             <img
-              class="hover-icon"
+              className="hover-icon"
               src={PhyrexianSymbol}
               alt="Phyrexian Symbol"
               width="15px"
@@ -97,9 +97,9 @@ const NavBar = () => {
               Sign Out
             </button>
           ) : (
-            <div class="flex-row menu-link center">
+            <div className="flex-row menu-link center">
               <img
-                class="hover-icon"
+                className="hover-icon"
                 src={PhyrexianSymbol}
                 alt="Phyrexian Symbol"
                 width="15px"
