@@ -35,7 +35,7 @@ export default function ForgotContainer() {
       <div className="flex-column  landing-content w-50 center">
         <h2 className="main-heading">Forgot Password</h2>
 
-        <form className="signIn-form" onSubmit={fnOnSubmit}>
+        <form className="flex-column center signIn-form" onSubmit={fnOnSubmit}>
           <input
             type="text"
             placeholder="Email"
@@ -55,11 +55,17 @@ export default function ForgotContainer() {
             Sign Up
           </Link>
         </div>
-        {sError ? <div className="error-flag">{sError}</div> : null}
+        {sError ? (
+          <div className="flex-row error-flag center">{sError}</div>
+        ) : null}
         {sMessage ? <div className="message-flag">{sMessage}</div> : null}
       </div>
       <div>
-        <img src={Forget} className="landing-mtg-card w-50" alt="Forget" />
+        <img
+          src={Forget}
+          className="landing-mtg-card w-50 mobile-landing-mtg-card"
+          alt="Forget"
+        />
       </div>
     </div>
   );

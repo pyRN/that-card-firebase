@@ -1,13 +1,9 @@
 .signIn-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   margin: 10px;
 }
 .signIn-link {
   text-decoration: none;
-  color: #09c372;
+  color: var(--green);
   margin: 20px;
 }
 
@@ -16,14 +12,15 @@
 }
 
 .error-flag {
-  background-color: red;
-  border: solid 2px red;
-  border-radius: 7px;
-  color: white;
+  background-color: var(--pink);
+  border: 1px solid var(--green);
+  border-radius: 8px;
+  color: var(--black);
   padding: 5px;
-  margin: 10px;
+  margin: 5px;
   text-align: center;
-  height: 20px;
+  height: 40px;
+  font-size: 13pt;
 }
 
 .message-flag {

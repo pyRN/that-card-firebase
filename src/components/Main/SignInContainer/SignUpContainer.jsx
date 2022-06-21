@@ -60,7 +60,7 @@ export default function SignUpContainer() {
       <div className="flex-column  landing-content w-50 center">
         <h2 className="main-heading">Sign Up</h2>
 
-        <form className="signIn-form" onSubmit={fnOnSubmit}>
+        <form className="flex-column center signIn-form" onSubmit={fnOnSubmit}>
           <input
             type="text"
             placeholder="Email"
@@ -92,12 +92,14 @@ export default function SignUpContainer() {
             Sign In
           </Link>
         </div>
-        {sError ? <div className="error-flag">{sError}</div> : null}
+        {sError ? (
+          <div className="flex-row error-flag center">{sError}</div>
+        ) : null}
       </div>
       <div>
         <img
           src={SignInBlood}
-          className="landing-mtg-card w-50"
+          className="landing-mtg-card w-50 mobile-landing-mtg-card"
           alt="Sign In Blood"
         />
       </div>
